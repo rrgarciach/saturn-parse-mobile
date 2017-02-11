@@ -7,6 +7,7 @@ import saturnModule from './saturn/saturn.module';
 import servicesModule from './services/services.module';
 
 import MenuCtrl from './menu/menu.controller';
+import menuTranslate from './menu/menu.translate';
 
 import routes from './app.routes';
 import run from './app.run';
@@ -19,5 +20,6 @@ angular.module('app', [
     ngParse
 ])
     .controller('MenuCtrl', MenuCtrl)
+    .config(menuTranslate)
     .config(routes)
     .run(run);

@@ -1,10 +1,8 @@
-import Parse from 'parse';
-
 import Order from '../../../models/order.model';
 
-export default class OrdersListCtrl {
+export default class OrdersViewCtrl {
 
-    constructor() {
+    constructor(Parse) {
         let query = new Parse.Query(Order);
         query.find()
             .then(orders => {

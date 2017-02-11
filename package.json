@@ -3,12 +3,14 @@
   "version": "0.0.1",
   "description": "Saturn Parse Mobile: An Ionic project",
   "dependencies": {
-    "angular": "^1.5.8",
+    "angular": "^1.6.2",
+    "angular-parse": "^0.2.2",
     "gulp": "^3.5.6",
     "gulp-concat": "^2.2.0",
     "gulp-minify-css": "^0.3.0",
     "gulp-rename": "^1.2.0",
-    "gulp-sass": "^2.0.4"
+    "gulp-sass": "^2.0.4",
+    "parse": "^1.9.2"
   },
   "devDependencies": {
     "babel": "^6.5.2",

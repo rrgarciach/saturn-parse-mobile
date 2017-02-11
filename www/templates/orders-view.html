@@ -1,10 +1,10 @@
 <ion-view view-title="Orders">
   <ion-content>
     <ion-title>
-      Orders
+      Order
     </ion-title>
     <ion-list>
-      <ion-item ng-repeat="order in vm.orders" href="#/app/orders/{{order.id}}">
+      <ion-item>
         {{order.get('folio')}}
       </ion-item>
     </ion-list>
