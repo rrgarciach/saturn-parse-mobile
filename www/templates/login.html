@@ -1,25 +1,35 @@
 <ion-view view-title="Login" hide-nav-bar="true">
-  <ion-content>
-    <form ng-submit="vm.doLogin()">
-      <ion-list>
-        <ion-item class="item-image">
-          <img ng-src="http://www.luzplantas.com/wp-content/uploads/2013/04/Truper.jpg" alt="">
-        </ion-item>
-        <ion-item>
-          {{'login_instructions' | translate}}
-        </ion-item>
-        <ion-item class="item-input">
-          <span class="input-label">{{'login_email' | translate}}</span>
-          <input type="text" ng-model="vm.loginData.email">
-        </ion-item>
-        <ion-item class="item-input">
-          <span class="input-label">{{'login_password' | translate}}</span>
-          <input type="password" ng-model="vm.loginData.password">
-        </ion-item>
-        <ion-item>
-          <button class="button button-block button-positive" type="submit">{{'login_button' | translate}}</button>
-        </ion-item>
-      </ion-list>
-    </form>
-  </ion-content>
+    <ion-content>
+        <form ng-submit="vm.doLogin()">
+            <ion-list>
+                <ion-item class="item-image">
+                    <img ng-src="http://www.luzplantas.com/wp-content/uploads/2013/04/Truper.jpg" alt="">
+                </ion-item>
+                <ion-item>
+                    {{'login_instructions' | translate}}
+                </ion-item>
+
+                <!--Email input field-->
+                <ion-item class="item-input">
+                    <span class="input-label">{{'login_email' | translate}}</span>
+                    <input type="text" ng-model="vm.loginData.email">
+                </ion-item>
+
+                <!--Password input field-->
+                <ion-item class="item-input">
+                    <span class="input-label">{{'login_password' | translate}}</span>
+                    <input type="password" ng-model="vm.loginData.password">
+                </ion-item>
+
+                <ion-item class="text-center">
+                    <button class="button button-block button-positive" type="submit">{{'login_button' | translate}}
+                    </button>
+                    <button class="button button-clear button-positive" ng-click="vm.showForgotPasswordDialog()">
+                        {{'forgot_password' | translate}}
+                    </button>
+                </ion-item>
+
+            </ion-list>
+        </form>
+    </ion-content>
 </ion-view>

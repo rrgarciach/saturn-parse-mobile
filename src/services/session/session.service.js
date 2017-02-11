@@ -1,6 +1,4 @@
-'use strict';
-
-export default function sessionService() {
+export default function sessionService(Parse) {
   
   let session = {};
 
@@ -15,7 +13,8 @@ export default function sessionService() {
   }
 
   function getToken() {
-    return session.token;
+    // return session.token;
+      return Parse.Session.current();
   }
 
   function destroy() {

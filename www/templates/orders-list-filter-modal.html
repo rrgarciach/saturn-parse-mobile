@@ -1,0 +1,47 @@
+<ion-modal-view>
+    <ion-header-bar>
+        <h1 class="title">Opciones de Filtradoo</h1>
+        <div class="buttons">
+            <button class="button button-clear align-left" ng-click="vm.closeFiltersModal()">
+                Cancelar
+            </button>
+        </div>
+    </ion-header-bar>
+    <ion-content>
+        <ion-list>
+            <ion-item class="item item-input item-select">
+                <div class="input-label">
+                    Buscar por
+                </div>
+                <select ng-model="vm.filter.searchBy">
+                    <option selected value="promoter">No. de Promotor</option>
+                    <option value="client">No. de Cliente</option>
+                </select>
+            </ion-item>
+            <ion-item class="item item-input item-select">
+                <div class="input-label">
+                    Ordenar por
+                </div>
+                <select ng-model="vm.filter.orderBy">
+                    <option selected value="Order.id">No. de Pedido</option>
+                    <option value="Order.date">Fecha</option>
+                </select>
+            </ion-item>
+            <ion-item class="item item-toggle">
+                Descendente
+                <label class="toggle toggle-balanced">
+                    <input type="checkbox" ng-model="vm.filter.desc">
+                    <div class="track">
+                        <div class="handle"></div>
+                    </div>
+                </label>
+            </ion-item>
+            <ion-item>
+                <button class="button button-block button-positive"
+                        ng-click="vm.applyFilters()">
+                    Aplicar Filtros
+                </button>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-modal-view>
