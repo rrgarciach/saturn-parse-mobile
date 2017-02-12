@@ -6,7 +6,10 @@ export default function orderService($q, Parse) {
 
     return {
         getAll,
-        getById
+        getById,
+        newOrder,
+        getCurrentOrder,
+        saveCurrentOrder
     };
 
     function getAll(filter) {
@@ -16,6 +19,7 @@ export default function orderService($q, Parse) {
         query.skip(filter.offset || 0);
         query.limit(filter.limit || 10);
         query.descending('folio');
+        query.select('folio,client,totals');
         query.include('client');
         query.include('client.profile');
         query.find({
@@ -39,7 +43,17 @@ export default function orderService($q, Parse) {
         query.include('client.profile');
         query.find({
             success: orders => {
-                deferred.resolve(orders[0]);
+                let order = new Order(orders[0]);
+                let items = order.relation('items');
+                items.query().include('product').find({
+                    success: _items => {
+                        order.items = _items;
+                        deferred.resolve(order);
+                    },
+                    error: err => {
+                        deferred.reject(err);
+                    }
+                });
             },
             error: err => {
                 deferred.reject(err);
@@ -49,12 +63,16 @@ export default function orderService($q, Parse) {
         return deferred.promise;
     }
 
-    function startNewOrder(client) {
+    function newOrder(client) {
         currentOrder = new Order();
         currentOrder.set('client', client);
     }
 
-    function saveNewOrder() {
+    function getCurrentOrder() {
+        return currentOrder;
+    }
+
+    function saveCurrentOrder() {
         let deferred = $q.defer();
 
         currentOrder.save({

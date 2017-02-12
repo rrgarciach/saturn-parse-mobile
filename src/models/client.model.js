@@ -1,6 +1,7 @@
 import Parse from 'parse';
 
 export default class Client extends Parse.Object {
+
     constructor(data) {
         super('Client');
 

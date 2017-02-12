@@ -1,8 +1,9 @@
 export default class OrdersNewCtrl {
 
-    constructor($state, $ionicLoading, clientService) {
+    constructor($state, $ionicLoading, orderService, clientService) {
         this.$state = $state;
         this.$ionicLoading = $ionicLoading;
+        this.orderService = orderService;
         this.clientService = clientService;
     }
 
@@ -21,7 +22,7 @@ export default class OrdersNewCtrl {
     }
 
     startNewOrder() {
-        this.clientService.startNewOrder(this.client);
+        this.orderService.newOrder(this.client);
         this.$state.go('app.orders:new:items');
     }
 
