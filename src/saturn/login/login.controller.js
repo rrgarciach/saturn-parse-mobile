@@ -6,10 +6,11 @@ export default class LoginCtrl {
         this.$ionicPopup = $ionicPopup;
         this.$location = $location;
         this.$ionicHistory = $ionicHistory;
-        this.state = $state;
+        this.$state = $state;
         this.authService = authService;
         this.sessionService = sessionService;
 
+        this.showLogin = false;
         // Initialize view:
         this.init();
     }
@@ -66,11 +67,9 @@ export default class LoginCtrl {
     requestPassword(email) {
         this.authService.recoverPassword(email)
             .then(response => {
-                console.log(angular.toJson(response));
                 this.showSimpleDialog('Recuperar contraseña',
                     'Se ha enviado un correo electrónico con su nueva contraseña provisional.');
             }, function(err) {
-                console.log(angular.toJson(err));
                 this.showSimpleDialog('Recuperar contraseña',
                     'La cuenta indicada no existe');
             });
@@ -93,9 +92,12 @@ export default class LoginCtrl {
             password: 'asdf1234'
         };
 
+        console.log( this.sessionService.getToken() );
+
         if (this.sessionService.getToken()) {
             this._redirectToHome();
         }
+        this.showLogin = true;
     }
 
     _redirectToHome() {
@@ -106,7 +108,7 @@ export default class LoginCtrl {
         this.$ionicLoading.hide();
 
         this.$ionicSideMenuDelegate.canDragContent(true);
-        this.state.go('app.orders');
+        this.$state.go('app.orders');
     }
 
 }

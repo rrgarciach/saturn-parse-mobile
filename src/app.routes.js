@@ -5,17 +5,18 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
 export default function routes($stateProvider, $urlRouterProvider, $translateProvider) {
-  $stateProvider
-    .state('app', {
-      url: '/app',
-      abstract: true,
-      templateUrl: 'templates/menu.html',
-      controller: 'MenuCtrl'
-    });
+    $stateProvider
+        .state('app', {
+            url: '/app',
+            abstract: true,
+            templateUrl: 'templates/menu.html',
+            controller: 'MenuCtrl',
+            controllerAs: 'vm'
+        });
 
-  $translateProvider.preferredLanguage('es');
-  $translateProvider.fallbackLanguage('es');
+    $translateProvider.preferredLanguage('es');
+    $translateProvider.fallbackLanguage('es');
 
-  // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/login');
+    // if none of the above states are matched, use this as the fallback
+    $urlRouterProvider.otherwise('/app/login');
 };

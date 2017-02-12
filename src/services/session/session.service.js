@@ -14,7 +14,7 @@ export default function sessionService(Parse) {
 
   function getToken() {
     // return session.token;
-      return Parse.Session.current();
+      return Parse.User.current();
   }
 
   function destroy() {

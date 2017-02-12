@@ -19,14 +19,14 @@
     </ion-header-bar>
     <ion-content>
       <ion-list>
-        <ion-item menu-close href="#/app/login">
-          <span class="input-label">{{'login' | translate}}</span>
-        </ion-item>
         <ion-item menu-close href="#/app/orders">
           <span class="input-label">{{'orders' | translate}}</span>
         </ion-item>
         <ion-item menu-close href="#/app/products">
           <span class="input-label">{{'products' | translate}}</span>
+        </ion-item>
+        <ion-item menu-close ng-click="vm.logout()">
+          <span class="input-label">{{'logout' | translate}}</span>
         </ion-item>
       </ion-list>
     </ion-content>

@@ -32,7 +32,8 @@ export default function authService($q, Parse, sessionService) {
     }
 
     function logout() {
-        sessionService.destroy();
+        // sessionService.destroy();
+        Parse.User.logOut();
     }
 
     function recoverPassword(email) {

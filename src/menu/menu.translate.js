@@ -4,6 +4,7 @@ export default function translate($translateProvider) {
         login: 'Iniciar Sesión',
         orders: 'Órdenes',
         products: 'Catálogo',
+        logout: 'Cerrar Sesión',
     });
 
 };

@@ -1,6 +1,4 @@
-'use strict';
-
-export default function run($ionicPlatform, Parse) {
+export default function run($ionicPlatform) {
   $ionicPlatform.ready(function () {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -14,8 +12,5 @@ export default function run($ionicPlatform, Parse) {
       StatusBar.styleDefault();
     }
 
-      // Initialize Parse
-      Parse.initialize('saturn-id', 'saturn-master-key');
-      Parse.serverURL = 'https://saturn-parse-server-dev.herokuapp.com/parse';
   });
 };

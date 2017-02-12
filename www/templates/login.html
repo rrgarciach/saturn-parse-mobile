@@ -1,6 +1,7 @@
 <ion-view view-title="Login" hide-nav-bar="true">
     <ion-content>
-        <form ng-submit="vm.doLogin()">
+        <span ng-show="vm.showLogin">
+            <form name="loginForm" novalidate ng-submit="loginForm.$valid && vm.doLogin()">
             <ion-list>
                 <ion-item class="item-image">
                     <img ng-src="http://www.luzplantas.com/wp-content/uploads/2013/04/Truper.jpg" alt="">
@@ -30,6 +31,7 @@
                 </ion-item>
 
             </ion-list>
-        </form>
+            </form>
+        </span>
     </ion-content>
 </ion-view>

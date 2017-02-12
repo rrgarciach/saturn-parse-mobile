@@ -67,7 +67,6 @@ export default class OrdersListCtrl {
         });
         this.orderService.getOrders(this.filter)
             .then(orders => {
-                console.log(orders[0]);
                 this.filter.offset += 10;
                 this.orders = this.orders.concat(orders); // Iterate received orders
                 this.$scope.$broadcast('scroll.infiniteScrollComplete');
