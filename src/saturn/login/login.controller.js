@@ -102,7 +102,7 @@ export default class LoginCtrl {
 
     _redirectToHome() {
         // second parameter true sets as history-root view:
-        this.$location.path('/app/orders', true);
+        this.$location.path('/app/home', true);
         // delete history in order to avoid return to login screen:
         this.$ionicHistory.nextViewOptions({historyRoot: true});
         this.$ionicLoading.hide();

@@ -65,7 +65,7 @@ export default class OrdersListCtrl {
         this.$ionicLoading.show({
             template: 'Procesando...'
         });
-        this.orderService.getOrders(this.filter)
+        this.orderService.getAll(this.filter)
             .then(orders => {
                 this.filter.offset += 10;
                 this.orders = this.orders.concat(orders); // Iterate received orders

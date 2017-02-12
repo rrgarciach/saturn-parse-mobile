@@ -4,7 +4,7 @@
 import ngParse from 'angular-parse';
 
 import run from './app.run';
-import { parseConfig } from './app.config';
+import config from './app.config';
 import routes from './app.routes';
 
 import MenuCtrl from './menu/menu.controller';
@@ -20,8 +20,8 @@ angular.module('app', [
     servicesModule,
     ngParse
 ])
+    .config(config)
     .config(menuTranslate)
     .config(routes)
-    .config(parseConfig)
     .run(run)
     .controller('MenuCtrl', MenuCtrl);

@@ -1,12 +1,12 @@
-import Order from '../../../models/order.model';
-
 export default class OrdersViewCtrl {
 
-    constructor(Parse) {
-        let query = new Parse.Query(Order);
-        query.find()
-            .then(orders => {
-                this.orders = orders;
+    constructor($stateParams, orderService) {
+        this.$stateParams = $stateParams;
+        this.orderService = orderService;
+
+        this.orderService.getById(this.$stateParams.id)
+            .then(order => {
+                this.order = order;
             });
     }
 

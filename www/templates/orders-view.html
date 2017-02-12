@@ -1,11 +1,36 @@
 <ion-view view-title="Orders">
+  <ion-header-bar>
+    <h1 class="title">Detalles de Pedido</h1>
+    <div class="buttons">
+      <button class="button button-clear align-left" ng-click="vm.closeOrder()">Volver</button>
+    </div>
+  </ion-header-bar>
   <ion-content>
-    <ion-title>
-      Order
-    </ion-title>
     <ion-list>
+      <ion-item class="item item-divider text-center">
+        Estatus: {{vm.order.get('status') | orderStatusFilter}}
+      </ion-item>
+      <ion-item ng-if="vm.adminUser" class="item item-divider text-center">
+        {{vm.order.get('client').get('folio')}} - {{vm.order.get('client').get('profile').get('lastName')}} {{vm.order.get('client').get('profile').get('firstName')}}
+      </ion-item>
+      <ion-item class="item item-icon-left" ng-repeat="item in order.Items">
+        <h4 class="icon">{{item.quantity}}</h4>
+        <p class="item-note text-right">
+          PU: {{item.price | currency}} MXN
+          <br/>
+          STL: {{(item.price * item.quantity) | currency}} MXN
+        </p>
+        <h2>{{item.Product.name}}</h2>
+        <h2>{{item.Product.sku}}</h2>
+      </ion-item>
+      <ion-item class="item item-divider text-center">
+        Total: {{order.totals | currency}} MXN
+      </ion-item>
       <ion-item>
-        {{order.get('folio')}}
+        <button class="button button-block button-positive"
+                ng-disabled="order.status > 1">
+          Editar Pedido
+        </button>
       </ion-item>
     </ion-list>
   </ion-content>

@@ -5,9 +5,9 @@ import routes from './orders.routes';
 import orderStatusFilter from './orders-status.filter';
 
 export default angular.module('app.saturn.orders', [])
+    .config(routes)
+    .filter('orderStatusFilter', orderStatusFilter)
     .controller('OrdersListCtrl', OrdersListCtrl)
     .config(ordersListTranslate)
     .controller('OrdersViewCtrl', OrdersViewCtrl)
-    .config(routes)
-    .filter('orderStatusFilter', orderStatusFilter)
     .name;

@@ -1,44 +1,32 @@
-<!--<ion-view view-title="Orders">-->
-  <!--<ion-content>-->
-    <!--<ion-title>-->
-      <!--Orders-->
-    <!--</ion-title>-->
-    <!--<ion-list>-->
-      <!--<ion-item ng-repeat="order in vm.orders" href="#/app/orders/{{order.id}}">-->
-        <!--{{order.get('folio')}}-->
-      <!--</ion-item>-->
-    <!--</ion-list>-->
-  <!--</ion-content>-->
-<!--</ion-view>-->
 <ion-view view-title="{{orders | translate}}" class="order-list-view" cache-view="false">
-  <ion-nav-buttons side="right">
-    <a class="button button-icon icon ion-funnel" ng-click="vm.openFiltersModal()"></a>
-  </ion-nav-buttons>
-  <div class="bar bar-subheader item-input-inset" no-tap-scroll="true">
-    <label class="item-input-wrapper">
-      <i class="icon ion-ios-search placeholder-icon"></i>
-      <input type="search"
-             ng-model="vm.filter.searchValue"
-             ng-change="vm.applyFilters()"
-             ng-model-options="{ debounce: 1000 }"
-             placeholder="Buscar por {{vm.filter.searchBy | lowercase}}...">
-    </label>
-  </div>
-  <ion-content class="has-subheader">
-    <ion-list>
-      <ion-item ng-repeat="order in vm.orders" ng-click="vm.viewOrder(order)">
-        <h2>{{order.get('client').get('profile').get('firstName')}}</h2>
-        <p class="item-note">{{order.get('createdAt') | date: 'dd/MM/yyyy'}}</p>
-        <p>Pedido No. {{order.get('folio')}}</p>
-        <p class="item-note">Importe: {{order.get('totals') | currency}} MXN</p>
-        <p>Estatus: {{order.get('status') | orderStatusFilter}}</p>
-      </ion-item>
-    </ion-list>
-    <ion-infinite-scroll
-            immediate-check="false"
-            ng-if="vm.moreData"
-            on-infinite="vm.loadMore()"
-            distance="1%">
-    </ion-infinite-scroll>
-  </ion-content>
+    <ion-nav-buttons side="right">
+        <a class="button button-icon icon ion-funnel" ng-click="vm.openFiltersModal()"></a>
+    </ion-nav-buttons>
+    <div class="bar bar-subheader item-input-inset" no-tap-scroll="true">
+        <label class="item-input-wrapper">
+            <i class="icon ion-ios-search placeholder-icon"></i>
+            <input type="search"
+                   ng-model="vm.filter.searchValue"
+                   ng-change="vm.applyFilters()"
+                   ng-model-options="{ debounce: 1000 }"
+                   placeholder="Buscar por {{vm.filter.searchBy | lowercase}}...">
+        </label>
+    </div>
+    <ion-content class="has-subheader">
+        <ion-list>
+            <ion-item ng-repeat="order in vm.orders" href="#/app/orders/{{order.id}}">
+                <h2>{{order.get('client').get('profile').get('firstName')}}</h2>
+                <p class="item-note">{{order.get('createdAt') | date: 'dd/MM/yyyy'}}</p>
+                <p>Pedido No. {{order.get('folio')}}</p>
+                <p class="item-note">{{order.get('totals') | currency}} MXN</p>
+                <p>Estatus: {{order.get('status') | orderStatusFilter}}</p>
+            </ion-item>
+        </ion-list>
+        <ion-infinite-scroll
+                immediate-check="false"
+                ng-if="vm.moreData"
+                on-infinite="vm.loadMore()"
+                distance="1%">
+        </ion-infinite-scroll>
+    </ion-content>
 </ion-view>
