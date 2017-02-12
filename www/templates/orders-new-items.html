@@ -13,9 +13,9 @@
                       ng-click="vm.openEditItem(item)">
                 <h4 class="icon">{{item.get('quantity')}}</h4>
                 <p class="item-note text-right">
-                    PU: {{item.get('price') | number: 2}} MXN
+                    PU: {{item.price | currency}} MXN
                     <br/>
-                    TL: {{item.totals | number: 2}} MXN
+                    TL: {{item.totals | currency}} MXN
                 </p>
                 <h2>{{item.name}}</h2>
                 <h2>{{item.sku}}</h2>

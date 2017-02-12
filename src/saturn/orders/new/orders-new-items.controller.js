@@ -15,17 +15,9 @@ export default class OrdersItemsCtrl {
 
     init() {
         /* When dealing with arrays for ng-repeat` that will be reloaded,
-         we have to clear Cache in order to avoid an Error in iOS */
+         we have to clear Cache in order to avoid an Error on iOS platform */
         this.$ionicHistory.clearCache()
             .then(() => {
-                // Default item to be displayed at beginning:
-                this.defaultItem = this.itemService.factory({
-                    product: this.productService.factory(),
-                    quantity: 1,
-                    price: 0,
-                    discount: 0
-                });
-
                 // get current Order:
                 this.order = this.orderService.getCurrentOrder();
 
@@ -40,13 +32,6 @@ export default class OrdersItemsCtrl {
                 this.instantiateModals(); // Instantiate required Ionic modals
 
             });
-
-    }
-
-    openAddNewItem() {
-        this.searchSku = '';
-        this.item = this.defaultItem;
-        this.$scope.newItemModal.show();
 
     }
 
@@ -114,5 +99,36 @@ export default class OrdersItemsCtrl {
             this.$scope.createdOrderModal.remove();
         });
     }
+
+    openAddNewItem() {
+        // Default item to be displayed at beginning:
+        this.defaultItem = this.itemService.factory({
+            product: this.productService.factory(),
+            quantity: 1,
+            price: 0,
+            discount: 0
+        });
+        this.item = this.defaultItem;
+        this.searchSku = '';
+        this.$scope.newItemModal.show();
+    }
+
+    // Add selected Item to current Order:
+    addNewItem() {
+        // Add new Item from Order's Items array:
+        this.order.items = this.order.items.concat([this.item]);
+        // Update current Order:
+        this.orderService.setCurrentOrder(this.order);
+        console.log(this.order.items);
+        this.closeAddNewItem();
+    };
+
+    // Close add new Product modal view:
+    closeAddNewItem() {
+        // Update current Order:
+        this.order = this.orderService.getCurrentOrder();
+        this.$scope.newItemModal.hide();
+        this.item = this.defaultItem;
+    };
 
 }

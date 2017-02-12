@@ -9,7 +9,7 @@ export default function orderService($q, Parse) {
         getById,
         newOrder,
         getCurrentOrder,
-        saveCurrentOrder
+        setCurrentOrder,
     };
 
     function getAll(filter) {
@@ -70,6 +70,10 @@ export default function orderService($q, Parse) {
 
     function getCurrentOrder() {
         return currentOrder;
+    }
+
+    function setCurrentOrder(order) {
+        currentOrder = order;
     }
 
     function saveCurrentOrder() {
