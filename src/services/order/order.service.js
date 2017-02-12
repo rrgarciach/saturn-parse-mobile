@@ -33,9 +33,11 @@ export default function orderService($q, Parse) {
 
         let query = new Parse.Query(Order);
         query.equalTo('objectId', id);
+        query.include('client');
+        query.include('client.profile');
         query.find({
-            success: order => {
-                deferred.resolve(order);
+            success: orders => {
+                deferred.resolve(orders[0]);
             },
             error: err => {
                 deferred.reject(err);

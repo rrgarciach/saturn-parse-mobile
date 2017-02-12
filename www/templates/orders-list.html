@@ -1,7 +1,13 @@
-<ion-view view-title="{{orders | translate}}" class="order-list-view" cache-view="false">
+<ion-view view-title="{{'orders' | translate}}" cache-view="false">
+
     <ion-nav-buttons side="right">
-        <a class="button button-icon icon ion-funnel" ng-click="vm.openFiltersModal()"></a>
+        <a class="button button-icon icon ion-plus-circled" href="#/app/orders/new"></a>
     </ion-nav-buttons>
+
+    <!--<ion-nav-buttons side="right">-->
+        <!--<a class="button button-icon icon ion-funnel" ng-click="vm.openFiltersModal()"></a>-->
+    <!--</ion-nav-buttons>-->
+
     <div class="bar bar-subheader item-input-inset" no-tap-scroll="true">
         <label class="item-input-wrapper">
             <i class="icon ion-ios-search placeholder-icon"></i>
@@ -12,9 +18,11 @@
                    placeholder="Buscar por {{vm.filter.searchBy | lowercase}}...">
         </label>
     </div>
+
     <ion-content class="has-subheader">
+
         <ion-list>
-            <ion-item ng-repeat="order in vm.orders" href="#/app/orders/{{order.id}}">
+            <ion-item ng-repeat="order in vm.orders" href="#/app/orders/view/{{order.id}}">
                 <h2>{{order.get('client').get('profile').get('firstName')}}</h2>
                 <p class="item-note">{{order.get('createdAt') | date: 'dd/MM/yyyy'}}</p>
                 <p>Pedido No. {{order.get('folio')}}</p>
@@ -22,6 +30,7 @@
                 <p>Estatus: {{order.get('status') | orderStatusFilter}}</p>
             </ion-item>
         </ion-list>
+
         <ion-infinite-scroll
                 immediate-check="false"
                 ng-if="vm.moreData"
@@ -29,4 +38,5 @@
                 distance="1%">
         </ion-infinite-scroll>
     </ion-content>
+
 </ion-view>

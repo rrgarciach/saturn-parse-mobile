@@ -1,0 +1,55 @@
+<ion-view view-title="{{'new_order' | translate}}" cache-view="false">
+
+    <ion-header-bar>
+        <h1 class="title">Detalles de Pedido</h1>
+        <div class="buttons">
+            <button class="button button-clear align-left" ng-click="vm.closeOrder()">Volver</button>
+        </div>
+    </ion-header-bar>
+
+    <ion-content>
+        <form>
+            <ion-list>
+                <label class="item item-input">
+                    <input type="tel"
+                           placeholder="Escriba el código de cliente..."
+                           ng-model="vm.searchFolio"
+                           ng-change="vm.searchClient()"
+                           ng-model-options="{ debounce: 500 }">
+                </label>
+                <span ng-if="!vm.client.id">
+                <ion-item class="item item-divider text-center">
+                    <h2>Sin resultados.</h2>
+                </ion-item>
+            </span>
+                <span ng-if="vm.client.id">
+                <ion-item class="item item-divider text-center">
+                    <h2>{{vm.client.name}}</h2>
+                </ion-item>
+                <ion-item class="item item-input">
+                    <span class="input-label">Calle:</span>
+                    <span>{{vm.client.MainAddress.street}}</span>
+                </ion-item>
+                <ion-item class="item item-input">
+                    <span class="input-label">Número:</span>
+                    <span>{{vm.client.MainAddress.number}} {{vm.client.MainAddress.interior}}</span>
+                </ion-item>
+                <ion-item class="item item-input">
+                    <span class="input-label">Colonia:</span>
+                    <span>{{vm.client.MainAddress.suburb}}</span>
+                </ion-item>
+                <ion-item class="item item-input">
+                    <span class="input-label">Localidad:</span>
+                    <span>{{vm.client.MainAddress.county}}, {{vm.client.MainAddress.city}}</span>
+                </ion-item>
+                <ion-item>
+                    <button class="button button-block button-positive" ng-enabled="client.valid"
+                            ng-click="vm.startNewOrder()">
+                        Continuar
+                    </button>
+                </ion-item>
+            </span>
+            </ion-list>
+        </form>
+    </ion-content>
+</ion-view>

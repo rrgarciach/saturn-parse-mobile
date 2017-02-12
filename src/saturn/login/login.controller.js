@@ -92,8 +92,6 @@ export default class LoginCtrl {
             password: 'asdf1234'
         };
 
-        console.log( this.sessionService.getToken() );
-
         if (this.sessionService.getToken()) {
             this._redirectToHome();
         }
@@ -102,7 +100,7 @@ export default class LoginCtrl {
 
     _redirectToHome() {
         // second parameter true sets as history-root view:
-        this.$location.path('/app/home', true);
+        this.$location.path('/app/orders', true);
         // delete history in order to avoid return to login screen:
         this.$ionicHistory.nextViewOptions({historyRoot: true});
         this.$ionicLoading.hide();

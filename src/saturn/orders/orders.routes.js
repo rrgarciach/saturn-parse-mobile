@@ -11,12 +11,22 @@ export default function routes($stateProvider) {
                 }
             }
         })
-        .state('app.orders:id', {
-            url: '/orders/:id',
+        .state('app.orders:view', {
+            url: '/orders/view/:id',
             views: {
                 'menuContent': {
                     templateUrl: 'templates/orders-view.html',
                     controller: 'OrdersViewCtrl',
+                    controllerAs: 'vm'
+                }
+            }
+        })
+        .state('app.orders:new', {
+            url: '/orders/new',
+            views: {
+                'menuContent': {
+                    templateUrl: 'templates/orders-new.html',
+                    controller: 'OrdersNewCtrl',
                     controllerAs: 'vm'
                 }
             }

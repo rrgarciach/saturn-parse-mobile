@@ -1,13 +1,16 @@
-import OrdersListCtrl from './list/orders-list.controller';
-import ordersListTranslate from './list/orders-list.translate';
-import OrdersViewCtrl from './view/orders-view.controller';
+import ordersTranslate from './orders.translate';
 import routes from './orders.routes';
 import orderStatusFilter from './orders-status.filter';
 
+import OrdersListCtrl from './list/orders-list.controller';
+import OrdersViewCtrl from './view/orders-view.controller';
+import OrdersNewCtrl from './new/orders-new.controller';
+
 export default angular.module('app.saturn.orders', [])
     .config(routes)
+    .config(ordersTranslate)
     .filter('orderStatusFilter', orderStatusFilter)
     .controller('OrdersListCtrl', OrdersListCtrl)
-    .config(ordersListTranslate)
     .controller('OrdersViewCtrl', OrdersViewCtrl)
+    .controller('OrdersNewCtrl', OrdersNewCtrl)
     .name;
