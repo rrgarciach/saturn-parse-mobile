@@ -2,9 +2,6 @@
   "name": "saturn-parse-mobile",
   "version": "0.0.1",
   "description": "Saturn Parse Mobile: An Ionic project",
-  "scripts": {
-    "preinstall": "npm i -g ionic cordova"
-  },
   "dependencies": {
     "angular": "^1.6.2",
     "angular-parse": "^0.2.2",
@@ -16,6 +13,8 @@
     "parse": "^1.9.2"
   },
   "devDependencies": {
+    "ionic": "^2.2.1",
+    "cordova": "^6.5.0",
     "babel": "^6.5.2",
     "babel-core": "^6.22.1",
     "babel-plugin-transform-class-properties": "^6.16.0",

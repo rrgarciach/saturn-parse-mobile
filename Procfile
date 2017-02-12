@@ -1,1 +1,1 @@
-web: npm preinstall && ionic serve
+web: ionic serve
