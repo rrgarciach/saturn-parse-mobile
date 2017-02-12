@@ -30,6 +30,16 @@ export default function routes($stateProvider) {
                     controllerAs: 'vm'
                 }
             }
+        })
+        .state('app.orders:new:items', {
+            url: '/orders/new/items',
+            views: {
+                'menuContent': {
+                    templateUrl: 'templates/orders-items.html',
+                    controller: 'OrdersItemsCtrl',
+                    controllerAs: 'vm'
+                }
+            }
         });
 
 };

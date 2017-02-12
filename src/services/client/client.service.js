@@ -34,9 +34,10 @@ export default function clientService($q, Parse) {
         let query = new Parse.Query(Client);
         query.equalTo('objectId', id);
         query.include('profile');
+        query.include('profile.address');
         query.find({
             success: clients => {
-                deferred.resolve(clients[0]);
+                deferred.resolve(new Client(clients[0]));
             },
             error: err => {
                 deferred.reject(err);
@@ -52,9 +53,10 @@ export default function clientService($q, Parse) {
         let query = new Parse.Query(Client);
         query.equalTo('folio', folio);
         query.include('profile');
+        query.include('profile.address');
         query.find({
             success: clients => {
-                deferred.resolve(clients[0]);
+                deferred.resolve(new Client(clients[0]));
             },
             error: err => {
                 deferred.reject(err);

@@ -24,23 +24,23 @@
             </span>
                 <span ng-if="vm.client.id">
                 <ion-item class="item item-divider text-center">
-                    <h2>{{vm.client.name}}</h2>
+                    <h2>{{vm.client.fullName}}</h2>
                 </ion-item>
                 <ion-item class="item item-input">
                     <span class="input-label">Calle:</span>
-                    <span>{{vm.client.MainAddress.street}}</span>
+                    <span>{{vm.client.address.get('street')}}</span>
                 </ion-item>
                 <ion-item class="item item-input">
                     <span class="input-label">Número:</span>
-                    <span>{{vm.client.MainAddress.number}} {{vm.client.MainAddress.interior}}</span>
+                    <span>{{vm.client.address.get('number')}} {{vm.client.address.get('interior')}}</span>
                 </ion-item>
                 <ion-item class="item item-input">
                     <span class="input-label">Colonia:</span>
-                    <span>{{vm.client.MainAddress.suburb}}</span>
+                    <span>{{vm.client.address.get('neighborhood')}}</span>
                 </ion-item>
                 <ion-item class="item item-input">
                     <span class="input-label">Localidad:</span>
-                    <span>{{vm.client.MainAddress.county}}, {{vm.client.MainAddress.city}}</span>
+                    <span>{{vm.client.address.get('city')}}, {{vm.client.address.get('street')}}</span>
                 </ion-item>
                 <ion-item>
                     <button class="button button-block button-positive" ng-enabled="client.valid"
