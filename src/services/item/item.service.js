@@ -3,8 +3,24 @@ import Item from '../../models/item.model';
 export default function itemService($q, Parse) {
 
     return {
+        saveAll,
         factory
     };
+
+    function saveAll(items) {
+        let deferred = $q.defer();
+
+        Parse.Object.saveAll(items, {
+            success: _items => {
+                deferred.resolve(_items);
+            },
+            error: err => {
+                deferred.reject(err);
+            }
+        });
+
+        return deferred.promise;
+    }
 
     function factory(data) {
         let item = new Item();

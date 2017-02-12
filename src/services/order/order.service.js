@@ -1,13 +1,14 @@
 import Order from '../../models/order.model';
 
-export default function orderService($q, Parse) {
+export default function orderService($q, Parse, itemService) {
 
     let currentOrder;
 
     return {
         getAll,
         getById,
-        newOrder,
+        save,
+        factory,
         getCurrentOrder,
         setCurrentOrder,
     };
@@ -63,9 +64,37 @@ export default function orderService($q, Parse) {
         return deferred.promise;
     }
 
-    function newOrder(client) {
-        currentOrder = new Order();
-        currentOrder.set('client', client);
+    function save(order) {
+        let deferred = $q.defer();
+
+        itemService.saveAll(order.items)
+            .then(_items => {
+
+                let relation = order.relation('items');
+                for (let i = 0; i < _items.length; ++i) {
+                    relation.add(_items[i]);
+                }
+
+                order.save({
+                    success: _order => {
+                        deferred.resolve(_order);
+                    },
+                    error: err => {
+                        deferred.reject(err);
+                    }
+                });
+
+            });
+
+        return deferred.promise;
+    }
+
+    function factory(data) {
+        let order = new Order();
+        if (data) {
+            if (data.client) order.set('client', data.client);
+        }
+        return order;
     }
 
     function getCurrentOrder() {
@@ -74,21 +103,6 @@ export default function orderService($q, Parse) {
 
     function setCurrentOrder(order) {
         currentOrder = order;
-    }
-
-    function saveCurrentOrder() {
-        let deferred = $q.defer();
-
-        currentOrder.save({
-            success: order => {
-                deferred.resolve(order);
-            },
-            error: err => {
-                deferred.reject(err);
-            }
-        });
-
-        return deferred.promise;
     }
 
 }

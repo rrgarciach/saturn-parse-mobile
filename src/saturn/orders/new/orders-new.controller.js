@@ -22,7 +22,8 @@ export default class OrdersNewCtrl {
     }
 
     startNewOrder() {
-        this.orderService.newOrder(this.client);
+        let order = this.orderService.factory({client: this.client});
+        this.orderService.setCurrentOrder(order);
         this.$state.go('app.orders:new:items');
     }
 

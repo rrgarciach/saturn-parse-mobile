@@ -1,9 +1,12 @@
 export default class OrdersItemsCtrl {
 
-    constructor($scope, $ionicHistory, $ionicModal, orderService, productService, itemService) {
+    constructor($scope, $location, $ionicHistory, $ionicModal, $ionicLoading, $ionicPopup, orderService, productService, itemService) {
         this.$scope = $scope;
+        this.$location = $location;
         this.$ionicHistory = $ionicHistory;
         this.$ionicModal = $ionicModal;
+        this.$ionicLoading = $ionicLoading;
+        this.$ionicPopup = $ionicPopup;
         this.orderService = orderService;
         this.productService = productService;
         this.itemService = itemService;
@@ -44,7 +47,7 @@ export default class OrdersItemsCtrl {
                 .then(product => {
                     // bind found Product with item
                     this.item = this.itemService.factory();
-                    this.item.set('product', product);
+                    this.item.product = product;
                     this.item.quantity = 1;
                     // @TODO: This part is useful to place promotional discounts:
                     this.item.discount = 0;
@@ -93,7 +96,7 @@ export default class OrdersItemsCtrl {
             });
 
         // Cleanup the modal when we're done with it!
-        this.$scope.$on('$destroy', function () {
+        this.$scope.$on('$destroy', () => {
             this.$scope.newItemModal.remove();
             this.$scope.editItemModal.remove();
             this.$scope.createdOrderModal.remove();
@@ -129,6 +132,75 @@ export default class OrdersItemsCtrl {
         this.order = this.orderService.getCurrentOrder();
         this.$scope.newItemModal.hide();
         this.item = this.defaultItem;
+    };
+
+    // Save current Order:
+    saveCurrentOrder() {
+        // Show loading:
+        this.$ionicLoading.show({
+            template: 'Procesando...'
+        });
+        this.orderService.save(this.order)
+            .then(order => {
+                // Search for created Order:
+                this.orderService.getById(order.id)
+                    .then(_order => {
+                        this.$scope.order = _order;
+                        this.openOrder();
+                        // Hide loading:
+                        this.$ionicLoading.hide();
+                        this.closeOrder();
+
+                    })
+                    // If getting new Order fails:
+                    .catch(() => {
+                        this.$ionicPopup.alert({
+                            title: 'Error de conexión',
+                            template: 'Ha ocurrido un error. Revise su conexión a Internet.',
+                            okText: 'Volver'
+                        });
+                    });
+
+            })
+            // If saving new Order fails:
+            .catch(err => {
+                if (err.status === 400) {
+                    // Display Alert to notify success:
+                    this.$ionicPopup.alert({
+                        title: 'Error',
+                        template: 'Ha ocurrido un error. Por favor intente más tarde.',
+                        okText: 'Volver'
+                    });
+                } else {
+                    this.$ionicPopup.alert({
+                        title: 'Error de conexión',
+                        template: 'Ha ocurrido un error. Revise su conexión a Internet.',
+                        okText: 'Volver'
+                    });
+                }
+                this.$ionicLoading.hide();
+            });
+    };
+
+    // Open created Order modal view:
+    openOrder() {
+        this.$scope.createdOrderModal.show();
+    };
+
+    // Close created Order modal view:
+    closeOrder() {
+        // Clear current Order:
+        this.item = this.defaultItem;
+        let order = this.orderService.factory();
+        this.orderService.setCurrentOrder(order);
+        this.$ionicHistory.clearCache();
+
+        // second parameter true sets as history-root view:
+        this.$location.path('/app/home', true);
+        // delete history in order to avoid return to login screen:
+        this.$ionicHistory.nextViewOptions({historyRoot: true});
+        this.$ionicLoading.hide();
+        this.$scope.createdOrderModal.hide();
     };
 
 }

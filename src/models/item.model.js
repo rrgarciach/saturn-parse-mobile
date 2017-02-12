@@ -8,6 +8,7 @@ export default class Item extends Parse.Object {
         if (data) {
             this.id = data.id;
             this.set('product', data.get('product'));
+            this.price = this.product.price;
         }
 
         this.ivaPerc = 0.16;
@@ -15,6 +16,11 @@ export default class Item extends Parse.Object {
 
     get product() {
         return this.get('product');
+    }
+
+    set product(product) {
+        this.set('product', product);
+        this.price = this.product.price;
     }
 
     get sku() {
@@ -34,11 +40,11 @@ export default class Item extends Parse.Object {
     }
 
     get price() {
-        return this.product.get('price') / 100;
+        return this.get('price') / 100;
     }
 
     set price(value) {
-        this.product.set('price', value * 100);
+        this.set('price', value * 100);
     }
 
     get discount() {

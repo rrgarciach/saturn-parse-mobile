@@ -36,7 +36,7 @@
                          placeholder="Escriba precio unitario..."
                          ng-if="!vm.clientUser"
                          ng-model="vm.item.price">
-                <h2 ng-if="vm.clientUser">{{vm.item.price | currency} MXN</h2>
+                <h2 ng-if="vm.clientUser">{{vm.item.price | currency}} MXN</h2>
             </label>
             <label class="item item-input">
                 <span class="input-label">Descuento (%):</span>

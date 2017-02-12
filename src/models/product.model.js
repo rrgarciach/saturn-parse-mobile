@@ -9,6 +9,15 @@ export default class Product extends Parse.Object {
             this.id = data.id;
         }
     }
+
+    get price() {
+        return this.get('price') / 100;
+    }
+
+    set price(value) {
+        this.set('price', value * 100);
+    }
+
 }
 
 Parse.Object.registerSubclass('Product', Product);
