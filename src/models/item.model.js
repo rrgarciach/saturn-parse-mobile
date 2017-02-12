@@ -7,23 +7,38 @@ export default class Item extends Parse.Object {
 
         if (data) {
             this.id = data.id;
+            this.set('product', data.get('product'));
         }
+
+        this.ivaPerc = 0.16;
+    }
+
+    get product() {
+        return this.get('product');
     }
 
     get sku() {
-        return this.get('product').get('sku');
+        return this.product.get('sku');
     }
 
     get description() {
-        return this.get('product').get('description');
+        return this.product.get('description');
+    }
+
+    get quantity() {
+        return this.get('quantity');
+    }
+
+    set quantity(value) {
+        this.set('quantity', value);
     }
 
     get price() {
-        return this.get('price') / 100;
+        return this.product.get('price') / 100;
     }
 
     set price(value) {
-        this.set('price', value * 100);
+        this.product.set('price', value * 100);
     }
 
     get discount() {
@@ -34,8 +49,16 @@ export default class Item extends Parse.Object {
         this.set('discount', value * 100);
     }
 
+    get discountValue() {
+        return this.price * (this.discount/100);
+    }
+
+    get iva() {
+        return this.product.get('noIVA') ? 0 : this.price * this.ivaPerc;
+    }
+
     get totals() {
-        return this.price * this.get('quantity');
+        return (this.price + this.iva - this.discountValue) * this.quantity;
     }
 }
 

@@ -1,16 +1,31 @@
-'use strict';
+import Product from '../../models/product.model';
 
-export default function productService(Parse) {
+export default function productService($q, Parse) {
 
     return {
-        uploadProducts
+        getBySku,
+        factory
     };
 
-    function uploadProducts(loginData) {
-        return Parse.User.logIn(loginData.email, loginData.password)
-            .then(response => {
-                sessionService.setToken(response.token);
-            });
+    function getBySku(sku) {
+        let deferred = $q.defer();
+
+        let query = new Parse.Query(Product);
+        query.equalTo('sku', sku);
+        query.find({
+            success: products => {
+                deferred.resolve(products[0]);
+            },
+            error: err => {
+                deferred.reject(err);
+            }
+        });
+
+        return deferred.promise;
+    }
+
+    function factory() {
+        return new Product();
     }
 
 }

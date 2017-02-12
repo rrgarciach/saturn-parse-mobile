@@ -8,7 +8,7 @@
     </ion-header-bar>
 
     <ion-content>
-        <form>
+        <form ng-submit="vm.searchClient()">
             <ion-list>
                 <label class="item item-input">
                     <input type="tel"
@@ -40,7 +40,7 @@
                 </ion-item>
                 <ion-item class="item item-input">
                     <span class="input-label">Localidad:</span>
-                    <span>{{vm.client.address.get('city')}}, {{vm.client.address.get('street')}}</span>
+                    <span>{{vm.client.address.get('city')}}, {{vm.client.address.get('state')}}</span>
                 </ion-item>
                 <ion-item>
                     <button class="button button-block button-positive" ng-enabled="client.valid"
