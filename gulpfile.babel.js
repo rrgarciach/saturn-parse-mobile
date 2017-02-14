@@ -1,17 +1,22 @@
-import del from 'del';
-var gulp = require('gulp');
-var gutil = require('gulp-util');
-var bower = require('bower');
-var concat = require('gulp-concat');
-var sass = require('gulp-sass');
-var minifyCss = require('gulp-minify-css');
-var rename = require('gulp-rename');
-var sh = require('shelljs');
-import inject from 'gulp-inject';
-import babel from 'gulp-babel';
-import _ from 'lodash';
-import lazypipe from 'lazypipe';
-import gulpLoadPlugins from 'gulp-load-plugins';
+const gulp = require('gulp');
+const gutil = require('gulp-util');
+const bower = require('bower');
+const concat = require('gulp-concat');
+const sass = require('gulp-sass');
+const minifyCss = require('gulp-minify-css');
+const rename = require('gulp-rename');
+const sh = require('shelljs');
+const del = require('del');
+const inject = require('gulp-inject');
+const babel = require('gulp-babel');
+const _ = require('lodash');
+const lazypipe = require('lazypipe');
+const gulpLoadPlugins = require('gulp-load-plugins');
+
+const babelify = require('babelify');
+const browserify = require('browserify');
+const vinylSourceStream = require('vinyl-source-stream');
+const vinylBuffer = require('vinyl-buffer');
 
 let plugins = gulpLoadPlugins();
 
@@ -101,14 +106,8 @@ gulp.task('test:watch', () => {
   return gulp.watch([`${srcPath}/**/**.js`], ['test']);
 });
 
-
-var babelify = require('babelify');
-var browserify = require('browserify');
-var vinylSourceStream = require('vinyl-source-stream');
-var vinylBuffer = require('vinyl-buffer');
-
 gulp.task('script', ['clean:dist'], () => {
-  var sources = browserify({
+  let sources = browserify({
     entries: 'src/app.module.js',
     // debug: true
   })
