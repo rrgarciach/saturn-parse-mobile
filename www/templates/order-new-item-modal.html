@@ -10,13 +10,16 @@
     </ion-header-bar>
     <ion-content>
         <div class="list">
+            <form ng-submit="vm.submitAction()">
             <ion-item class="item-input">
                 <span class="input-label">{{'sku' | translate}}:</span>
                 <input type="text"
                        placeholder="Escriba código de producto..."
+                       ng-if="vm.actionLabel === 'add_item'"
                        ng-model="vm.searchSku"
                        ng-change="vm.searchProduct()"
                        ng-model-options="{ debounce: 500 }">
+                <h2 class="text-gray" ng-if="vm.actionLabel === 'edit_item'">{{vm.item.sku}}</h2>
             </ion-item>
             <ion-item class="item-input">
                 <span class="input-label">Descripción:</span>
@@ -79,6 +82,7 @@
                 </button>
             </ion-item>
             </ion-list>
+            </form>
         </div>
     </ion-content>
 </ion-modal-view>

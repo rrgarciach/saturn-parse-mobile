@@ -73,7 +73,8 @@ export default class OrdersItemsCtrl {
         // Instantiate New Item modal:
         this.$ionicModal.fromTemplateUrl('templates/order-new-item-modal.html', {
             scope: this.$scope,
-            animation: 'slide-in-up'
+            animation: 'slide-in-up',
+            focusFirstInput: true
         })
             .then(modal => {
                 // bind modal instance:
@@ -83,7 +84,8 @@ export default class OrdersItemsCtrl {
         // Instantiate Edit Item modal:
         this.$ionicModal.fromTemplateUrl('templates/order-new-item-modal.html', {
             scope: this.$scope,
-            animation: 'slide-in-up'
+            animation: 'slide-in-up',
+            focusFirstInput: true
         })
             .then(modal => {
                 // bind modal instance:
@@ -93,7 +95,8 @@ export default class OrdersItemsCtrl {
         // Instantiate View Created Order modal:
         this.$ionicModal.fromTemplateUrl('templates/order-view-modal.html', {
             scope: this.$scope,
-            animation: 'slide-in-up'
+            animation: 'slide-in-up',
+            focusFirstInput: true
         })
             .then(modal => {
                 // bind modal instance:
