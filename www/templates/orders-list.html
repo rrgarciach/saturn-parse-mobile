@@ -22,7 +22,7 @@
     <ion-content class="has-subheader">
 
         <ion-list>
-            <ion-item ng-repeat="order in vm.orders" href="#/app/orders/view/{{order.id}}">
+            <ion-item ng-repeat="order in vm.orders track by $index" href="#/app/orders/view/{{order.id}}">
                 <h2>{{order.get('client').get('profile').get('firstName')}}</h2>
                 <p class="item-note">{{order.get('createdAt') | date: 'dd/MM/yyyy'}}</p>
                 <p>Pedido No. {{order.get('folio')}}</p>

@@ -45,12 +45,17 @@ export default class OrdersItemsCtrl {
 
             this.productService.getBySku(this.searchSku)
                 .then(product => {
-                    // bind found Product with item
-                    this.item = this.itemService.factory();
-                    this.item.product = product;
-                    this.item.quantity = 1;
-                    // @TODO: This part is useful to place promotional discounts:
-                    this.item.discount = 0;
+                    if(product) {
+                        // bind found Product with item
+                        this.item = this.itemService.factory();
+                        this.item.product = product;
+                        this.item.quantity = 1;
+                        // @TODO: This part is useful to place promotional discounts:
+                        this.item.discount = 0;
+
+                    } else {
+                        this.item = this.defaultItem;
+                    }
 
                 })
                 .catch(err => {
@@ -104,6 +109,7 @@ export default class OrdersItemsCtrl {
     }
 
     openAddNewItem() {
+        this.actionLabel = 'add_item';
         // Default item to be displayed at beginning:
         this.defaultItem = this.itemService.factory({
             product: this.productService.factory(),
@@ -117,16 +123,16 @@ export default class OrdersItemsCtrl {
     }
 
     // Add selected Item to current Order:
-    addNewItem() {
+    _addNewItem() {
         // Add new Item from Order's Items array:
         this.order.items = this.order.items.concat([this.item]);
         // Update current Order:
         this.orderService.setCurrentOrder(this.order);
-        this.closeAddNewItem();
+        this._closeAddNewItem();
     };
 
     // Close add new Product modal view:
-    closeAddNewItem() {
+    _closeAddNewItem() {
         // Update current Order:
         this.order = this.orderService.getCurrentOrder();
         this.$scope.newItemModal.hide();
@@ -204,33 +210,58 @@ export default class OrdersItemsCtrl {
 
     // Open view to edit an Item:
     openEditItem(item) {
+        this.actionLabel = 'edit_item';
         this.item = item;
         this.$scope.editItemModal.show();
     };
 
     // Edit current modal's Item
-    editItem() {
+    _editItem() {
         // Edit Item from Order's Items array:
         let items = this.order.items;
         items[this.item.$index] = this.item;
         this.order.items = items;
         // Update current Order:
         this.orderService.setCurrentOrder(this.order);
-        this.closeEditItem(); // Close edit Product modal view:
+        this._closeEditItem(); // Close edit Product modal view:
     };
 
     // Remove current modal's Item
     removeItem() {
         // Remove Item from Order's Items array:
-        this.order.Items.splice(this.item.$index, 1);
+        let items = this.order.items;
+        items.splice(this.item.$index, 1);
+        this.order.items = items;
         // Update current Order:
         this.orderService.setCurrentOrder(this.order);
-        this.closeEditItem(); // Close edit Product modal view:
+        this._closeEditItem(); // Close edit Product modal view:
     };
 
     // Close edit Product modal view:
-    closeEditItem() {
+    _closeEditItem() {
         this.$scope.editItemModal.hide();
     };
+
+    submitAction() {
+        switch (this.actionLabel) {
+            case 'add_item':
+                this._addNewItem();
+                break;
+            case 'edit_item':
+                this._editItem();
+                break;
+        }
+    }
+
+    closeModal() {
+        switch (this.actionLabel) {
+            case 'add_item':
+                this._closeAddNewItem();
+                break;
+            case 'edit_item':
+                this._closeEditItem();
+                break;
+        }
+    }
 
 }

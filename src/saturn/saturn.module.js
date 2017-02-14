@@ -2,6 +2,7 @@
 
 import ordersModule from './orders/orders.module';
 
+import saturnTranslate from './saturn.translate';
 import routes from './saturn.routes';
 
 import LoginCtrl from './login/login.controller';
@@ -11,6 +12,7 @@ export default angular.module('saturn', [
   ordersModule,
 ])
   .config(routes)
+  .config(saturnTranslate)
   .controller('LoginCtrl', LoginCtrl)
   .config(loginTranslate)
   .name;

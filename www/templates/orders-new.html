@@ -43,7 +43,8 @@
                     <span>{{vm.client.address.get('city')}}, {{vm.client.address.get('state')}}</span>
                 </ion-item>
                 <ion-item>
-                    <button class="button button-block button-positive" ng-enabled="client.valid"
+                    <button class="button button-block button-positive icon-left ion-checkmark-circled"
+                            ng-enabled="client.valid"
                             ng-click="vm.startNewOrder()">
                         Continuar
                     </button>

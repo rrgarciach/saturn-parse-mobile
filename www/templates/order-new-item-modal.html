@@ -1,34 +1,37 @@
 <ion-modal-view>
     <ion-header-bar>
-        <h1 class="title">Agregar Producto</h1>
+        <h1 class="title">{{vm.actionLabel | translate}}</h1>
 
         <div class="buttons">
-            <button class="button icon-left ion-close-circled" ng-click="vm.closeAddNewItem()">Cancelar</button>
+            <button class="button icon-left ion-close-circled"
+                    ng-click="vm.closeModal()">{{'cancel' | translate}}
+            </button>
         </div>
     </ion-header-bar>
     <ion-content>
         <div class="list">
-            <label class="item item-input">
-                <span class="input-label">Código:</span>
+            <ion-item class="item-input">
+                <span class="input-label">{{'sku' | translate}}:</span>
                 <input type="text"
                        placeholder="Escriba código de producto..."
                        ng-model="vm.searchSku"
                        ng-change="vm.searchProduct()"
                        ng-model-options="{ debounce: 500 }">
-            </label>
-            <label class="item item-input">
+            </ion-item>
+            <ion-item class="item-input">
                 <span class="input-label">Descripción:</span>
 
                 <h2 class="text-gray">{{vm.item.product.get('description')}}</h2>
-            </label>
-            <label class="item item-input">
+            </ion-item>
+            <ion-item class="item-input">
                 <span class="input-label">Cantidad:</span>
                 <input type="number"
                        min="1"
+                       step="1"
                        placeholder="Escriba cantidad..."
                        ng-model="vm.item.quantity">
-            </label>
-            <label class="item item-input">
+            </ion-item>
+            <ion-item class="item-input">
                 <span class="input-label">Precio Unitario:</span>
                 $ <input type="number"
                          min="1"
@@ -37,38 +40,44 @@
                          ng-if="vm.adminUser"
                          ng-model="vm.item.price">
                 <h2 ng-if="!vm.adminUser">{{vm.item.price | currency}} MXN</h2>
-            </label>
-            <label class="item item-input">
+            </ion-item>
+            <ion-item class="item-input">
                 <span class="input-label">Descuento (%):</span>
                 <input type="number"
                        min="0"
                        max="100"
                        step="0.01"
                        placeholder="Escriba porcentaje de descuento..."
-                       ng-if="!vm.clientUser"
+                       ng-if="vm.adminUser"
                        ng-model="vm.item.discount">
 
-                <h2 ng-if="vm.clientUser">{{vm.item.discount}}%</h2>
-            </label>
-            <label class="item item-input">
+                <h2 ng-if="!vm.adminUser">{{vm.item.discount}}%</h2>
+            </ion-item>
+            <ion-item class="item-input">
                 <span class="input-label">Subtotal:</span>
                 <h2>{{vm.item.subtotals | currency}} MXN</h2>
-            </label>
-            <label class="item item-input">
+            </ion-item>
+            <ion-item class="item-input">
                 <span class="input-label">IVA:</span>
                 <p class="text-gray">{{vm.item.iva | currency}} MXN</p>
-            </label>
-            <label class="item item-input">
+            </ion-item>
+            <ion-item class="item-input">
                 <span class="input-label">Total:</span>
                 <h2>{{vm.item.totals | currency}} MXN</h2>
-            </label>
-            <label class="item">
-                <button class="button button-block button-positive"
-                        ng-disabled="!vm.item.sku || vm.item.quantity < 1"
-                        ng-click="vm.addNewItem()">
-                    Agregar Producto
+            </ion-item>
+            <ion-item>
+                <button class="button button-block button-positive icon-left ion-checkmark-circled"
+                        ng-disabled="!vm.item.sku || !vm.item.quantity"
+                        ng-click="vm.submitAction()">
+                    {{vm.actionLabel | translate}}
                 </button>
-            </label>
+                <button class="button button-block button-assertive icon-left ion-trash-b"
+                        ng-if="vm.actionLabel === 'edit_item'"
+                        ng-disabled="!vm.item.sku || !vm.item.quantity"
+                        ng-click="vm.removeItem()">
+                    {{'remove_item' | translate}}
+                </button>
+            </ion-item>
             </ion-list>
         </div>
     </ion-content>
