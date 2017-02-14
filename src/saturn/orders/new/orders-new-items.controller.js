@@ -76,7 +76,7 @@ export default class OrdersItemsCtrl {
             });
 
         // Instantiate Edit Item modal:
-        this.$ionicModal.fromTemplateUrl('templates/order-edit-item-modal.html', {
+        this.$ionicModal.fromTemplateUrl('templates/order-new-item-modal.html', {
             scope: this.$scope,
             animation: 'slide-in-up'
         })
@@ -122,7 +122,6 @@ export default class OrdersItemsCtrl {
         this.order.items = this.order.items.concat([this.item]);
         // Update current Order:
         this.orderService.setCurrentOrder(this.order);
-        console.log(this.order.items);
         this.closeAddNewItem();
     };
 
@@ -201,6 +200,37 @@ export default class OrdersItemsCtrl {
         this.$ionicHistory.nextViewOptions({historyRoot: true});
         this.$ionicLoading.hide();
         this.$scope.createdOrderModal.hide();
+    };
+
+    // Open view to edit an Item:
+    openEditItem(item) {
+        this.item = item;
+        this.$scope.editItemModal.show();
+    };
+
+    // Edit current modal's Item
+    editItem() {
+        // Edit Item from Order's Items array:
+        let items = this.order.items;
+        items[this.item.$index] = this.item;
+        this.order.items = items;
+        // Update current Order:
+        this.orderService.setCurrentOrder(this.order);
+        this.closeEditItem(); // Close edit Product modal view:
+    };
+
+    // Remove current modal's Item
+    removeItem() {
+        // Remove Item from Order's Items array:
+        this.order.Items.splice(this.item.$index, 1);
+        // Update current Order:
+        this.orderService.setCurrentOrder(this.order);
+        this.closeEditItem(); // Close edit Product modal view:
+    };
+
+    // Close edit Product modal view:
+    closeEditItem() {
+        this.$scope.editItemModal.hide();
     };
 
 }

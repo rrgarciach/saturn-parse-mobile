@@ -11,7 +11,7 @@ export default class Item extends Parse.Object {
             this.price = this.product.price;
         }
 
-        this.ivaPerc = 0.16;
+        this.IVA_PERCENTAGE = 0.16;
     }
 
     get product() {
@@ -47,6 +47,14 @@ export default class Item extends Parse.Object {
         this.set('price', value * 100);
     }
 
+    get subtotals() {
+        return this.price * this.quantity;
+    }
+
+    get iva() {
+        return this.product.get('noIVA') ? 0 : this.subtotals * this.IVA_PERCENTAGE;
+    }
+
     get discount() {
         return this.get('discount') / 100;
     }
@@ -56,15 +64,11 @@ export default class Item extends Parse.Object {
     }
 
     get discountValue() {
-        return this.price * (this.discount/100);
-    }
-
-    get iva() {
-        return this.product.get('noIVA') ? 0 : this.price * this.ivaPerc;
+        return (this.subtotals + this.iva) * (this.discount / 100);
     }
 
     get totals() {
-        return (this.price + this.iva - this.discountValue) * this.quantity;
+        return (this.subtotals + this.iva) - this.discountValue;
     }
 }
 

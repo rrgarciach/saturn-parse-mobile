@@ -1,20 +1,16 @@
 <ion-modal-view>
     <ion-header-bar>
-        <h1 class="title">Agregar Producto</h1>
+        <h1 class="title">Editar Producto</h1>
 
         <div class="buttons">
-            <button class="button icon-left ion-close-circled" ng-click="vm.closeAddNewItem()">Cancelar</button>
+            <button class="button button-clear align-left" ng-click="vm.closeEditItem()">Cancelar</button>
         </div>
     </ion-header-bar>
     <ion-content>
         <div class="list">
             <label class="item item-input">
                 <span class="input-label">Código:</span>
-                <input type="text"
-                       placeholder="Escriba código de producto..."
-                       ng-model="vm.searchSku"
-                       ng-change="vm.searchProduct()"
-                       ng-model-options="{ debounce: 500 }">
+                <h2>{{vm.item.sku}}</h2>
             </label>
             <label class="item item-input">
                 <span class="input-label">Descripción:</span>
@@ -41,14 +37,13 @@
             <label class="item item-input">
                 <span class="input-label">Descuento (%):</span>
                 <input type="number"
-                       min="0"
-                       max="100"
+                       min="1"
                        step="0.01"
                        placeholder="Escriba porcentaje de descuento..."
-                       ng-if="!vm.clientUser"
+                       ng-if="vm.adminUser"
                        ng-model="vm.item.discount">
 
-                <h2 ng-if="vm.clientUser">{{vm.item.discount}}%</h2>
+                <h2 ng-if="!vm.adminUser">{{vm.item.discount}}%</h2>
             </label>
             <label class="item item-input">
                 <span class="input-label">Subtotal:</span>
@@ -62,13 +57,17 @@
                 <span class="input-label">Total:</span>
                 <h2>{{vm.item.totals | currency}} MXN</h2>
             </label>
-            <label class="item">
+            <span class="item">
                 <button class="button button-block button-positive"
-                        ng-disabled="!vm.item.sku || vm.item.quantity < 1"
-                        ng-click="vm.addNewItem()">
-                    Agregar Producto
+                        ng-disabled="vm.item.quantity < 1"
+                        ng-click="vm.editItem()">
+                    Guardar Cambios
                 </button>
-            </label>
+                <button class="button button-block button-assertive"
+                        ng-click="vm.removeItem()">
+                    Remover Producto
+                </button>
+            </span>
             </ion-list>
         </div>
     </ion-content>
