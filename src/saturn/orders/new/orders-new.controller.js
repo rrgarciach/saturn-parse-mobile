@@ -10,9 +10,7 @@ export default class OrdersNewCtrl {
     searchClient() {
         // Do not search if Client Folio has not 3 characters or more:
         if (this.searchFolio.toString().length > 2) {
-            this.$ionicLoading.show({
-                template: 'Procesando...'
-            });
+            this.$ionicLoading.show({template: 'Procesando...'});
             this.clientService.getByFolio(this.searchFolio)
                 .then(client => {
                     this.client = client;

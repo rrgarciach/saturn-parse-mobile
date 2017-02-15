@@ -35,7 +35,17 @@ export default function routes($stateProvider) {
             url: '/orders/new/items',
             views: {
                 'menuContent': {
-                    templateUrl: 'templates/order-new-items.html',
+                    templateUrl: 'templates/orders-items.html',
+                    controller: 'OrdersItemsCtrl',
+                    controllerAs: 'vm'
+                }
+            }
+        })
+        .state('app.orders:edit:items', {
+            url: '/orders/edit/items/:action:id',
+            views: {
+                'menuContent': {
+                    templateUrl: 'templates/orders-items.html',
                     controller: 'OrdersItemsCtrl',
                     controllerAs: 'vm'
                 }

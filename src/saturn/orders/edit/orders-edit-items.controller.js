@@ -1,7 +1,8 @@
-export default class OrdersNewItemsCtrl {
+export default class OrdersEditItemsCtrl {
 
-    constructor($scope, $location, $ionicHistory, $ionicModal, $ionicLoading, $ionicPopup, orderService, productService, itemService) {
+    constructor($scope, $stateParams, $location, $ionicHistory, $ionicModal, $ionicLoading, $ionicPopup, orderService, productService, itemService) {
         this.$scope = $scope;
+        this.$stateParams = $stateParams;
         this.$location = $location;
         this.$ionicHistory = $ionicHistory;
         this.$ionicModal = $ionicModal;
@@ -17,6 +18,21 @@ export default class OrdersNewItemsCtrl {
     }
 
     init() {
+        /* When dealing with arrays for ng-repeat` that will be reloaded,
+         we have to clear Cache in order to avoid an Error on iOS platform */
+        this.$ionicHistory.clearCache()
+            .then(() => {
+                this.$ionicLoading.show({template: 'Procesando...'});
+                this.orderService.getById(this.$stateParams.id)
+                    .then(order => {
+                        this.order = order;
+
+                        this.instantiateModals(); // Instantiate required Ionic modals
+
+                        this.$ionicLoading.hide();
+                    });
+
+            });
 
     }
 
@@ -27,7 +43,7 @@ export default class OrdersNewItemsCtrl {
 
             this.productService.getBySku(this.searchSku)
                 .then(product => {
-                    if(product) {
+                    if (product) {
                         // bind found Product with item
                         this.item = this.itemService.factory();
                         this.item.product = product;
