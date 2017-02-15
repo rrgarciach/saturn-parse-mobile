@@ -9814,3 +9814,17 @@ a.button {
   opacity: 0;
   -webkit-transition-duration: 0s;
   transition-duration: 0s; }
+
+@media (min-width: 680px) {
+  .modal {
+    height: 90vh;
+    top: 5vh; } }
+
+#order-new-item-modal input,
+#order-new-client input {
+  font-size: 1.5em;
+  color: blue; }
+
+#order-new-item-modal .currency,
+#order-new-client .currency {
+  font-size: 1.25em; }

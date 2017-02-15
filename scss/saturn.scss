@@ -1,0 +1,22 @@
+@media (min-width: 680px) {
+
+    .modal {
+        height: 90vh;
+        top: 5vh;
+    }
+
+}
+
+#order-new-item-modal,
+#order-new-client {
+
+    input {
+        font-size: 1.5em;
+        color: blue;
+    }
+
+    .currency {
+        font-size: 1.25em;
+    }
+
+}

@@ -62,7 +62,7 @@ gulp.task('injector', ['script'], () => {
     .pipe(gulp.dest('./www'))
 });
 
-gulp.task('sass', ['babel'], done => {
+gulp.task('sass', done => {
   gulp.src('./scss/ionic.app.scss')
     .pipe(sass())
     .on('error', sass.logError)
@@ -85,8 +85,12 @@ gulp.task('babel', ['clean:dist'], () => {
 
 gulp.task('clean:dist', () => del([`${distPath}/**/*`]));
 
-gulp.task('watch', () => {
-  gulp.watch(_.union(paths.scripts.src, paths.css), ['default']);
+gulp.task('watch', ['default'], () => {
+  gulp.watch(_.union(paths.scripts.src), ['default']);
+});
+
+gulp.task('sass:watch', ['sass'], () => {
+  gulp.watch(_.union(paths.sass), ['sass']);
 });
 
 let jasmine = lazypipe()

@@ -1,4 +1,4 @@
-<ion-modal-view>
+<ion-modal-view id="order-new-item-modal">
     <ion-header-bar>
         <h1 class="title">{{vm.actionLabel | translate}}</h1>
 
@@ -14,7 +14,7 @@
             <ion-item class="item-input">
                 <span class="input-label">{{'sku' | translate}}:</span>
                 <input type="text"
-                       placeholder="Escriba código de producto..."
+                       placeholder="..."
                        ng-if="vm.actionLabel === 'add_item'"
                        ng-model="vm.searchSku"
                        ng-change="vm.searchProduct()"
@@ -58,15 +58,15 @@
             </ion-item>
             <ion-item class="item-input">
                 <span class="input-label">Subtotal:</span>
-                <h2>{{vm.item.subtotals | currency}} MXN</h2>
+                <h2 class="currency">{{vm.item.subtotals | currency}} MXN</h2>
             </ion-item>
             <ion-item class="item-input">
                 <span class="input-label">IVA:</span>
-                <p class="text-gray">{{vm.item.iva | currency}} MXN</p>
+                <p class="text-gray currency">{{vm.item.iva | currency}} MXN</p>
             </ion-item>
             <ion-item class="item-input">
                 <span class="input-label">Total:</span>
-                <h2>{{vm.item.totals | currency}} MXN</h2>
+                <h2 class="currency">{{vm.item.totals | currency}} MXN</h2>
             </ion-item>
             <ion-item>
                 <button class="button button-block button-positive icon-left ion-checkmark-circled"
