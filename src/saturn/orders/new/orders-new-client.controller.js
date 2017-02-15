@@ -1,4 +1,4 @@
-export default class OrdersNewCtrl {
+export default class OrdersNewClientCtrl {
 
     constructor($state, $ionicLoading, orderService, clientService) {
         this.$state = $state;

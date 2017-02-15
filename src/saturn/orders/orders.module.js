@@ -4,7 +4,7 @@ import orderStatusFilter from './orders-status.filter';
 
 import OrdersListCtrl from './list/orders-list.controller';
 import OrdersViewCtrl from './view/orders-view.controller';
-import OrdersNewCtrl from './new/orders-new.controller';
+import OrdersNewClientCtrl from './new/orders-new-client.controller';
 import OrdersItemsCtrl from './items/orders-items.controller';
 
 export default angular.module('app.saturn.orders', [])
@@ -13,6 +13,6 @@ export default angular.module('app.saturn.orders', [])
     .filter('orderStatusFilter', orderStatusFilter)
     .controller('OrdersListCtrl', OrdersListCtrl)
     .controller('OrdersViewCtrl', OrdersViewCtrl)
-    .controller('OrdersNewCtrl', OrdersNewCtrl)
+    .controller('OrdersNewClientCtrl', OrdersNewClientCtrl)
     .controller('OrdersItemsCtrl', OrdersItemsCtrl)
     .name;

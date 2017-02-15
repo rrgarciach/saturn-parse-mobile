@@ -241,8 +241,9 @@ export default class OrdersItemsCtrl {
     };
 
     // Open view to edit an Item:
-    openEditItem(item) {
+    openEditItem(key, item) {
         this.actionLabel = 'edit_item';
+        item.$key = key; // Notice the use of $key instead of key.
         this.item = item;
         this.$scope.editItemModal.show();
     };
@@ -251,7 +252,7 @@ export default class OrdersItemsCtrl {
     _editItem() {
         // Edit Item from Order's Items array:
         let items = this.order.items;
-        items[this.item.$index] = this.item;
+        items[this.item.key] = this.item;
         this.order.items = items;
         // Update current Order:
         this.orderService.setCurrentOrder(this.order);
@@ -262,7 +263,7 @@ export default class OrdersItemsCtrl {
     removeItem() {
         // Remove Item from Order's Items array:
         let items = this.order.items;
-        items.splice(this.item.$index, 1);
+        items.splice(this.item.$key, 1);
         this.order.items = items;
         // Update current Order:
         this.orderService.setCurrentOrder(this.order);

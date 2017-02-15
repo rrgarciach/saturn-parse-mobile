@@ -26,7 +26,7 @@ export default function routes($stateProvider) {
             views: {
                 'menuContent': {
                     templateUrl: 'templates/order-new-client.html',
-                    controller: 'OrdersNewCtrl',
+                    controller: 'OrdersNewClientCtrl',
                     controllerAs: 'vm'
                 }
             }

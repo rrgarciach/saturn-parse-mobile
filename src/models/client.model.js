@@ -20,7 +20,7 @@ export default class Client extends Parse.Object {
     }
 
     get fullName() {
-        return `${this.profile.get('firstName')} ${this.profile.get('lastName')}`;
+        return `${this.profile.get('lastName')} ${this.profile.get('firstName')}`;
     }
 }
 

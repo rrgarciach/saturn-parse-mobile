@@ -9,8 +9,8 @@
                 {{vm.order.client.get('folio')}} - {{vm.order.client.fullName}}
             </ion-item>
             <ion-item class="item item-icon-left"
-                      ng-repeat="item in vm.order.items track by $index"
-                      ng-click="vm.openEditItem(item)">
+                      ng-repeat="(key, item) in vm.order.items track by $index"
+                      ng-click="vm.openEditItem(key, item)">
                 <h4 class="icon">{{item.get('quantity')}}</h4>
                 <p class="item-note text-right">
                     PU: {{item.price | currency}} MXN
