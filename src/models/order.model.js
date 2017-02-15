@@ -1,7 +1,6 @@
 import Parse from 'parse';
 
 import Client from './client.model';
-import Item from './item.model';
 
 export default class Order extends Parse.Object {
 
@@ -10,7 +9,7 @@ export default class Order extends Parse.Object {
 
         if (data) {
             this.id = data.id;
-            this.set('client', new Client(data.get('client')) );
+            this.set('client', data.get('client'));
         }
     }
 
@@ -26,12 +25,32 @@ export default class Order extends Parse.Object {
         return this._items || [];
     }
 
-    get totals() {
-        let totals = 0;
+    get subtotals() {
+        let subtotals = 0;
         for (let i = 0; i < this.items.length; ++i) {
-            totals += this.items[i].totals;
+            subtotals += this.items[i].subtotals;
         }
-        return totals;
+        return subtotals;
+    }
+
+    get discountTotals() {
+        let discountTotals = 0;
+        for (let i = 0; i < this.items.length; ++i) {
+            discountTotals += this.items[i].discountValue;
+        }
+        return discountTotals;
+    }
+
+    get ivaTotals() {
+        let ivaTotals = 0;
+        for (let i = 0; i < this.items.length; ++i) {
+            ivaTotals += this.items[i].iva;
+        }
+        return ivaTotals;
+    }
+
+    get totals() {
+        return this.subtotals + this.discountTotals + this.ivaTotals;
     }
 }
 
