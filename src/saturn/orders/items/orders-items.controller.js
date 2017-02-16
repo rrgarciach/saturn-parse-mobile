@@ -275,6 +275,19 @@ export default class OrdersItemsCtrl {
         this.$scope.editItemModal.hide();
     };
 
+    promptCloseOrder() {
+        this.$ionicPopup.confirm({
+            title: 'Terminar Órden',
+            template: '¿Está seguro que desea terminar de capturar esta órden?',
+            inputType: false,
+            cancelText: 'No',
+            okText: 'Si',
+        })
+            .then(res => {
+                if (res) this.saveCurrentOrder();
+            })
+    }
+
     submitAction() {
         switch (this.actionLabel) {
             case 'add_item':

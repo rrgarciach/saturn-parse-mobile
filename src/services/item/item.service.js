@@ -4,6 +4,7 @@ export default function itemService($q, Parse) {
 
     return {
         saveAll,
+        destroyAll,
         factory
     };
 
@@ -13,6 +14,21 @@ export default function itemService($q, Parse) {
         Parse.Object.saveAll(items, {
             success: _items => {
                 deferred.resolve(_items);
+            },
+            error: err => {
+                deferred.reject(err);
+            }
+        });
+
+        return deferred.promise;
+    }
+
+    function destroyAll(items) {
+        let deferred = $q.defer();
+
+        Parse.Object.destroyAll(items, {
+            success: () => {
+                deferred.resolve();
             },
             error: err => {
                 deferred.reject(err);

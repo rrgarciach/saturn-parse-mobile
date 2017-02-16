@@ -8,6 +8,7 @@ export default function orderService($q, Parse, itemService) {
         getAll,
         getById,
         save,
+        remove,
         factory,
         getCurrentOrder,
         setCurrentOrder,
@@ -76,6 +77,26 @@ export default function orderService($q, Parse, itemService) {
                 }
 
                 order.save({
+                    success: _order => {
+                        deferred.resolve(_order);
+                    },
+                    error: err => {
+                        deferred.reject(err);
+                    }
+                });
+
+            });
+
+        return deferred.promise;
+    }
+
+    function remove(order) {
+        let deferred = $q.defer();
+
+        itemService.destroyAll(order.items)
+            .then(() => {
+
+                order.destroy({
                     success: _order => {
                         deferred.resolve(_order);
                     },

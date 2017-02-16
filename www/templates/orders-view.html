@@ -1,10 +1,15 @@
 <ion-view view-title="{{'order' | translate}} No. {{vm.order.get('folio')}}" cache-view="false">
-    <ion-header-bar>
-        <h1 class="title">Detalles de Pedido</h1>
-        <div class="buttons">
-            <button class="button button-clear align-left" ng-click="vm.closeOrder()">Volver</button>
-        </div>
-    </ion-header-bar>
+    <ion-nav-buttons side="right">
+        <!--<button class="button button-clear align-left" ng-click="vm.closeOrder()">Volver</button>-->
+        <button class="button button-a button-icon icon ion-compose ion-trash-b"
+                ng-disabled="vm.order.get('status') > 1"
+                ng-click="vm.promptDeleteOrder()">
+        </button>
+        <button class="button button-icon icon ion-compose icon-right"
+                ng-disabled="vm.order.get('status') > 1"
+                ng-click="vm.editOrder()">
+        </button>
+    </ion-nav-buttons>
     <ion-content>
         <ion-list>
             <ion-item class="item item-divider text-center">
@@ -27,13 +32,13 @@
             <ion-item class="item item-divider text-center">
                 Total: {{vm.order.totals | currency}} MXN
             </ion-item>
-            <ion-item>
-                <button class="button button-block button-positive"
-                        ng-disabled="vm.order.get('status') > 1"
-                        ng-click="vm.editOrder()">
-                    Editar Pedido
-                </button>
-            </ion-item>
+            <!--<ion-item>-->
+                <!--<button class="button button-assertive"-->
+                        <!--ng-disabled="vm.order.get('status') > 1"-->
+                        <!--ng-click="vm.editOrder()">-->
+                    <!--Editar Pedido-->
+                <!--</button>-->
+            <!--</ion-item>-->
         </ion-list>
     </ion-content>
 </ion-view>
