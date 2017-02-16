@@ -26,7 +26,7 @@
             <ion-item ng-repeat="client in vm.clients track by $index" href="#/app/clients/view/{{client.id}}">
                 <h2>{{client.get('folio')}} - {{client.fullName}}</h2>
                 <!--<p class="item-note">{{client.get('createdAt') | date: 'dd/MM/yyyy'}}</p>-->
-                <!--<p>Pedido No. {{client.get('folio')}}</p>-->
+                <p>{{client.profile.get('rfc')}}</p>
                 <!--<p class="item-note">{{client.get('totals') | currency}} MXN</p>-->
                 <!--<p>Estatus: {{client.get('status') | orderStatusFilter}}</p>-->
             </ion-item>

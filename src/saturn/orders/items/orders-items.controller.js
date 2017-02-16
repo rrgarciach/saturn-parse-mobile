@@ -262,9 +262,7 @@ export default class OrdersItemsCtrl {
     // Remove current modal's Item
     removeItem() {
         // Remove Item from Order's Items array:
-        let items = this.order.items;
-        items.splice(this.item.$key, 1);
-        this.order.items = items;
+        this.order.removeItem(this.item);
         // Update current Order:
         this.orderService.setCurrentOrder(this.order);
         this._closeEditItem(); // Close edit Product modal view:
