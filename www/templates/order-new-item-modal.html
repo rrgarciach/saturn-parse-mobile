@@ -11,78 +11,79 @@
     <ion-content>
         <div class="list">
             <form ng-submit="vm.submitAction()">
-            <ion-item class="item-input">
-                <span class="input-label">{{'sku' | translate}}:</span>
-                <input type="text"
-                       placeholder="..."
-                       ng-if="vm.actionLabel === 'add_item'"
-                       ng-model="vm.searchSku"
-                       ng-change="vm.searchProduct()"
-                       ng-model-options="{ debounce: 500 }">
-                <h2 class="text-gray" ng-if="vm.actionLabel === 'edit_item'">{{vm.item.sku}}</h2>
-            </ion-item>
-            <ion-item class="item-input">
-                <span class="input-label">Descripción:</span>
+                <ion-list>
+                    <ion-item class="item-input">
+                        <span class="input-label">{{'sku' | translate}}:</span>
+                        <input type="text"
+                               placeholder="..."
+                               ng-if="vm.actionLabel === 'add_item'"
+                               ng-model="vm.searchSku"
+                               ng-change="vm.searchProduct()"
+                               ng-model-options="{ debounce: 500 }">
+                        <h2 class="text-gray" ng-if="vm.actionLabel === 'edit_item'">{{vm.item.sku}}</h2>
+                    </ion-item>
+                    <ion-item class="item-input">
+                        <span class="input-label">Descripción:</span>
 
-                <h2 class="text-gray">{{vm.item.product.get('description')}}</h2>
-            </ion-item>
-            <ion-item class="item-input">
-                <span class="input-label">Cantidad:</span>
-                <input type="number"
-                       min="1"
-                       step="1"
-                       placeholder="Escriba cantidad..."
-                       ng-disabled="!vm.item.sku"
-                       ng-model="vm.item.quantity">
-            </ion-item>
-            <ion-item class="item-input">
-                <span class="input-label">Precio Unitario:</span>
-                $ <input type="number"
-                         min="1"
-                         step="0.01"
-                         ng-if="vm.adminUser"
-                         ng-disabled="!vm.item.sku"
-                         ng-model="vm.item.floatPrice">
-                <h2 ng-if="!vm.adminUser">{{vm.item.price | centsCurrency}}</h2>
-            </ion-item>
-            <ion-item class="item-input">
-                <span class="input-label">Descuento (%):</span>
-                <!--<input type="number"-->
-                       <!--min="0"-->
-                       <!--max="100"-->
-                       <!--step="0.01"-->
-                       <!--placeholder="Escriba porcentaje de descuento..."-->
-                       <!--ng-if="vm.adminUser"-->
-                       <!--ng-model="vm.item.discount">-->
+                        <h2 class="text-gray">{{vm.item.product.get('description')}}</h2>
+                    </ion-item>
+                    <ion-item class="item-input">
+                        <span class="input-label">Cantidad:</span>
+                        <input type="number"
+                               min="1"
+                               step="1"
+                               placeholder="Escriba cantidad..."
+                               ng-disabled="!vm.item.sku"
+                               ng-model="vm.item.quantity">
+                    </ion-item>
+                    <ion-item class="item-input">
+                        <span class="input-label">Precio Unitario:</span>
+                        $ <input type="number"
+                                 min="1"
+                                 step="0.01"
+                                 ng-if="vm.adminUser"
+                                 ng-disabled="!vm.item.sku"
+                                 ng-model="vm.item.floatPrice">
+                        <h2 ng-if="!vm.adminUser">{{vm.item.price | centsCurrency}}</h2>
+                    </ion-item>
+                    <ion-item class="item-input">
+                        <span class="input-label">Descuento (%):</span>
+                        <!--<input type="number"-->
+                        <!--min="0"-->
+                        <!--max="100"-->
+                        <!--step="0.01"-->
+                        <!--placeholder="Escriba porcentaje de descuento..."-->
+                        <!--ng-if="vm.adminUser"-->
+                        <!--ng-model="vm.item.discount">-->
 
-                <h2>{{vm.item.discount}}%</h2>
-            </ion-item>
-            <ion-item class="item-input">
-                <span class="input-label">Subtotal:</span>
-                <h2 class="centsCurrency">{{vm.item.subtotals | centsCurrency}}</h2>
-            </ion-item>
-            <ion-item class="item-input">
-                <span class="input-label">IVA:</span>
-                <p class="text-gray centsCurrency">{{vm.item.iva | centsCurrency}}</p>
-            </ion-item>
-            <ion-item class="item-input">
-                <span class="input-label">Total:</span>
-                <h2 class="centsCurrency">{{vm.item.totals | centsCurrency}}</h2>
-            </ion-item>
-            <ion-item>
-                <button class="button button-block button-positive icon-left ion-checkmark-circled"
-                        ng-disabled="!vm.item.sku || !vm.item.quantity"
-                        ng-click="vm.submitAction()">
-                    {{vm.actionLabel | translate}}
-                </button>
-                <button class="button button-block button-assertive icon-left ion-trash-b"
-                        ng-if="vm.actionLabel === 'edit_item'"
-                        ng-disabled="!vm.item.sku || !vm.item.quantity"
-                        ng-click="vm.removeItem()">
-                    {{'remove_item' | translate}}
-                </button>
-            </ion-item>
-            </ion-list>
+                        <h2>{{vm.item.discount}}%</h2>
+                    </ion-item>
+                    <ion-item class="item-input">
+                        <span class="input-label">Subtotal:</span>
+                        <h2 class="centsCurrency">{{vm.item.subtotals | centsCurrency}}</h2>
+                    </ion-item>
+                    <ion-item class="item-input">
+                        <span class="input-label">IVA:</span>
+                        <p class="text-gray centsCurrency">{{vm.item.iva | centsCurrency}}</p>
+                    </ion-item>
+                    <ion-item class="item-input">
+                        <span class="input-label">Total:</span>
+                        <h2 class="centsCurrency">{{vm.item.totals | centsCurrency}}</h2>
+                    </ion-item>
+                    <ion-item>
+                        <button class="button button-block button-positive icon-left ion-checkmark-circled"
+                                ng-disabled="!vm.item.sku || !vm.item.quantity"
+                                ng-click="vm.submitAction()">
+                            {{vm.actionLabel | translate}}
+                        </button>
+                        <button class="button button-block button-assertive icon-left ion-trash-b"
+                                ng-if="vm.actionLabel === 'edit_item'"
+                                ng-disabled="!vm.item.sku || !vm.item.quantity"
+                                ng-click="vm.removeItem()">
+                            {{'remove_item' | translate}}
+                        </button>
+                    </ion-item>
+                </ion-list>
             </form>
         </div>
     </ion-content>
