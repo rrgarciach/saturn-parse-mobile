@@ -29,7 +29,10 @@
                 <h2>{{item.description}}</h2>
                 <h2>{{item.sku}}</h2>
             </ion-item>
-            <ion-item class="item item-divider text-center">
+            <ion-item class="item item-divider text-right">
+                <p>Subtotal: {{vm.order.subtotals | centsCurrency}}</p>
+                <p>Total Descuento: {{vm.order.discountTotals | centsCurrency}}</p>
+                <p>Total IVA: {{vm.order.ivaTotals | centsCurrency}}</p>
                 Total: {{vm.order.totals | centsCurrency}}
             </ion-item>
             <!--<ion-item>-->
