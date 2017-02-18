@@ -25,9 +25,16 @@
             </ion-item>
             <ion-item>
                 <button class="button button-block button-positive icon-left ion-checkmark-circled"
+                        ng-if="vm.screenTitle === 'new_order'"
                         ng-disabled="vm.order.items.length < 1"
                         ng-click="vm.promptCloseOrder()">
                     Terminar Pedido
+                </button>
+                <button class="button button-block button-positive icon-left ion-checkmark-circled"
+                        ng-if="vm.screenTitle !== 'new_order'"
+                        ng-disabled="vm.order.items.length < 1"
+                        ng-click="vm.promptCloseOrder()">
+                    Guardar Cambios
                 </button>
             </ion-item>
         </ion-list>
