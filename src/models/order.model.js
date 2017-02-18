@@ -25,6 +25,14 @@ export default class Order extends Parse.Object {
         return this._items || [];
     }
 
+    get notes() {
+        return this.get('notes');
+    }
+
+    set notes(notes) {
+        this.set('notes', notes);
+    }
+
     removeItem(item) {
         this.items.splice(item.$key, 1);
         if (item.id) { // Check if Item was already saved before:

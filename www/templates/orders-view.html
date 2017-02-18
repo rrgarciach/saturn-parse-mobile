@@ -12,14 +12,14 @@
     </ion-nav-buttons>
     <ion-content>
         <ion-list>
-            <ion-item class="item item-divider text-center">
+            <ion-item class="item-divider text-center">
                 Estatus: {{vm.order.get('status') | orderStatusFilter}}
             </ion-item>
-            <ion-item ng-if="vm.adminUser" class="item item-divider text-center">
+            <ion-item class="item item-divider text-center" ng-if="vm.adminUser">
                 {{vm.order.get('client').get('folio')}} - {{vm.order.get('client').get('profile').get('lastName')}}
                 {{vm.order.get('client').get('profile').get('firstName')}}
             </ion-item>
-            <ion-item class="item item-icon-left" ng-repeat="item in vm.order.items">
+            <ion-item class="item-icon-left" ng-repeat="item in vm.order.items">
                 <h4 class="icon">{{item.get('quantity')}}</h4>
                 <p class="item-note text-right">
                     PU: {{item.price | centsCurrency}}
@@ -29,7 +29,11 @@
                 <h2>{{item.description}}</h2>
                 <h2>{{item.sku}}</h2>
             </ion-item>
-            <ion-item class="item item-divider text-right">
+            <ion-item class="item-divider" ng-if="vm.order.notes">
+                {{'order_notes' | translate}}:
+                <p>{{vm.order.notes}}</p>
+            </ion-item>
+            <ion-item class="item-divider text-right">
                 <p>Subtotal: {{vm.order.subtotals | centsCurrency}}</p>
                 <p>Total Descuento: {{vm.order.discountTotals | centsCurrency}}</p>
                 <p>Total IVA: {{vm.order.ivaTotals | centsCurrency}}</p>

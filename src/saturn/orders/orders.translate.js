@@ -9,6 +9,7 @@ export default function translate($translateProvider) {
         edit_item: 'Editar Renglón',
         remove_item: 'Remover Renglón',
         sku: 'Código',
+        order_notes: 'Notas de la órden',
     });
 
 };
