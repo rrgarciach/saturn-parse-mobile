@@ -1,19 +1,19 @@
-<ion-view view-title="{{'order' | translate}} No. {{vm.order.get('folio')}}" cache-view="false">
+<ion-view view-title="{{'order' | translate}} No. {{vm.order.folio}}" cache-view="false">
     <ion-nav-buttons side="right">
         <!--<button class="button button-clear align-left" ng-click="vm.closeOrder()">Volver</button>-->
         <button class="button button-a button-icon icon ion-compose ion-trash-b"
-                ng-disabled="vm.order.get('status') > 1"
+                ng-disabled="vm.order.isEditable()"
                 ng-click="vm.promptDeleteOrder()">
         </button>
         <button class="button button-icon icon ion-compose icon-right"
-                ng-disabled="vm.order.get('status') > 1"
+                ng-disabled="vm.order.isEditable()"
                 ng-click="vm.editOrder()">
         </button>
     </ion-nav-buttons>
     <ion-content>
         <ion-list>
             <ion-item class="item-divider text-center">
-                Estatus: {{vm.order.get('status') | orderStatusFilter}}
+                Estatus: {{vm.order.status | orderStatusFilter}}
             </ion-item>
             <ion-item class="item item-divider text-center" ng-if="vm.adminUser">
                 {{vm.order.get('client').get('folio')}} - {{vm.order.get('client').get('profile').get('lastName')}}

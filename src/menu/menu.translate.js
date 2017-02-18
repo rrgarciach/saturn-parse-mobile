@@ -6,6 +6,9 @@ export default function translate($translateProvider) {
         clients: 'Clientes',
         products: 'Catálogo',
         logout: 'Cerrar Sesión',
+        close: 'Cerrar',
+        clear_all: 'Borrar todo',
+        back: 'Volver',
     });
 
 };

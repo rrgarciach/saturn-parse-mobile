@@ -10,6 +10,7 @@ export default function translate($translateProvider) {
         remove_item: 'Remover Renglón',
         sku: 'Código',
         order_notes: 'Notas de la órden',
+        no_order_notes: 'No existen notas para esta órden',
     });
 
 };

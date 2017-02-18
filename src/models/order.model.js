@@ -17,6 +17,14 @@ export default class Order extends Parse.Object {
         return this.get('client');
     }
 
+    get folio() {
+        return this.get('folio');
+    }
+
+    get status() {
+        return this.get('status');
+    }
+
     set items(_items) {
         this._items = _items;
     }
@@ -67,6 +75,11 @@ export default class Order extends Parse.Object {
     get totals() {
         return this.subtotals + this.discountTotals + this.ivaTotals;
     }
+
+    isEditable() {
+        return this.status > 1;
+    }
+
 }
 
 Parse.Object.registerSubclass('Order', Order);

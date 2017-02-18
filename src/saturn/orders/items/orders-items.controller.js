@@ -132,6 +132,17 @@ export default class OrdersItemsCtrl {
                 this.$scope.createdOrderModal = modal;
             });
 
+        // Instantiate Order's Notes modal:
+        this.$ionicModal.fromTemplateUrl('templates/order-new-notes-modal.html', {
+            scope: this.$scope,
+            animation: 'slide-in-up',
+            focusFirstInput: true
+        })
+            .then(modal => {
+                // bind modal instance:
+                this.$scope.orderNotesModal = modal;
+            });
+
         // Cleanup the modal when we're done with it!
         this.$scope.$on('$destroy', () => {
             this.$scope.newItemModal.remove();
@@ -273,6 +284,15 @@ export default class OrdersItemsCtrl {
         this.$scope.editItemModal.hide();
     };
 
+    openNotesModal() {
+        this.$scope.orderNotesModal.show();
+        // this.clearNotes = () => {this.order.notes = '';}
+    }
+
+    closeNotesModal() {
+        this.$scope.orderNotesModal.hide();
+    }
+
     promptCloseOrder() {
         this.$ionicPopup.confirm({
             title: 'Terminar Órden',
@@ -283,7 +303,7 @@ export default class OrdersItemsCtrl {
         })
             .then(res => {
                 if (res) this.saveCurrentOrder();
-            })
+            });
     }
 
     submitAction() {

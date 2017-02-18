@@ -1,0 +1,32 @@
+<ion-modal-view id="order-new-notes-modal">
+    <ion-header-bar>
+        <h1 class="title">{{'order_notes' | translate}} No. {{vm.order.folio}}</h1>
+
+        <div class="buttons">
+            <button class="button button-icon icon ion-close" ng-click="vm.closeNotesModal()"></button>
+        </div>
+    </ion-header-bar>
+    <ion-content>
+        <div class="list">
+            <ion-list>
+
+                <ion-item class="item-input">
+                    <!--<span class="input-label">Cantidad:</span>-->
+                    <textarea id="order-notes"
+                              rows="4"
+                              placeholder="Escriba las notas para este pedido."
+                              ng-model="vm.order.notes">
+                    </textarea>
+                </ion-item>
+
+                <!--<ion-item>-->
+                    <!--<button class="button button-block button-positive icon-left ion-checkmark-circled"-->
+                            <!--ng-click="vm.clearNotes()">-->
+                        <!--{{'clear_all' | translate}}-->
+                    <!--</button>-->
+                <!--</ion-item>-->
+
+            </ion-list>
+        </div>
+    </ion-content>
+</ion-modal-view>

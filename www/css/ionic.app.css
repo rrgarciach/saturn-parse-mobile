@@ -9828,3 +9828,6 @@ a.button {
 #order-new-item-modal .currency,
 #order-new-client .currency {
   font-size: 1.25em; }
+
+textarea#order-notes {
+  font-size: 1.25em; }
