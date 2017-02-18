@@ -32,6 +32,7 @@
                        min="1"
                        step="1"
                        placeholder="Escriba cantidad..."
+                       ng-disabled="!vm.item.sku"
                        ng-model="vm.item.quantity">
             </ion-item>
             <ion-item class="item-input">
@@ -39,9 +40,9 @@
                 $ <input type="number"
                          min="1"
                          step="0.01"
-                         placeholder="..."
                          ng-if="vm.adminUser"
-                         ng-model="vm.price">
+                         ng-disabled="!vm.item.sku"
+                         ng-model="vm.item.floatPrice">
                 <h2 ng-if="!vm.adminUser">{{vm.item.price | centsCurrency}}</h2>
             </ion-item>
             <ion-item class="item-input">

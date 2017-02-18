@@ -47,6 +47,14 @@ export default class Item extends Parse.Object {
         this.set('price', value);
     }
 
+    get floatPrice() {
+        return this.price / 100;
+    }
+
+    set floatPrice(value) {
+        this.price = value * 100;
+    }
+
     get subtotals() {
         return this.price * this.quantity;
     }
