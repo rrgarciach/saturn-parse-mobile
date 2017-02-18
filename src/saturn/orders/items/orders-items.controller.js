@@ -14,6 +14,7 @@ export default class OrdersItemsCtrl {
 
         this.adminUser = true;
 
+        this.screenTitle = 'new_order';
         this._init();
     }
 
@@ -25,7 +26,6 @@ export default class OrdersItemsCtrl {
                 switch (this.$stateParams.action) {
                     case 'new':
                     default:
-                        this.screenTitle = 'new_order';
                         this._initNew();
                         break;
                     case 'edit':
@@ -37,9 +37,9 @@ export default class OrdersItemsCtrl {
     }
 
     _initNew() {
+        this.screenTitle = 'new_order';
         // get current Order:
         this.order = this.orderService.getCurrentOrder();
-        this.screenTitle = 'new_order';
 
         // // Check if User is Client (Role ID 7):
         // if (sessionDataService.getRoleId() > 5) {
@@ -54,11 +54,11 @@ export default class OrdersItemsCtrl {
     }
 
     _initEdit() {
+        this.screenTitle = 'edit_order';
         this.$ionicLoading.show({template: 'Procesando...'});
         this.orderService.getById(this.$stateParams.id)
             .then(order => {
                 this.order = order;
-                this.screenTitle = 'edit_order';
                 this.instantiateModals(); // Instantiate required Ionic modals
                 this.$ionicLoading.hide();
             });
