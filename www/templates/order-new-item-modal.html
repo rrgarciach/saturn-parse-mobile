@@ -39,34 +39,34 @@
                 $ <input type="number"
                          min="1"
                          step="0.01"
-                         placeholder="Escriba precio unitario..."
+                         placeholder="..."
                          ng-if="vm.adminUser"
-                         ng-model="vm.item.price">
-                <h2 ng-if="!vm.adminUser">{{vm.item.price | currency}} MXN</h2>
+                         ng-model="vm.price">
+                <h2 ng-if="!vm.adminUser">{{vm.item.price | centsCurrency}}</h2>
             </ion-item>
             <ion-item class="item-input">
                 <span class="input-label">Descuento (%):</span>
-                <input type="number"
-                       min="0"
-                       max="100"
-                       step="0.01"
-                       placeholder="Escriba porcentaje de descuento..."
-                       ng-if="vm.adminUser"
-                       ng-model="vm.item.discount">
+                <!--<input type="number"-->
+                       <!--min="0"-->
+                       <!--max="100"-->
+                       <!--step="0.01"-->
+                       <!--placeholder="Escriba porcentaje de descuento..."-->
+                       <!--ng-if="vm.adminUser"-->
+                       <!--ng-model="vm.item.discount">-->
 
-                <h2 ng-if="!vm.adminUser">{{vm.item.discount}}%</h2>
+                <h2>{{vm.item.discount}}%</h2>
             </ion-item>
             <ion-item class="item-input">
                 <span class="input-label">Subtotal:</span>
-                <h2 class="currency">{{vm.item.subtotals | currency}} MXN</h2>
+                <h2 class="centsCurrency">{{vm.item.subtotals | centsCurrency}}</h2>
             </ion-item>
             <ion-item class="item-input">
                 <span class="input-label">IVA:</span>
-                <p class="text-gray currency">{{vm.item.iva | currency}} MXN</p>
+                <p class="text-gray centsCurrency">{{vm.item.iva | centsCurrency}}</p>
             </ion-item>
             <ion-item class="item-input">
                 <span class="input-label">Total:</span>
-                <h2 class="currency">{{vm.item.totals | currency}} MXN</h2>
+                <h2 class="centsCurrency">{{vm.item.totals | centsCurrency}}</h2>
             </ion-item>
             <ion-item>
                 <button class="button button-block button-positive icon-left ion-checkmark-circled"

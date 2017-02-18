@@ -27,7 +27,7 @@
                 <h2>{{order.get('client').fullName}}</h2>
                 <p class="item-note">{{order.get('createdAt') | date: 'dd/MM/yyyy'}}</p>
                 <p>Pedido No. {{order.get('folio')}}</p>
-                <p class="item-note">{{order.get('totals') | currency}} MXN</p>
+                <p class="item-note">{{order.get('totals') | centsCurrency}}</p>
                 <p>Estatus: {{order.get('status') | orderStatusFilter}}</p>
             </ion-item>
         </ion-list>

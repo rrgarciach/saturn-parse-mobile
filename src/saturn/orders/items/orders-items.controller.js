@@ -76,6 +76,7 @@ export default class OrdersItemsCtrl {
                         // bind found Product with item
                         this.item = this.itemService.factory();
                         this.item.product = product;
+                        this.price = this.item.price / 100;
                         this.item.quantity = 1;
                         // @TODO: This part is useful to place promotional discounts:
                         this.item.discount = 0;
@@ -88,7 +89,7 @@ export default class OrdersItemsCtrl {
                 })
                 .catch(err => {
                     // If not Product was found, bind as default:
-                    this.item = this.defaultItem
+                    this.item = this.defaultItem;
                     this.$ionicLoading.hide();
                 });
 
@@ -245,6 +246,7 @@ export default class OrdersItemsCtrl {
         this.actionLabel = 'edit_item';
         item.$key = key; // Notice the use of $key instead of key.
         this.item = item;
+        this.price = this.item.price / 100;
         this.$scope.editItemModal.show();
     };
 
@@ -287,6 +289,7 @@ export default class OrdersItemsCtrl {
     }
 
     submitAction() {
+        this.item.price = this.price * 100;
         switch (this.actionLabel) {
             case 'add_item':
                 this._addNewItem();

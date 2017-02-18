@@ -13,15 +13,15 @@
                       ng-click="vm.openEditItem(key, item)">
                 <h4 class="icon">{{item.get('quantity')}}</h4>
                 <p class="item-note text-right">
-                    PU: {{item.price | currency}} MXN
+                    PU: {{item.price | centsCurrency}}
                     <br/>
-                    TL: {{item.totals | currency}} MXN
+                    TL: {{item.totals | centsCurrency}}
                 </p>
                 <h2>{{item.description}}</h2>
                 <h2>{{item.sku}}</h2>
             </ion-item>
             <ion-item class="item item-divider text-center">
-                Total: {{vm.order.totals | currency}} MXN
+                Total: {{vm.order.totals | centsCurrency}}
             </ion-item>
             <ion-item>
                 <button class="button button-block button-positive icon-left ion-checkmark-circled"
