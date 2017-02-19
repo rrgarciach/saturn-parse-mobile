@@ -9,6 +9,8 @@ import routes from './app.routes';
 
 import centsCurrency from './filters/cents-currency.filter';
 
+import registerModels from './app.models';
+
 import MenuCtrl from './menu/menu.controller';
 import menuTranslate from './menu/menu.translate';
 
@@ -27,4 +29,5 @@ angular.module('app', [
     .config(routes)
     .run(run)
     .filter('centsCurrency', centsCurrency)
+    .config(registerModels)
     .controller('MenuCtrl', MenuCtrl);

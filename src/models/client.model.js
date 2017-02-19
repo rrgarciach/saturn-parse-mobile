@@ -11,6 +11,10 @@ export default class Client extends Parse.Object {
         }
     }
 
+    get folio() {
+        return this.get('folio');
+    }
+
     get profile() {
         return this.get('profile');
     }
@@ -20,8 +24,13 @@ export default class Client extends Parse.Object {
     }
 
     get fullName() {
-        return `${this.profile.get('lastName')} ${this.profile.get('firstName')}`;
+        return this.profile.fullName;
     }
+
+    get rfc() {
+        return this.profile.rfc;
+    }
+
 }
 
 Parse.Object.registerSubclass('Client', Client);
