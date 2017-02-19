@@ -15,12 +15,13 @@
                     {{'profile' | translate}}
                 </ion-item>
 
-                <ion-item class="item-input" ng-if="vm.actionLabel === 'edit_client'">
+                <ion-item class="item-input">
                     <span class="input-label">{{'folio' | translate}}:</span>
                     <input type="text"
                            ng-required="true"
+                           ng-if="vm.actionLabel !== 'edit_client'"
                            ng-model="vm.client.folio">
-                    <!--<h2 class="text-gray">{{vm.client.folio}}</h2>-->
+                    <!--<h2 class="text-gray" ng-if="vm.actionLabel === 'edit_client'">{{vm.client.folio}}</h2>-->
                 </ion-item>
 
                 <ion-item class="item-input">

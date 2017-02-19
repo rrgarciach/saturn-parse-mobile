@@ -89,8 +89,14 @@ export default function clientService($q, Parse, profileService, addressService)
                                 deferred.reject(err);
                             }
                         });
+                    })
+                    .catch(err => {
+                        deferred.reject(err);
                     });
 
+            })
+            .catch(err => {
+                deferred.reject(err);
             });
 
         return deferred.promise;

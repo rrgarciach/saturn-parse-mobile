@@ -31,8 +31,6 @@ export default class ClientsFormCtrl {
                         break;
                 }
             });
-        this.saveForm;
-
     }
 
     _initNew() {
@@ -60,7 +58,6 @@ export default class ClientsFormCtrl {
         });
         this.clientService.save(this.client)
             .then(() => {
-                this.$ionicLoading.hide();
                 this._redirectToHome();
             })
             // If saving new Client fails:
@@ -102,7 +99,6 @@ export default class ClientsFormCtrl {
         // delete history in order to avoid return to login screen:
         this.$ionicHistory.nextViewOptions({historyRoot: true});
         this.$ionicLoading.hide();
-        this.$scope.createdOrderModal.hide();
     }
 
 }
