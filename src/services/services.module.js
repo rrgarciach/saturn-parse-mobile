@@ -5,6 +5,7 @@ import itemService from './item/item.service';
 import sessionService from './session/session.service';
 import orderService from './order/order.service';
 import productService from './product/product.service';
+import productUploadService from './product/product.upload.service';
 import profileService from './profile/profile.service';
 import addressService from './address/address.service';
 
@@ -16,6 +17,7 @@ export default angular.module('app.services', [])
     .service('sessionService', sessionService)
     .service('orderService', orderService)
     .service('productService', productService)
+    .service('productUploadService', productUploadService)
     .service('profileService', profileService)
     .service('addressService', addressService)
     .name;

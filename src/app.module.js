@@ -11,6 +11,10 @@ import centsCurrency from './filters/cents-currency.filter';
 
 import registerModels from './app.models';
 
+import fileModel from './directives/file-model.directive';
+
+import ENV from './app.env';
+
 import MenuCtrl from './menu/menu.controller';
 import menuTranslate from './menu/menu.translate';
 
@@ -30,4 +34,6 @@ angular.module('app', [
     .run(run)
     .filter('centsCurrency', centsCurrency)
     .config(registerModels)
+    .directive('fileModel', fileModel)
+    .constant('ENV', ENV)
     .controller('MenuCtrl', MenuCtrl);

@@ -1,0 +1,22 @@
+<ion-view view-title="{{'upload_products' | translate}}" cache-view="false">
+    <ion-content>
+        <form name="uploadForm">
+            <ion-list>
+
+                <ion-item class="item-divider item-icon-left item-text-wrap">
+                    <i class="icon ion-alert-circled"></i>
+                    <p>{{'upload_instructions' | translate}}</p>
+                </ion-item>
+
+                <ion-item>
+                    <button class="button icon-left ion-upload"
+                            ng-click="vm.uploadFile()"
+                            ng-disabled="!vm.productUploadService.getFile()">{{'upload' | translate}}
+                    </button>
+                    <input accept=".csv" type="file" file-model="myFile"/>
+                </ion-item>
+
+            </ion-list>
+        </form>
+    </ion-content>
+</ion-view>

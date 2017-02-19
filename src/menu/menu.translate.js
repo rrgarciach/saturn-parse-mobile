@@ -5,6 +5,7 @@ export default function translate($translateProvider) {
         orders: 'Órdenes',
         clients: 'Clientes',
         products: 'Catálogo',
+        upload_products: 'Importar Catálogo',
         logout: 'Cerrar Sesión',
         close: 'Cerrar',
         clear_all: 'Borrar todo',

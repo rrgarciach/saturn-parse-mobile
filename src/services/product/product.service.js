@@ -1,10 +1,10 @@
 import Product from '../../models/product.model';
 
-export default function productService($q, Parse) {
+export default function productService($http, $q, Parse) {
 
     return {
         getBySku,
-        factory
+        factory,
     };
 
     function getBySku(sku) {
