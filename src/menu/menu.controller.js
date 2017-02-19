@@ -1,6 +1,6 @@
 export default class MenuCtrl {
 
-    constructor($location, $ionicHistory, $ionicLoading, $ionicSideMenuDelegate, $state, authService) {
+    constructor($location, $ionicHistory, $ionicLoading, $ionicSideMenuDelegate, $state, authService, sessionService) {
         // With the new view caching in Ionic, Controllers are only called
         // when they are recreated or on app start, instead of every page change.
         // To listen for when this page is active (for example, to refresh data),
@@ -13,6 +13,9 @@ export default class MenuCtrl {
         this.$ionicSideMenuDelegate = $ionicSideMenuDelegate;
         this.$state = $state;
         this.authService = authService;
+        this.sessionService = sessionService;
+
+        this.user = sessionService.getUser();
     }
 
     logout() {
