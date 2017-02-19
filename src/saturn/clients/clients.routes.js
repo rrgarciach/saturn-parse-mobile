@@ -20,6 +20,26 @@ export default function routes($stateProvider) {
                     controllerAs: 'vm'
                 }
             }
+        })
+        .state('app.clients:new', {
+            url: '/clients/new',
+            views: {
+                'menuContent': {
+                    templateUrl: 'templates/clients-form.html',
+                    controller: 'ClientsFormCtrl',
+                    controllerAs: 'vm'
+                }
+            }
+        })
+        .state('app.clients:edit', {
+            url: '/clients/edit/:action:id',
+            views: {
+                'menuContent': {
+                    templateUrl: 'templates/clients-form.html',
+                    controller: 'ClientsFormCtrl',
+                    controllerAs: 'vm'
+                }
+            }
         });
 
 };

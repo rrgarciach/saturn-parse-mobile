@@ -39,6 +39,10 @@ export default class Profile extends Parse.Object {
         return this.get('address');
     }
 
+    set address(address) {
+        this.set('address', address);
+    }
+
     get fullName() {
         return `${this.get('lastName')} ${this.get('firstName')}`;
     }

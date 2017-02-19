@@ -21,7 +21,7 @@ export default class ClientsViewCtrl {
     }
 
     editClient() {
-        this.$state.go('app.client:edit', {
+        this.$state.go('app.clients:edit', {
             action: 'edit',
             id: this.$stateParams.id
         });

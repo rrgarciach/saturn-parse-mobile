@@ -15,12 +15,16 @@ export default class Client extends Parse.Object {
         return this.get('folio');
     }
 
+    set folio(folio) {
+        this.set('folio', folio);
+    }
+
     get profile() {
         return this.get('profile');
     }
 
-    get address() {
-        return this.get('profile').get('address');
+    set profile(profile) {
+        this.set('profile', profile);
     }
 
     get fullName() {

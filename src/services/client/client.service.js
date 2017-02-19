@@ -1,11 +1,13 @@
 import Client from '../../models/client.model';
 
-export default function clientService($q, Parse) {
+export default function clientService($q, Parse, profileService, addressService) {
 
     return {
         getAll,
         getById,
-        getByFolio
+        getByFolio,
+        factory,
+        save
     };
 
     function getAll(filter) {
@@ -64,6 +66,42 @@ export default function clientService($q, Parse) {
         });
 
         return deferred.promise;
+    }
+
+    function save(client) {
+        let deferred = $q.defer();
+
+        addressService.save(client.profile.address)
+            .then(_address => {
+
+                client.profile.address = _address;
+
+                profileService.save(client.profile)
+                    .then(_profile => {
+
+                        client.profile = _profile;
+
+                        client.save({
+                            success: _order => {
+                                deferred.resolve(_order);
+                            },
+                            error: err => {
+                                deferred.reject(err);
+                            }
+                        });
+                    });
+
+            });
+
+        return deferred.promise;
+    }
+
+    function factory(data) {
+        let client = new Client();
+
+        client.profile = data ? profileService.factory(data.profile) : profileService.factory();
+
+        return client;
     }
 
 }

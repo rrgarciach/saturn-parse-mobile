@@ -16,6 +16,8 @@ export default function translate($translateProvider) {
         postalCode: 'C.P.',
         city: 'Ciudad',
         state: 'Estado',
+        new_client: 'Nuevo Cliente',
+        edit_client: 'Editar Cliente',
     });
 
 };
