@@ -42,12 +42,10 @@ export default function authService($q, Parse, sessionService) {
         Parse.User.requestPasswordReset(email, {
             success: () => {
                 // Password reset request was sent successfully
-                console.log(angular.toJson(response));
-                deferred.resolve(true);
+                deferred.resolve();
             },
             error: error => {
                 // Show the error message somewhere
-                console.log(angular.toJson(error));
                 deferred.reject(error);
             }
         });

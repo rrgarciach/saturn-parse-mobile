@@ -1,12 +1,13 @@
 export default class LoginCtrl {
 
-    constructor($ionicSideMenuDelegate, $ionicLoading, $ionicPopup, $location, $ionicHistory, $state, authService, sessionService) {
+    constructor($ionicSideMenuDelegate, $ionicLoading, $ionicPopup, $location, $ionicHistory, $state, $scope, authService, sessionService) {
         this.$ionicSideMenuDelegate = $ionicSideMenuDelegate;
         this.$ionicLoading = $ionicLoading;
         this.$ionicPopup = $ionicPopup;
         this.$location = $location;
         this.$ionicHistory = $ionicHistory;
         this.$state = $state;
+        this.$scope = $scope;
         this.authService = authService;
         this.sessionService = sessionService;
 
@@ -39,20 +40,23 @@ export default class LoginCtrl {
             });
     }
 
-    showForgotPasswordDialog() {
-        this.$ionicPopup.show({
+    showForgotPasswordDialog(e) {
+        let that = this;
+        e.preventDefault();
+        this.forgotPasswordDialog = this.$ionicPopup.show({
             title: 'Recuperar contraseña',
             templateUrl: 'templates/forgot-password.html',
             scope: this.$scope,
+            // controllerAs: 'vm',
             buttons: [
                 {
                     text: 'Enviar Contraseña',
                     type: 'button-positive',
-                    onTap: function(e) {
-                        if(!this.email) {
-                            e.preventDefault(); // Don't allow the user to close unless he enters an email
-                        } else{
-                            this.requestPassword(this.email);
+                    onTap: e => {
+                        e.preventDefault(); // Don't allow the user to close unless he enters an email
+                        let email = this.$scope.vm.email;
+                        if (email) {
+                            return this.requestPassword(email);
                         }
                     }
                 },
@@ -62,14 +66,19 @@ export default class LoginCtrl {
                 }
             ]
         });
+        this.forgotPasswordDialog
+            .then(() => {
+                this.$scope.vm.email = ''; // clean email input field
+            });
     }
 
     requestPassword(email) {
+        this.forgotPasswordDialog.close();
         this.authService.recoverPassword(email)
-            .then(response => {
+            .then(() => {
                 this.showSimpleDialog('Recuperar contraseña',
                     'Se ha enviado un correo electrónico con su nueva contraseña provisional.');
-            }, function(err) {
+            }, err => {
                 this.showSimpleDialog('Recuperar contraseña',
                     'La cuenta indicada no existe');
             });
