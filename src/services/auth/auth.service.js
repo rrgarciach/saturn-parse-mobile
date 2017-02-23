@@ -19,9 +19,12 @@ export default function authService($q, Parse, sessionService) {
             },
             error: (user, error) => {
                 let err = {};
-                switch (error) {
+                switch (error.code) {
                     case Parse.Error.OBJECT_NOT_FOUND:
                         err.status = 401;
+                        break;
+                    case Parse.Error.EMAIL_NOT_FOUND:
+                        err.status = 403;
                         break;
                 }
                 deferred.reject(err);
@@ -45,8 +48,13 @@ export default function authService($q, Parse, sessionService) {
                 deferred.resolve();
             },
             error: error => {
-                // Show the error message somewhere
-                deferred.reject(error);
+                if (error.code === 205) {
+                    // if email's associated user doesn't, don't give the clue:
+                    deferred.resolve();
+                } else {
+                    // Show the error message somewhere
+                    deferred.reject(error);
+                }
             }
         });
 

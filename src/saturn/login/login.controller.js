@@ -30,8 +30,12 @@ export default class LoginCtrl {
                         'Ha excedido el número de intentos de inicio de sesión. Por motivos de seguridad su actual dirección IP ' +
                         'permanecerá bloqueada durante 15 minutos.');
                 } else if (err.status === 401) {
-                    this.showSimpleDialog('Login',
+                    this.showSimpleDialog('Credenciales incorrectas',
                         'El usuario o contraseña proporcionados son incorrectos. Intente de nuevo por favor.');
+                } else if (err.status === 403) {
+                    this.showSimpleDialog('Correo electrónico no verificado',
+                        `Por favor siga los pasos que se indican en el mensaje que ha recibido en su bandeja de correo 
+                        electrónico para verificar y activar su cuenta.`);
                 } else {
                     this.showSimpleDialog('Error de conexión',
                         'Ha ocurrido un error. Revise su conexión a Internet.');
@@ -73,14 +77,17 @@ export default class LoginCtrl {
     }
 
     requestPassword(email) {
+        this.$ionicLoading.show({template: 'Procesando...'});
         this.forgotPasswordDialog.close();
         this.authService.recoverPassword(email)
             .then(() => {
                 this.showSimpleDialog('Recuperar contraseña',
-                    'Se ha enviado un correo electrónico con su nueva contraseña provisional.');
+                    'Se ha enviado un correo electrónico con instrucciones para restablecer su contraseña.');
+                this.$ionicLoading.hide();
             }, err => {
                 this.showSimpleDialog('Recuperar contraseña',
                     'La cuenta indicada no existe');
+                this.$ionicLoading.hide();
             });
     }
 
