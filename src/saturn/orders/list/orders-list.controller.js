@@ -1,12 +1,19 @@
 export default class OrdersListCtrl {
 
-    constructor($scope, $ionicModal, $ionicPopup, $ionicLoading, orderService) {
+    constructor($scope, $state, ENV, $ionicModal, $ionicPopup, $ionicLoading, orderService, orderDownloadService) {
         this.$scope = $scope;
+        this.$state = $state;
+        this.ENV = ENV;
         this.$ionicModal = $ionicModal;
         this.$ionicPopup = $ionicPopup;
         this.$ionicLoading = $ionicLoading;
         this.orderService = orderService;
+        this.orderDownloadService = orderDownloadService;
 
+        this._init();
+    }
+
+    _init() {
         // Cleanup the modal when we're done with it!
         this.$scope.$on('$destroy', () => {
             this.$scope.filtersModal.remove();
@@ -17,7 +24,34 @@ export default class OrdersListCtrl {
             this.loadMore();
         });
 
-        this.init();
+        this.downloadAction = false;
+
+        this.filter = {
+            offset: 0,
+            limit: 10,
+            // desc: true,
+            // orderBy: 'Order.id',
+            // searchBy: 'client',
+            // searchValue: '',
+        };
+        this.moreData = true;
+        this.orders = [];
+
+        this.$ionicModal.fromTemplateUrl('templates/orders-list-filter-modal.html', {
+            scope: this.$scope,
+            animation: 'slide-in-up'
+        })
+            .then(modal => {
+                this.$scope.filtersModal = modal;
+            });
+
+        this.$ionicModal.fromTemplateUrl('templates/order-view-modal.html', {
+            scope: this.$scope,
+            animation: 'slide-in-up'
+        })
+            .then(modal => {
+                this.$scope.orderViewModal = modal;
+            });
     }
 
     viewOrder(order) {
@@ -82,33 +116,19 @@ export default class OrdersListCtrl {
             });
     }
 
-    init() {
-        this.filter = {
-            offset: 0,
-            limit: 10,
-            // desc: true,
-            // orderBy: 'Order.id',
-            // searchBy: 'client',
-            // searchValue: '',
-        };
-        this.moreData = true;
-        this.orders = [];
+    toggleDownloadAction() {
+        this.downloadAction = !this.downloadAction;
+    }
 
-        this.$ionicModal.fromTemplateUrl('templates/orders-list-filter-modal.html', {
-            scope: this.$scope,
-            animation: 'slide-in-up'
-        })
-            .then(modal => {
-                this.$scope.filtersModal = modal;
-            });
+    selectOrderAction(order) {
+        if (this.downloadAction) {
+            // this.$scope.fileHref = this.orderDownloadService.downloadOrderTxt(order.folio);
+            this.orderUrl = `#/app/orders/view/${order.id}`;
 
-        this.$ionicModal.fromTemplateUrl('templates/order-view-modal.html', {
-            scope: this.$scope,
-            animation: 'slide-in-up'
-        })
-            .then(modal => {
-                this.$scope.orderViewModal = modal;
-            });
+        } else {
+            // this.$state.go('app.orders:view', {id: order.id});
+            this.orderUrl = `#/app/orders/view/${order.id}`;
+        }
     }
 
 }

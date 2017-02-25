@@ -66,6 +66,22 @@ export default class Address extends Parse.Object {
         this.set('state', state);
     }
 
+    get phone1() {
+        return this.get('phone1');
+    }
+
+    set phone1(phone1) {
+        this.set('phone1', phone1);
+    }
+
+    get phone2() {
+        return this.get('phone2');
+    }
+
+    set phone2(phone2) {
+        this.set('phone2', phone2);
+    }
+
 }
 
 Parse.Object.registerSubclass('Address', Address);

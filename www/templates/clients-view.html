@@ -4,93 +4,91 @@
         <button class="button button-icon icon ion-compose icon-right" ng-click="vm.editClient()"></button>
     </ion-nav-buttons>
     <ion-content>
+        <ion-list>
 
-        <ion-item class="item-divider item-icon-left">
-            <i class="icon ion-person"></i>
-            {{'profile' | translate}}
-        </ion-item>
+            <ion-item class="item-divider item-icon-left">
+                <i class="icon ion-person"></i>
+                {{'profile' | translate}}
+            </ion-item>
 
-        <ion-item class="item-input">
-            <span class="input-label">{{'folio' | translate}}:</span>
-            <!--<input type="text"-->
-                   <!--ng-model="vm.client.folio">-->
-            <h2 class="text-gray">{{vm.client.folio}}</h2>
-        </ion-item>
+            <ion-item class="item-input">
+                <span class="input-label">{{'folio' | translate}}:</span>
+                <!--<input type="text"-->
+                <!--ng-model="vm.client.folio">-->
+                <h2 class="text-gray">{{vm.client.folio}}</h2>
+            </ion-item>
 
-        <ion-item class="item-input">
-            <span class="input-label">{{'firstName' | translate}}:</span>
-            <!--<input type="text"-->
-                   <!--ng-model="vm.client.firstName">-->
-            <h2 class="text-gray">{{vm.client.profile.firstName}}</h2>
-        </ion-item>
+            <ion-item class="item-input">
+                <span class="input-label">{{'firstName' | translate}}:</span>
+                <!--<input type="text"-->
+                <!--ng-model="vm.client.firstName">-->
+                <h2 class="text-gray">{{vm.client.profile.firstName}}</h2>
+            </ion-item>
 
-        <ion-item class="item-input">
-            <span class="input-label">{{'lastName' | translate}}:</span>
-            <!--<input type="text"-->
-                   <!--ng-model="vm.client.lastName">-->
-            <h2 class="text-gray">{{vm.client.profile.lastName}}</h2>
-        </ion-item>
+            <ion-item class="item-input">
+                <span class="input-label">{{'lastName' | translate}}:</span>
+                <!--<input type="text"-->
+                <!--ng-model="vm.client.lastName">-->
+                <h2 class="text-gray">{{vm.client.profile.lastName}}</h2>
+            </ion-item>
 
-        <ion-item class="item-input">
-            <span class="input-label">{{'rfc' | translate}}:</span>
-            <!--<input type="text"-->
-                   <!--ng-model="vm.client.rfc">-->
-            <h2 class="text-gray">{{vm.client.profile.rfc}}</h2>
-        </ion-item>
+            <ion-item class="item-input">
+                <span class="input-label">{{'rfc' | translate}}:</span>
+                <!--<input type="text"-->
+                <!--ng-model="vm.client.rfc">-->
+                <h2 class="text-gray">{{vm.client.profile.rfc}}</h2>
+            </ion-item>
 
-        <ion-item class="item-divider item-icon-left">
-            <i class="icon ion-location"></i>
-            {{'address' | translate}}
-        </ion-item>
+            <ion-item class="item-divider item-icon-left">
+                <i class="icon ion-location"></i>
+                {{'address' | translate}}
+            </ion-item>
 
-        <ion-item class="item-input">
-            <span class="input-label">{{'street' | translate}}:</span>
-            <!--<input type="text"-->
-                   <!--ng-model="vm.client.profile.address.street">-->
-            <h2 class="text-gray">{{vm.client.profile.address.street}}</h2>
-        </ion-item>
+            <ion-item class="item-input">
+                <span class="input-label">{{'street' | translate}}:</span>
+                <h2 class="text-gray">{{vm.client.profile.address.street}}</h2>
+            </ion-item>
 
-        <ion-item class="item-input">
-            <span class="input-label">{{'number' | translate}}:</span>
-            <!--<input type="text"-->
-                   <!--ng-model="vm.client.profile.address.number">-->
-            <h2 class="text-gray">{{vm.client.profile.address.number}}</h2>
-        </ion-item>
+            <ion-item class="item-input">
+                <span class="input-label">{{'number' | translate}}:</span>
+                <h2 class="text-gray">{{vm.client.profile.address.number}}</h2>
+            </ion-item>
 
-        <ion-item class="item-input">
-            <span class="input-label">{{'interior' | translate}}:</span>
-            <!--<input type="text"-->
-                   <!--ng-model="vm.client.profile.address.interior">-->
-            <h2 class="text-gray">{{vm.client.profile.address.interior}}</h2>
-        </ion-item>
+            <ion-item class="item-input">
+                <span class="input-label">{{'interior' | translate}}:</span>
+                <h2 class="text-gray">{{vm.client.profile.address.interior}}</h2>
+            </ion-item>
 
-        <ion-item class="item-input">
-            <span class="input-label">{{'neighborhood' | translate}}:</span>
-            <!--<input type="text"-->
-                   <!--ng-model="vm.client.profile.address.neighborhood">-->
-            <h2 class="text-gray">{{vm.client.profile.address.neighborhood}}</h2>
-        </ion-item>
+            <ion-item class="item-input">
+                <span class="input-label">{{'neighborhood' | translate}}:</span>
+                <h2 class="text-gray">{{vm.client.profile.address.neighborhood}}</h2>
+            </ion-item>
 
-        <ion-item class="item-input">
-            <span class="input-label">{{'postalCode' | translate}}</span>
-            <!--<input type="text"-->
-                   <!--ng-model="vm.client.profile.address.postalCode">-->
-            <h2 class="text-gray">{{vm.client.profile.address.postalCode}}</h2>
-        </ion-item>
+            <ion-item class="item-input">
+                <span class="input-label">{{'postalCode' | translate}}</span>
+                <h2 class="text-gray">{{vm.client.profile.address.postalCode}}</h2>
+            </ion-item>
 
-        <ion-item class="item-input">
-            <span class="input-label">{{'city' | translate}}:</span>
-            <!--<input type="text"-->
-                   <!--ng-model="vm.client.profile.address.city">-->
-            <h2 class="text-gray">{{vm.client.profile.address.city}}</h2>
-        </ion-item>
+            <ion-item class="item-input">
+                <span class="input-label">{{'city' | translate}}:</span>
+                <h2 class="text-gray">{{vm.client.profile.address.city}}</h2>
+            </ion-item>
 
-        <ion-item class="item-input">
-            <span class="input-label">{{'state' | translate}}:</span>
-            <!--<input type="text"-->
-                   <!--ng-model="vm.client.profile.address.state">-->
-            <h2 class="text-gray">{{vm.client.profile.address.state}}</h2>
-        </ion-item>
+            <ion-item class="item-input">
+                <span class="input-label">{{'state' | translate}}:</span>
+                <h2 class="text-gray">{{vm.client.profile.address.state}}</h2>
+            </ion-item>
 
+            <ion-item class="item-input">
+                <span class="input-label">{{'phone1' | translate}}:</span>
+                <h2 class="text-gray">{{vm.client.profile.address.phone1}}</h2>
+            </ion-item>
+
+            <ion-item class="item-input">
+                <span class="input-label">{{'phone2' | translate}}:</span>
+                <h2 class="text-gray">{{vm.client.profile.address.phone2}}</h2>
+            </ion-item>
+
+        </ion-list>
     </ion-content>
 </ion-view>

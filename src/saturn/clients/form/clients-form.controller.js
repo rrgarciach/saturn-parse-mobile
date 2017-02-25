@@ -53,9 +53,7 @@ export default class ClientsFormCtrl {
     // Save current Client:
     saveClient() {
         // Show loading:
-        this.$ionicLoading.show({
-            template: 'Procesando...'
-        });
+        this.$ionicLoading.show({template: 'Procesando...'});
         this.clientService.save(this.client)
             .then(() => {
                 this._redirectToHome();

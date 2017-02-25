@@ -41,6 +41,10 @@ export default class Order extends Parse.Object {
         this.set('notes', notes);
     }
 
+    get date() {
+        return this.createdAt;
+    }
+
     removeItem(item) {
         this.items.splice(item.$key, 1);
         if (item.id) { // Check if Item was already saved before:

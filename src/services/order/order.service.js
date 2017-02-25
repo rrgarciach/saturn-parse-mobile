@@ -12,6 +12,7 @@ export default function orderService($q, Parse, itemService) {
         factory,
         getCurrentOrder,
         setCurrentOrder,
+        downloadOrderTxt,
     };
 
     function getAll(filter) {
@@ -43,9 +44,8 @@ export default function orderService($q, Parse, itemService) {
         query.equalTo('objectId', id);
         query.include('client');
         query.include('client.profile');
-        query.find({
-            success: orders => {
-                let order = new Order(orders[0]);
+        query.first({
+            success: order => {
                 let items = order.relation('items');
                 items.query().include('product').find({
                     success: _items => {
@@ -124,6 +124,34 @@ export default function orderService($q, Parse, itemService) {
 
     function setCurrentOrder(order) {
         currentOrder = order;
+    }
+
+    function downloadOrderTxt(id) {
+        let deferred = $q.defer();
+
+        let query = new Parse.Query(Order);
+        query.equalTo('objectId', id);
+        query.include('client');
+        query.include('client.profile');
+        query.first({
+            success: order => {
+                let items = order.relation('items');
+                items.query().include('product').find({
+                    success: _items => {
+                        order.items = _items;
+                        deferred.resolve(order);
+                    },
+                    error: err => {
+                        deferred.reject(err);
+                    }
+                });
+            },
+            error: err => {
+                deferred.reject(err);
+            }
+        });
+
+        return deferred.promise;
     }
 
 }

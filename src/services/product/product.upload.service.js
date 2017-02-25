@@ -20,7 +20,7 @@ export default function productUploadService($http, $q, ENV) {
     function upload() {
         let fd = new FormData();
         fd.append('catalog', file);
-        let url = `${ENV.PARSE_SERVER_URL}/import/product`;
+        const url = `${ENV.PARSE_SERVER_URL}/import/product`;
         return $http.post(url, fd, {
             transformRequest: angular.identity,
             headers: {
