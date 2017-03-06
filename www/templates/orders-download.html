@@ -1,0 +1,27 @@
+<ion-view view-title="{{'download_orders' | translate}}" cache-view="false">
+    <ion-content>
+
+        <ion-card>
+            <ion-item class="item-divider">
+                Seleccione una fecha:
+            </ion-item>
+            <ion-item class="item-text-wrap text-center">
+                <button class="button icon-left ion-calendar" ng-click="vm.openDatePicker()">
+                    Elegir Fecha
+                </button>
+                <h1 ng-if="vm.selectedDateString">
+                    {{vm.selectedDateString}}
+                </h1>
+            </ion-item>
+            <ion-item class="item-divider">
+                <a
+                        class="button button-block button-positive icon-left ion-android-download"
+                        ng-if="vm.url"
+                        href="{{vm.url}}">
+                    Descargar
+                </a>
+            </ion-item>
+        </ion-card>
+
+    </ion-content>
+</ion-view>

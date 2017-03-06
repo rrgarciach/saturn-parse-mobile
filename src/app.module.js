@@ -24,6 +24,7 @@ import servicesModule from './services/services.module';
 angular.module('app', [
     'ionic',
     'pascalprecht.translate',
+    'ionic-datepicker',
     saturnModule,
     servicesModule,
     ngParse

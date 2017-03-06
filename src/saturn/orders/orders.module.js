@@ -6,6 +6,7 @@ import OrdersListCtrl from './list/orders-list.controller';
 import OrdersViewCtrl from './view/orders-view.controller';
 import OrdersNewClientCtrl from './new/orders-new-client.controller';
 import OrdersItemsCtrl from './items/orders-items.controller';
+import OrdersDownloadCtrl from './download/orders-download.controller';
 
 export default angular.module('app.saturn.orders', [])
     .config(routes)
@@ -15,4 +16,5 @@ export default angular.module('app.saturn.orders', [])
     .controller('OrdersViewCtrl', OrdersViewCtrl)
     .controller('OrdersNewClientCtrl', OrdersNewClientCtrl)
     .controller('OrdersItemsCtrl', OrdersItemsCtrl)
+    .controller('OrdersDownloadCtrl', OrdersDownloadCtrl)
     .name;

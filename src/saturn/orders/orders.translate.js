@@ -5,6 +5,7 @@ export default function translate($translateProvider) {
         order: 'Órden',
         new_order: 'Nueva Órden',
         edit_order: 'Editar Órden',
+        download_orders: 'Descargar Órdenes',
         add_item: 'Agregar Renglón',
         edit_item: 'Editar Renglón',
         remove_item: 'Remover Renglón',

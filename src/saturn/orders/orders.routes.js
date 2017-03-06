@@ -50,6 +50,16 @@ export default function routes($stateProvider) {
                     controllerAs: 'vm'
                 }
             }
+        })
+        .state('app.orders:download', {
+            url: '/orders/download',
+            views: {
+                'menuContent': {
+                    templateUrl: 'templates/orders-download.html',
+                    controller: 'OrdersDownloadCtrl',
+                    controllerAs: 'vm'
+                }
+            }
         });
 
 };
