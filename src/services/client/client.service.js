@@ -1,6 +1,6 @@
 import Client from '../../models/client.model';
 
-export default function clientService($q, Parse, profileService, addressService) {
+export default function clientService($q, Parse, profileService, addressService, userService) {
 
     return {
         getAll,
@@ -76,23 +76,34 @@ export default function clientService($q, Parse, profileService, addressService)
 
                 client.profile.address = _address;
 
-                profileService.save(client.profile)
-                    .then(_profile => {
+                return profileService.save(client.profile)
 
-                        client.profile = _profile;
+            })
+            .then(_profile => {
 
-                        client.save({
-                            success: _order => {
-                                deferred.resolve(_order);
-                            },
-                            error: err => {
-                                deferred.reject(err);
-                            }
-                        });
-                    })
-                    .catch(err => {
+                client.profile = _profile;
+                let user = _buildNewUser(client);
+
+                return userService.save(user)
+
+            })
+            .then(_user => {
+
+                client.user = _user;
+
+                return userService.requestPasswordReset(client.email)
+
+            })
+            .then(() => {
+
+                client.save({
+                    success: _client => {
+                        deferred.resolve(_client);
+                    },
+                    error: err => {
                         deferred.reject(err);
-                    });
+                    }
+                });
 
             })
             .catch(err => {
@@ -100,6 +111,16 @@ export default function clientService($q, Parse, profileService, addressService)
             });
 
         return deferred.promise;
+    }
+
+    function _buildNewUser(client) {
+        const tempPassword = (Math.random().toString(36) + '00000000000000000').slice(2, 16 + 2);
+        let user = userService.factory();
+        user.set('username', client.email);
+        user.set('password', tempPassword);
+        user.set('email', client.email);
+        user.set('profile', client.profile);
+        return user;
     }
 
     function factory(data) {

@@ -8,6 +8,8 @@ export default class Client extends Parse.Object {
         if (data) {
             this.id = data.id;
             this.set('profile', data.get('profile'));
+            this.set('promoter', data.get('promoter'));
+            this.set('user', data.get('user'));
         }
     }
 
@@ -43,6 +45,13 @@ export default class Client extends Parse.Object {
         this.set('promoter', promoter);
     }
 
+    get user() {
+        return this.get('user');
+    }
+
+    set user(user) {
+        this.set('user', user);
+    }
 
 }
 

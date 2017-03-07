@@ -55,7 +55,12 @@ export default class ClientsFormCtrl {
         // Show loading:
         this.$ionicLoading.show({template: 'Procesando...'});
         this.clientService.save(this.client)
-            .then(() => {
+            .then(client => {
+                this.$ionicPopup.alert({
+                    title: 'Nuevo Cliente creado',
+                    template: `El nuevo Cliente ${client.fullName} ha sido creado exitosamente.`,
+                    okText: 'Aceptar'
+                });
                 this._redirectToHome();
             })
             // If saving new Client fails:

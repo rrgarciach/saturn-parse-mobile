@@ -18,30 +18,36 @@
                 <ion-item class="item-input">
                     <span class="input-label">{{'folio' | translate}}:</span>
                     <input type="text"
-                           ng-required="true"
                            ng-if="vm.actionLabel !== 'edit_client'"
                            ng-model="vm.client.folio">
                 </ion-item>
 
                 <ion-item class="item-input">
-                    <span class="input-label">{{'firstName' | translate}}:</span>
+                    <span class="input-label">{{'firstName' | translate}}*:</span>
                     <input type="text"
                            ng-required="true"
                            ng-model="vm.client.profile.firstName">
                 </ion-item>
 
                 <ion-item class="item-input">
-                    <span class="input-label">{{'lastName' | translate}}:</span>
+                    <span class="input-label">{{'lastName' | translate}}*:</span>
                     <input type="text"
                            ng-required="true"
                            ng-model="vm.client.profile.lastName">
                 </ion-item>
 
                 <ion-item class="item-input">
-                    <span class="input-label">{{'rfc' | translate}}:</span>
+                    <span class="input-label">{{'rfc' | translate}}*:</span>
                     <input type="text"
                            ng-required="true"
                            ng-model="vm.client.profile.rfc">
+                </ion-item>
+
+                <ion-item class="item-input">
+                    <span class="input-label">{{'email' | translate}}*:</span>
+                    <input type="email"
+                           ng-required="true"
+                           ng-model="vm.client.email">
                 </ion-item>
 
                 <ion-item class="item-divider item-icon-left">
@@ -50,14 +56,14 @@
                 </ion-item>
 
                 <ion-item class="item-input">
-                    <span class="input-label">{{'street' | translate}}:</span>
+                    <span class="input-label">{{'street' | translate}}*:</span>
                     <input type="text"
                            ng-required="true"
                            ng-model="vm.client.profile.address.street">
                 </ion-item>
 
                 <ion-item class="item-input">
-                    <span class="input-label">{{'number' | translate}}:</span>
+                    <span class="input-label">{{'number' | translate}}*:</span>
                     <input type="number"
                            ng-required="true"
                            ng-model="vm.client.profile.address.number">
@@ -70,35 +76,35 @@
                 </ion-item>
 
                 <ion-item class="item-input">
-                    <span class="input-label">{{'neighborhood' | translate}}:</span>
+                    <span class="input-label">{{'neighborhood' | translate}}*:</span>
                     <input type="text"
                            ng-required="true"
                            ng-model="vm.client.profile.address.neighborhood">
                 </ion-item>
 
                 <ion-item class="item-input">
-                    <span class="input-label">{{'postalCode' | translate}}</span>
+                    <span class="input-label">{{'postalCode' | translate}}*:</span>
                     <input type="number"
                            ng-required="true"
                            ng-model="vm.client.profile.address.postalCode">
                 </ion-item>
 
                 <ion-item class="item-input">
-                    <span class="input-label">{{'city' | translate}}:</span>
+                    <span class="input-label">{{'city' | translate}}*:</span>
                     <input type="text"
                            ng-required="true"
                            ng-model="vm.client.profile.address.city">
                 </ion-item>
 
                 <ion-item class="item-input">
-                    <span class="input-label">{{'state' | translate}}:</span>
+                    <span class="input-label">{{'state' | translate}}*:</span>
                     <input type="text"
                            ng-required="true"
                            ng-model="vm.client.profile.address.state">
                 </ion-item>
 
                 <ion-item class="item-input">
-                    <span class="input-label">{{'phone1' | translate}}:</span>
+                    <span class="input-label">{{'phone1' | translate}}*:</span>
                     <input type="text"
                            ng-required="true"
                            ng-model="vm.client.profile.address.phone1">
@@ -107,7 +113,6 @@
                 <ion-item class="item-input">
                     <span class="input-label">{{'phone2' | translate}}:</span>
                     <input type="text"
-                           ng-required="true"
                            ng-model="vm.client.profile.address.phone2">
                 </ion-item>
 

@@ -1,3 +1,4 @@
+import addressService from './address/address.service';
 import apiService from './api/api.service';
 import authService from './auth/auth.service';
 import clientService from './client/client.service';
@@ -8,9 +9,10 @@ import orderDownloadService from './order/order.download.service';
 import productService from './product/product.service';
 import productUploadService from './product/product.upload.service';
 import profileService from './profile/profile.service';
-import addressService from './address/address.service';
+import userService from './user/user.service';
 
 export default angular.module('app.services', [])
+    .service('addressService', addressService)
     .service('apiService', apiService)
     .service('authService', authService)
     .service('clientService', clientService)
@@ -21,5 +23,5 @@ export default angular.module('app.services', [])
     .service('productService', productService)
     .service('productUploadService', productUploadService)
     .service('profileService', profileService)
-    .service('addressService', addressService)
+    .service('userService', userService)
     .name;
