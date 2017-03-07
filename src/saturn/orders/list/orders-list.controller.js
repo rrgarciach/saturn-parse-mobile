@@ -24,8 +24,6 @@ export default class OrdersListCtrl {
             this.loadMore();
         });
 
-        this.downloadAction = false;
-
         this.filter = {
             offset: 0,
             limit: 10,
@@ -114,21 +112,6 @@ export default class OrdersListCtrl {
                     okText: 'Volver'
                 });
             });
-    }
-
-    toggleDownloadAction() {
-        this.downloadAction = !this.downloadAction;
-    }
-
-    selectOrderAction(order) {
-        if (this.downloadAction) {
-            // this.$scope.fileHref = this.orderDownloadService.downloadOrderTxt(order.folio);
-            this.orderUrl = `#/app/orders/view/${order.id}`;
-
-        } else {
-            // this.$state.go('app.orders:view', {id: order.id});
-            this.orderUrl = `#/app/orders/view/${order.id}`;
-        }
     }
 
 }

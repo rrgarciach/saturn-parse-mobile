@@ -1,10 +1,6 @@
 <ion-view view-title="{{'orders' | translate}}" cache-view="false">
 
     <ion-nav-buttons side="right">
-        <button class="button button-icon button-clear ion-android-download"
-                ng-class="{'button-light': !vm.downloadAction, 'button-positive': vm.downloadAction}"
-                ng-click="vm.toggleDownloadAction()">
-        </button>
         <a class="button button-icon  icon ion-plus-circled" href="#/app/orders/new"></a>
     </ion-nav-buttons>
 
@@ -30,7 +26,6 @@
             <ion-item ng-repeat="(key, order) in vm.orders track by $index"
                       ng-if="!vm.downloadAction"
                       href="#/app/orders/view/{{order.id}}">
-                      <!--ng-click="vm.selectOrderAction(order)" -->
                 <h2>{{order.get('client').fullName}}</h2>
                 <a href=""></a>
                 <p class="item-note">{{order.get('createdAt') | date: 'dd/MM/yyyy'}}</p>
@@ -41,7 +36,6 @@
             <ion-item ng-repeat="(key, order) in vm.orders track by $index"
                       ng-if="vm.downloadAction"
                       href="{{vm.ENV.PARSE_SERVER_URL}}/orders/export/{{order.folio}}">
-                      <!--ng-click="vm.selectOrderAction(order)" -->
                 <h2>{{order.get('client').fullName}}</h2>
                 <a href=""></a>
                 <p class="item-note">{{order.get('createdAt') | date: 'dd/MM/yyyy'}}</p>
