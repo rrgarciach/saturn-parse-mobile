@@ -1,9 +1,9 @@
 import Parse from 'parse';
 
-export default class Client extends Parse.Object {
+export default class Promoter extends Parse.Object {
 
     constructor(data) {
-        super('Client');
+        super('Promoter');
 
         if (data) {
             this.id = data.id;
@@ -34,16 +34,6 @@ export default class Client extends Parse.Object {
     get rfc() {
         return this.profile.rfc;
     }
-
-    get promoter() {
-        return this.get('promoter');
-    }
-
-    set promoter(promoter) {
-        this.set('promoter', promoter);
-    }
-
-
 }
 
-Parse.Object.registerSubclass('Client', Client);
+Parse.Object.registerSubclass('Promoter', Promoter);
