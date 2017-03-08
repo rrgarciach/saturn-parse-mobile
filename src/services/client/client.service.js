@@ -132,6 +132,7 @@ export default function clientService($q, Parse, profileService, addressService,
         let client = new Client();
 
         client.profile = data ? profileService.factory(data.profile) : profileService.factory();
+        client.user = data ? userService.factory(data.profile) : userService.factory();
 
         return client;
     }

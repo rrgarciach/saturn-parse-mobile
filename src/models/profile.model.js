@@ -20,11 +20,12 @@ export default class Profile extends Parse.Object {
     }
 
     get lastName() {
-        return this.get('lastName');
+        return !this.isPersonaMoral ? this.get('lastName') : '';
     }
 
     set lastName(lastName) {
-        this.set('lastName', lastName);
+        const value = !this.isPersonaMoral ? lastName : '';
+        this.set('lastName', value);
     }
 
     get isPersonaMoral() {
@@ -33,6 +34,7 @@ export default class Profile extends Parse.Object {
 
     set isPersonaMoral(isPersonaMoral) {
         this.set('isPersonaMoral', isPersonaMoral);
+        this.lastName = this.lastName;
     }
 
     get rfc() {
@@ -52,7 +54,7 @@ export default class Profile extends Parse.Object {
     }
 
     get fullName() {
-        return `${this.get('lastName')} ${this.get('firstName')}`;
+        return `${this.lastName} ${this.firstName}`;
     }
 
 }

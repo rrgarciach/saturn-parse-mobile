@@ -99,7 +99,7 @@ export default class ClientsFormCtrl {
 
     _redirectToHome() {
         // second parameter true sets as history-root view:
-        this.$location.path('/app/clients/' + this.client.id, true);
+        this.$location.path('/app/clients/view/' + this.client.id, true);
         // delete history in order to avoid return to login screen:
         this.$ionicHistory.nextViewOptions({historyRoot: true});
         this.$ionicLoading.hide();

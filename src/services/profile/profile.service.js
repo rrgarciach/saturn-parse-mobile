@@ -1,5 +1,4 @@
 import Profile from '../../models/profile.model';
-import Address from '../../models/address.model';
 
 export default function profileService($q, addressService) {
 
