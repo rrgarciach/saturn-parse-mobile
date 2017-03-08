@@ -25,7 +25,7 @@
                 <h2 class="text-gray">{{vm.client.profile.firstName}}</h2>
             </ion-item>
 
-            <ion-item class="item-input">
+            <ion-item class="item-input" ng-if="!vm.client.profile.isPersonaMoral">
                 <span class="input-label">{{'lastName' | translate}}:</span>
                 <!--<input type="text"-->
                 <!--ng-model="vm.client.lastName">-->
@@ -37,6 +37,11 @@
                 <!--<input type="text"-->
                 <!--ng-model="vm.client.rfc">-->
                 <h2 class="text-gray">{{vm.client.profile.rfc}}</h2>
+            </ion-item>
+
+            <ion-item class="item-input">
+                <span class="input-label">{{'email' | translate}}:</span>
+                <h2 class="text-gray">{{vm.client.email}}</h2>
             </ion-item>
 
             <ion-item class="item-divider item-icon-left">

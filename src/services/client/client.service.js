@@ -37,9 +37,11 @@ export default function clientService($q, Parse, profileService, addressService,
         query.equalTo('objectId', id);
         query.include('profile');
         query.include('profile.address');
-        query.find({
-            success: clients => {
-                deferred.resolve(new Client(clients[0]));
+        query.include('user.email');
+        query.include('promoter');
+        query.first({
+            success: client => {
+                deferred.resolve(new Client(client));
             },
             error: err => {
                 deferred.reject(err);
@@ -56,9 +58,11 @@ export default function clientService($q, Parse, profileService, addressService,
         query.equalTo('folio', folio);
         query.include('profile');
         query.include('profile.address');
-        query.find({
-            success: clients => {
-                deferred.resolve(new Client(clients[0]));
+        query.include('user.email');
+        query.include('promoter');
+        query.first({
+            success: client => {
+                deferred.resolve(new Client(client));
             },
             error: err => {
                 deferred.reject(err);
@@ -82,7 +86,8 @@ export default function clientService($q, Parse, profileService, addressService,
             .then(_profile => {
 
                 client.profile = _profile;
-                let user = _buildNewUser(client);
+
+                let user = client.existed() ? client.user : _buildNewUser(client);
 
                 return userService.save(user)
 
@@ -91,7 +96,7 @@ export default function clientService($q, Parse, profileService, addressService,
 
                 client.user = _user;
 
-                return userService.requestPasswordReset(client.email)
+                return client.existed() ? Promise.resolve() : userService.requestPasswordReset(client.email)
 
             })
             .then(() => {

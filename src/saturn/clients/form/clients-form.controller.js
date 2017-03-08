@@ -37,6 +37,7 @@ export default class ClientsFormCtrl {
         this.screenTitle = 'new_client';
         // get current Client:
         this.client = this.clientService.factory();
+        this.client.profile.isPersonaMoral = false;
         this.client.profile.address.state = 'Chihuahua';
     }
 

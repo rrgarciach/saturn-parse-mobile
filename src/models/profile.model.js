@@ -27,6 +27,14 @@ export default class Profile extends Parse.Object {
         this.set('lastName', lastName);
     }
 
+    get isPersonaMoral() {
+        return this.get('isPersonaMoral');
+    }
+
+    set isPersonaMoral(isPersonaMoral) {
+        this.set('isPersonaMoral', isPersonaMoral);
+    }
+
     get rfc() {
         return this.get('rfc');
     }

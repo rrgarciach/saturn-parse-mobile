@@ -29,8 +29,20 @@ export default class Client extends Parse.Object {
         this.set('profile', profile);
     }
 
+    get email() {
+        return this.get('user').get('email');
+    }
+
+    set email(email) {
+        this.get('user').set('email', email);
+    }
+
     get fullName() {
         return this.profile.fullName;
+    }
+
+    get isPersonaMoral() {
+        return this.profile.isPersonaMoral;
     }
 
     get rfc() {
