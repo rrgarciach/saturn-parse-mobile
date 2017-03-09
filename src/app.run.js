@@ -1,4 +1,5 @@
-export default function run($ionicPlatform) {
+export default function run($rootScope, $state, $ionicPlatform, sessionService) {
+
   $ionicPlatform.ready(function () {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -13,4 +14,13 @@ export default function run($ionicPlatform) {
     }
 
   });
+
+    $rootScope.$on('$stateChangeStart', (event, toState) => {
+        if (toState.authenticate && !sessionService.getToken() ) {
+            // User isn’t authenticated
+            $state.transitionTo('app.login');
+            event.preventDefault();
+        }
+    });
+
 };

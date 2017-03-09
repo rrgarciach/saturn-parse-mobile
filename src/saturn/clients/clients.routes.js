@@ -9,7 +9,8 @@ export default function routes($stateProvider) {
                     controller: 'ClientsListCtrl',
                     controllerAs: 'vm'
                 }
-            }
+            },
+            authenticate: true
         })
         .state('app.clients:view', {
             url: '/clients/view/:id',
@@ -19,7 +20,8 @@ export default function routes($stateProvider) {
                     controller: 'ClientsViewCtrl',
                     controllerAs: 'vm'
                 }
-            }
+            },
+            authenticate: true
         })
         .state('app.clients:new', {
             url: '/clients/new',
@@ -29,7 +31,8 @@ export default function routes($stateProvider) {
                     controller: 'ClientsFormCtrl',
                     controllerAs: 'vm'
                 }
-            }
+            },
+            authenticate: true
         })
         .state('app.clients:edit', {
             url: '/clients/edit/:action:id',
@@ -39,7 +42,8 @@ export default function routes($stateProvider) {
                     controller: 'ClientsFormCtrl',
                     controllerAs: 'vm'
                 }
-            }
+            },
+            authenticate: true
         });
 
 };

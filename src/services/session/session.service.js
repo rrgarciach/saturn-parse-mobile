@@ -1,29 +1,34 @@
 export default function sessionService(Parse) {
-  
-  let session = {};
 
-  return {
-    getUser,
-    setToken,
-    getToken,
-    destroy
-  };
+    let session = {};
 
-  function getUser() {
-      return Parse.User.current();
-  }
+    return {
+        getUser,
+        setToken,
+        getToken,
+        destroy,
+        getProfile
+    };
 
-  function setToken(token) {
-    session.token = `Bearer ${token}`;
-  }
+    function getUser() {
+        return Parse.User.current();
+    }
 
-  function getToken() {
-    // return session.token;
-      return Parse.User.current();
-  }
+    function setToken(token) {
+        session.token = `Bearer ${token}`;
+    }
 
-  function destroy() {
-    session = {};
-  }
+    function getToken() {
+        // return session.token;
+        return Parse.User.current();
+    }
+
+    function destroy() {
+        session = {};
+    }
+
+    function getProfile() {
+        return session && session.profile;
+    }
 
 }

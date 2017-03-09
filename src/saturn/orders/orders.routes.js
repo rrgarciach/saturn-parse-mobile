@@ -9,7 +9,8 @@ export default function routes($stateProvider) {
                     controller: 'OrdersListCtrl',
                     controllerAs: 'vm'
                 }
-            }
+            },
+            authenticate: true
         })
         .state('app.orders:view', {
             url: '/orders/view/:id',
@@ -19,7 +20,8 @@ export default function routes($stateProvider) {
                     controller: 'OrdersViewCtrl',
                     controllerAs: 'vm'
                 }
-            }
+            },
+            authenticate: true
         })
         .state('app.orders:new', {
             url: '/orders/new',
@@ -29,7 +31,8 @@ export default function routes($stateProvider) {
                     controller: 'OrdersNewClientCtrl',
                     controllerAs: 'vm'
                 }
-            }
+            },
+            authenticate: true
         })
         .state('app.orders:new:items', {
             url: '/orders/new/items',
@@ -39,7 +42,8 @@ export default function routes($stateProvider) {
                     controller: 'OrdersItemsCtrl',
                     controllerAs: 'vm'
                 }
-            }
+            },
+            authenticate: true
         })
         .state('app.orders:edit:items', {
             url: '/orders/edit/items/:action:id',
@@ -49,7 +53,8 @@ export default function routes($stateProvider) {
                     controller: 'OrdersItemsCtrl',
                     controllerAs: 'vm'
                 }
-            }
+            },
+            authenticate: true
         })
         .state('app.orders:download', {
             url: '/orders/download',
@@ -59,7 +64,8 @@ export default function routes($stateProvider) {
                     controller: 'OrdersDownloadCtrl',
                     controllerAs: 'vm'
                 }
-            }
+            },
+            authenticate: true
         });
 
 };
