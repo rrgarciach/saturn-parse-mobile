@@ -27,8 +27,10 @@ export default class MenuCtrl {
     }
 
     logout() {
-        this.authService.logout();
-        this._redirectToLogin();
+        this.authService.logout()
+            .then(() => {
+                this._redirectToLogin();
+            });
     }
 
     _redirectToLogin() {

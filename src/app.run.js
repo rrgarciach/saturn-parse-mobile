@@ -25,8 +25,9 @@ export default function run($rootScope, $state, $ionicPlatform, sessionService) 
 
             if (toState.permission) {
                 let userRoles = sessionService.getUserRoles();
-                for (let role in userRoles) {
-                    if (toState.permission.indexOf(role) > -1) return;
+                for (let key in userRoles) {
+                    console.log(toState.permission, userRoles[key], toState.permission.indexOf(userRoles[key]) > -1)
+                    if (toState.permission.indexOf(userRoles[key]) > -1) return;
                 }
                 $state.transitionTo('app.orders');
                 event.preventDefault();

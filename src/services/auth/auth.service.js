@@ -37,7 +37,7 @@ export default function authService($q, Parse, sessionService) {
     }
 
     function logout() {
-        Parse.User.logOut()
+        return Parse.User.logOut()
             .then(() => {
                 sessionService.destroy();
             });
