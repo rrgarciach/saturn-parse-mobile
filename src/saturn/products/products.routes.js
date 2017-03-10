@@ -9,7 +9,8 @@ export default function routes($stateProvider) {
                     controller: 'ProductsUploadCtrl',
                     controllerAs: 'vm'
                 }
-            }
+            },
+            permission: ['Manager']
         });
 
 };

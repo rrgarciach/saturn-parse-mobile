@@ -14,8 +14,10 @@ export default function authService($q, Parse, sessionService) {
 
         Parse.User.logIn(loginData.email, loginData.password, {
             success: user => {
-                // sessionService.setToken(user.token);
-                deferred.resolve(user);
+                sessionService.loadUserRoles()
+                    .then(() => {
+                        deferred.resolve(user);
+                    });
             },
             error: (user, error) => {
                 let err = {};
@@ -35,8 +37,10 @@ export default function authService($q, Parse, sessionService) {
     }
 
     function logout() {
-        // sessionService.destroy();
-        Parse.User.logOut();
+        Parse.User.logOut()
+            .then(() => {
+                sessionService.destroy();
+            });
     }
 
     function recoverPassword(email) {

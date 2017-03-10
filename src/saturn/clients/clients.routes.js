@@ -10,7 +10,7 @@ export default function routes($stateProvider) {
                     controllerAs: 'vm'
                 }
             },
-            authenticate: true
+            permission: ['Promoter']
         })
         .state('app.clients:view', {
             url: '/clients/view/:id',
@@ -21,7 +21,7 @@ export default function routes($stateProvider) {
                     controllerAs: 'vm'
                 }
             },
-            authenticate: true
+            permission: ['Promoter']
         })
         .state('app.clients:new', {
             url: '/clients/new',
@@ -32,7 +32,7 @@ export default function routes($stateProvider) {
                     controllerAs: 'vm'
                 }
             },
-            authenticate: true
+            permission: ['Promoter']
         })
         .state('app.clients:edit', {
             url: '/clients/edit/:action:id',
@@ -43,7 +43,7 @@ export default function routes($stateProvider) {
                     controllerAs: 'vm'
                 }
             },
-            authenticate: true
+            permission: ['Promoter']
         });
 
 };

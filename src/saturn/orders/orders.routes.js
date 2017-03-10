@@ -10,7 +10,6 @@ export default function routes($stateProvider) {
                     controllerAs: 'vm'
                 }
             },
-            authenticate: true
         })
         .state('app.orders:view', {
             url: '/orders/view/:id',
@@ -21,7 +20,6 @@ export default function routes($stateProvider) {
                     controllerAs: 'vm'
                 }
             },
-            authenticate: true
         })
         .state('app.orders:new', {
             url: '/orders/new',
@@ -32,7 +30,6 @@ export default function routes($stateProvider) {
                     controllerAs: 'vm'
                 }
             },
-            authenticate: true
         })
         .state('app.orders:new:items', {
             url: '/orders/new/items',
@@ -43,7 +40,6 @@ export default function routes($stateProvider) {
                     controllerAs: 'vm'
                 }
             },
-            authenticate: true
         })
         .state('app.orders:edit:items', {
             url: '/orders/edit/items/:action:id',
@@ -54,7 +50,6 @@ export default function routes($stateProvider) {
                     controllerAs: 'vm'
                 }
             },
-            authenticate: true
         })
         .state('app.orders:download', {
             url: '/orders/download',
@@ -65,7 +60,7 @@ export default function routes($stateProvider) {
                     controllerAs: 'vm'
                 }
             },
-            authenticate: true
+            permission: ['Manager']
         });
 
 };

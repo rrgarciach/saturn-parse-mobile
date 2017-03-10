@@ -16,11 +16,24 @@ export default function run($rootScope, $state, $ionicPlatform, sessionService) 
   });
 
     $rootScope.$on('$stateChangeStart', (event, toState) => {
-        if (toState.authenticate && !sessionService.getToken() ) {
+        if (!toState.public && !sessionService.getToken() ) {
             // User isn’t authenticated
             $state.transitionTo('app.login');
             event.preventDefault();
+
+        } else {
+
+            if (toState.permission) {
+                let userRoles = sessionService.getUserRoles();
+                for (let role in userRoles) {
+                    if (toState.permission.indexOf(role) > -1) return;
+                }
+                $state.transitionTo('app.orders');
+                event.preventDefault();
+            }
+
         }
+
     });
 
 };

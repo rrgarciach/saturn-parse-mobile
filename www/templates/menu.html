@@ -21,19 +21,19 @@
       <ion-list ng-if="vm.sessionService.getToken()">
         <ion-item class="item-avatar" href="#">
           <img src="http://presentationvoice.com/wp-content/uploads/2014/03/Photo-March-Issue_Facebook--1024x1024.jpg">
-          <h2>{{vm.user.get('username')}}</h2>
-          <p>Administrador</p>
+          <h2>{{vm.sessionService.getUser().get('username')}}</h2>
+          <p>{{vm.sessionService.getUserRoleName()}}</p>
         </ion-item>
         <ion-item menu-close href="#/app/orders">
           <span class="input-label">{{'orders' | translate}}</span>
         </ion-item>
-        <ion-item menu-close href="#/app/clients">
+        <ion-item menu-close href="#/app/clients" ng-if="vm.userHasAccess('Promoter')">
           <span class="input-label">{{'clients' | translate}}</span>
         </ion-item>
-        <ion-item menu-close href="#/app/orders/download">
+        <ion-item menu-close href="#/app/orders/download" ng-if="vm.userHasAccess('Manager')">
           <span class="input-label">{{'download_orders' | translate}}</span>
         </ion-item>
-        <ion-item menu-close href="#/app/products/upload">
+        <ion-item menu-close href="#/app/products/upload" ng-if="vm.userHasAccess('Manager')">
           <span class="input-label">{{'upload_products' | translate}}</span>
         </ion-item>
         <ion-item menu-close ng-click="vm.logout()">

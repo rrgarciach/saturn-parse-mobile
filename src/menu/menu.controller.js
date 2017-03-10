@@ -15,17 +15,25 @@ export default class MenuCtrl {
         this.authService = authService;
         this.sessionService = sessionService;
 
-        this.user = sessionService.getUser();
+        this._init();
+    }
+
+    _init() {
+        this.sessionService.loadUserRoles();
+    }
+
+    userHasAccess(permission) {
+        return this.sessionService.getUserRoles().indexOf(permission) > -1;
     }
 
     logout() {
         this.authService.logout();
-        this._redirectToHome();
+        this._redirectToLogin();
     }
 
-    _redirectToHome() {
+    _redirectToLogin() {
         // second parameter true sets as history-root view:
-        this.$location.path('/app/home', true);
+        this.$location.path('/app/login', true);
         // delete history in order to avoid return to login screen:
         this.$ionicHistory.nextViewOptions({historyRoot: true});
 
