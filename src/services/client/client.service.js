@@ -93,35 +93,20 @@ export default function clientService($q, Parse, profileService, addressService,
             })
             .then(_client => {
 
-            //     client = _client;
-            //
-            //     let user = client.existed() ? client.user : _buildNewUser(client);
-            //
-            //     return userService.save(user);
-            //
-            // })
-            // .then(_user => {
-            //
-            //     client.user = _user;
                 client = _client;
 
                 return client.existed() ? Promise.resolve() : userService.requestPasswordReset(client.email)
 
             })
             .then(() => {
-            //
-            //     client.save({
-            //         success: _client => {
-                        deferred.resolve(client);
-            //         },
-            //         error: err => {
-            //             deferred.reject(err);
-            //         }
-            //     });
-            //
+
+                deferred.resolve(client);
+
             })
             .catch(err => {
+
                 deferred.reject(err);
+
             });
 
         return deferred.promise;
