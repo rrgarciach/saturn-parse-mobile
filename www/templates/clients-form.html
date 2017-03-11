@@ -19,7 +19,7 @@
 
                 <ion-item class="item-input">
                     <span class="input-label">{{'folio' | translate}}:</span>
-                    <input type="text"
+                    <input type="tel"
                            ng-if="vm.actionLabel !== 'edit_client'"
                            ng-model="vm.client.folio">
                 </ion-item>
@@ -107,14 +107,14 @@
 
                 <ion-item class="item-input">
                     <span class="input-label">{{'phone1' | translate}}*:</span>
-                    <input type="text"
+                    <input type="tel"
                            ng-required="true"
                            ng-model="vm.client.profile.address.phone1">
                 </ion-item>
 
                 <ion-item class="item-input">
                     <span class="input-label">{{'phone2' | translate}}:</span>
-                    <input type="text"
+                    <input type="tel"
                            ng-model="vm.client.profile.address.phone2">
                 </ion-item>
 
