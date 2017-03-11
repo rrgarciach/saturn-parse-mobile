@@ -86,30 +86,39 @@ export default function clientService($q, Parse, profileService, addressService,
             .then(_profile => {
 
                 client.profile = _profile;
+                client.user = client.existed() ? client.user : _buildNewUser(client);
 
-                let user = client.existed() ? client.user : _buildNewUser(client);
-
-                return userService.save(user)
+                return client.save();
 
             })
-            .then(_user => {
+            .then(_client => {
 
-                client.user = _user;
+            //     client = _client;
+            //
+            //     let user = client.existed() ? client.user : _buildNewUser(client);
+            //
+            //     return userService.save(user);
+            //
+            // })
+            // .then(_user => {
+            //
+            //     client.user = _user;
+                client = _client;
 
                 return client.existed() ? Promise.resolve() : userService.requestPasswordReset(client.email)
 
             })
             .then(() => {
-
-                client.save({
-                    success: _client => {
-                        deferred.resolve(_client);
-                    },
-                    error: err => {
-                        deferred.reject(err);
-                    }
-                });
-
+            //
+            //     client.save({
+            //         success: _client => {
+                        deferred.resolve(client);
+            //         },
+            //         error: err => {
+            //             deferred.reject(err);
+            //         }
+            //     });
+            //
             })
             .catch(err => {
                 deferred.reject(err);
@@ -125,6 +134,16 @@ export default function clientService($q, Parse, profileService, addressService,
         user.set('password', tempPassword);
         user.set('email', client.email);
         user.set('profile', client.profile);
+
+        let userACL = new Parse.ACL();
+        // Allow Client to access and edit this User:
+        userACL.setWriteAccess(Parse.User.current(), true);
+        userACL.setReadAccess(Parse.User.current(), true);
+        // Allow Managers Role to access and edit this User:
+        userACL.setRoleReadAccess('Manager', true);
+        userACL.setRoleWriteAccess('Manager', true);
+        user.setACL(userACL);
+
         return user;
     }
 
