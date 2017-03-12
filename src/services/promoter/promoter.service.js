@@ -1,6 +1,6 @@
-import Client from '../../models/client.model';
+import Promoter from '../../models/promoter.model';
 
-export default function clientService($q, Parse, profileService, addressService, userService) {
+export default function promoterService($q, Parse, profileService, addressService, userService) {
 
     return {
         getAll,
@@ -11,17 +11,17 @@ export default function clientService($q, Parse, profileService, addressService,
         save
     };
 
-    function getAll(filter) {
+    function getAll(filter = {}) {
         let deferred = $q.defer();
 
-        let query = new Parse.Query(Client);
+        let query = new Parse.Query(Promoter);
         query.skip(filter.offset || 0);
         query.limit(filter.limit || 10);
         query.descending('folio');
         query.include('profile');
         query.find({
-            success: clients => {
-                deferred.resolve(clients);
+            success: promoters => {
+                deferred.resolve(promoters);
             },
             error: err => {
                 deferred.reject(err);
@@ -33,15 +33,14 @@ export default function clientService($q, Parse, profileService, addressService,
 
     function getOne(fieldName, value) {
         return new Promise((resolve, reject) => {
-            let query = new Parse.Query(Client);
+            let query = new Parse.Query(Promoter);
             query.equalTo(fieldName, value);
             query.include('profile');
             query.include('profile.address');
             query.include('user.email');
-            query.include('promoter');
             query.first({
-                success: client => {
-                    resolve(new Client(client));
+                success: promoter => {
+                    resolve(new Promoter(promoter));
                 },
                 error: err => {
                     reject(err);
@@ -62,44 +61,44 @@ export default function clientService($q, Parse, profileService, addressService,
         return getOne('user', user);
     }
 
-    function save(client) {
+    function save(promoter) {
         let deferred = $q.defer();
 
         // Save Profile's Address:
-        addressService.save(client.profile.address)
+        addressService.save(promoter.profile.address)
             .then(_address => {
 
-                client.profile.address = _address;
+                promoter.profile.address = _address;
 
-                // Save Client's Profile:
-                return profileService.save(client.profile)
+                // Save promoter's Profile:
+                return profileService.save(promoter.profile)
 
             })
             .then(_profile => {
 
-                client.profile = _profile;
-                // If it's a new Client, build a new User instance:
-                client.user = client.existed() ? client.user : _buildNewUser(client);
+                promoter.profile = _profile;
+                // If it's a new promoter, build a new User instance:
+                promoter.user = promoter.existed() ? promoter.user : _buildNewUser(promoter);
 
-                // Save Client and its User:
-                return client.save();
+                // Save promoter and its User:
+                return promoter.save();
 
             })
-            .then(_client => {
+            .then(_promoter => {
 
-                client = _client;
+                promoter = _promoter;
 
-                // Trigger User's reset password when it's a new Client:
-                if (!client.existed()) {
-                    return userService.requestPasswordReset(client.email);
+                // Trigger User's reset password when it's a new promoter:
+                if (!promoter.existed()) {
+                    return userService.requestPasswordReset(promoter.email);
                 }
-                // If Client already existed, just resolve:
+                // If promoter already existed, just resolve:
                 return Promise.resolve();
 
             })
             .then(() => {
 
-                deferred.resolve(client);
+                deferred.resolve(promoter);
 
             })
             .catch(err => {

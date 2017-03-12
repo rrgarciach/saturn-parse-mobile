@@ -7,6 +7,7 @@ export default function translate($translateProvider) {
         firstName: 'Nombre(s)',
         lastName: 'Appellidos',
         persona_moral: 'Persona Moral',
+        promoterName: 'Vendedor',
         folio: 'No. de Cliente',
         rfc: 'RFC',
         address: 'Dirección',

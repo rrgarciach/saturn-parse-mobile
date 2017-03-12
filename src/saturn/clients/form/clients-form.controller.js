@@ -1,6 +1,6 @@
 export default class ClientsFormCtrl {
 
-    constructor($scope, $stateParams, $location, $ionicHistory, $ionicModal, $ionicLoading, $ionicPopup, clientService) {
+    constructor($scope, $stateParams, $location, $ionicHistory, $ionicModal, $ionicLoading, $ionicPopup, sessionService, clientService, promoterService) {
         this.$scope = $scope;
         this.$stateParams = $stateParams;
         this.$location = $location;
@@ -8,7 +8,9 @@ export default class ClientsFormCtrl {
         this.$ionicModal = $ionicModal;
         this.$ionicLoading = $ionicLoading;
         this.$ionicPopup = $ionicPopup;
+        this.sessionService = sessionService;
         this.clientService = clientService;
+        this.promoterService = promoterService;
 
         this.adminUser = true;
 
@@ -21,6 +23,7 @@ export default class ClientsFormCtrl {
          we have to clear Cache in client to avoid an Error on iOS platform */
         this.$ionicHistory.clearCache()
             .then(() => {
+
                 switch (this.$stateParams.action) {
                     case 'new':
                     default:
@@ -30,7 +33,29 @@ export default class ClientsFormCtrl {
                         this._initEdit();
                         break;
                 }
+
+                return Promise.resolve();
+
+            })
+            .then(() => {
+                // Check if current User is not a Promoter, it means that one has to be
+                // picked from Promoters:
+                if (!this.userIsPromoter()) {
+
+                    return this.promoterService.getAll()
+                        .then(promoters => {
+                            this.promoters = promoters;
+                        });
+
+                // If user is a Promoter, just go straight:
+                } else {
+
+                    this.client.promoter = this.sessionService.getPromoter();
+                    return Promise.resolve();
+
+                }
             });
+
     }
 
     _initNew() {
@@ -49,6 +74,10 @@ export default class ClientsFormCtrl {
                 this.client = client;
                 this.$ionicLoading.hide();
             });
+    }
+
+    userIsPromoter() {
+        return !!this.sessionService.getPromoter().id;
     }
 
     // Save current Client:

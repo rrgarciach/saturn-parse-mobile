@@ -17,6 +17,17 @@
 
                 <ion-toggle ng-model="vm.client.profile.isPersonaMoral">{{'persona_moral' | translate}}</ion-toggle>
 
+                <ion-item class="item-input item-select" ng-if="!vm.userIsPromoter()">
+                    <span class="input-label">{{'promoterName' | translate}}*:</span>
+                    <select ng-options="promoter.fullName for promoter in vm.promoters track by promoter.id"
+                            ng-model="vm.client.promoter"
+                            ng-required="!vm.userIsPromoter()">
+                    </select>
+                    <!--<input type="text"-->
+                           <!--ng-if="vm.actionLabel !== 'edit_client'"-->
+                           <!--ng-model="vm.client.promoter.fullName">-->
+                </ion-item>
+
                 <ion-item class="item-input">
                     <span class="input-label">{{'folio' | translate}}:</span>
                     <input type="tel"
