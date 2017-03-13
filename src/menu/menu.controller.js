@@ -26,6 +26,10 @@ export default class MenuCtrl {
         return this.sessionService.getUserRoles().indexOf(permission) > -1;
     }
 
+    platformIsDesktop() {
+        return !ionic.Platform.is('android') && !ionic.Platform.is('ios');
+    }
+
     logout() {
         this.authService.logout()
             .then(() => {

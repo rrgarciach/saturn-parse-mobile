@@ -30,10 +30,10 @@
         <ion-item menu-close href="#/app/clients" ng-if="vm.userHasAccess('Promoter')">
           <span class="input-label">{{'clients' | translate}}</span>
         </ion-item>
-        <ion-item menu-close href="#/app/orders/download" ng-if="vm.userHasAccess('Manager')">
+        <ion-item menu-close href="#/app/orders/download" ng-if="vm.userHasAccess('Manager') && vm.platformIsDesktop()">
           <span class="input-label">{{'download_orders' | translate}}</span>
         </ion-item>
-        <ion-item menu-close href="#/app/products/upload" ng-if="vm.userHasAccess('Manager')">
+        <ion-item menu-close href="#/app/products/upload" ng-if="vm.userHasAccess('Manager') && vm.platformIsDesktop()">
           <span class="input-label">{{'upload_products' | translate}}</span>
         </ion-item>
         <ion-item menu-close ng-click="vm.logout()">

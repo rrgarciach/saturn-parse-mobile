@@ -1,6 +1,8 @@
 export default function run($rootScope, $state, $ionicPlatform, sessionService) {
 
   $ionicPlatform.ready(function () {
+      // http://ionicframework.com/docs/api/utility/ionic.Platform/
+      console.log('ionic.Platform.is("ios")', ionic.Platform.is('ios'));
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
     if (window.cordova && window.cordova.plugins.Keyboard) {

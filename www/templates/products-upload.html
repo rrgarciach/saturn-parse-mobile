@@ -10,7 +10,7 @@
 
                 <ion-item>
                     <button class="button icon-left ion-upload"
-                            ng-click="vm.uploadFile()"
+                            ng-click="vm.parseFile()"
                             ng-disabled="!vm.productUploadService.getFile()">{{'upload' | translate}}
                     </button>
                     <input accept=".csv" type="file" file-model="myFile"/>
