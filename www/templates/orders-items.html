@@ -5,6 +5,17 @@
 
     <ion-content>
         <ion-list>
+            <ion-item class="item-divider text-center" ng-if="!vm.statusIsEditable()">
+                Estatus: {{vm.order.status | orderStatusFilter}}
+            </ion-item>
+
+            <ion-item class="item-divider item-input item-select" ng-if="vm.statusIsEditable()">
+                <span class="input-label">{{'status' | translate}}:</span>
+                <select ng-options="statusOption.id as statusOption.name for statusOption in vm.status"
+                        ng-model="vm.order.status">
+                </select>
+            </ion-item>
+
             <ion-item ng-if="vm.adminUser" class="item item-divider text-center">
                 {{vm.order.client.folio}} - {{vm.order.client.fullName}}
             </ion-item>

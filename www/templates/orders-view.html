@@ -6,15 +6,17 @@
                 ng-click="vm.promptDeleteOrder()">
         </button>
         <button class="button button-icon icon ion-compose icon-right"
-                ng-disabled="vm.order.isEditable()"
+                ng-disabled="!vm.orderIsEditable()"
                 ng-click="vm.editOrder()">
         </button>
     </ion-nav-buttons>
     <ion-content>
         <ion-list>
+
             <ion-item class="item-divider text-center">
                 Estatus: {{vm.order.status | orderStatusFilter}}
             </ion-item>
+
             <ion-item class="item item-divider text-center" ng-if="vm.adminUser">
                 {{vm.order.get('client').get('folio')}} - {{vm.order.get('client').get('profile').get('lastName')}}
                 {{vm.order.get('client').get('profile').get('firstName')}}

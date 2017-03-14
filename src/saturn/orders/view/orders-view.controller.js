@@ -1,10 +1,11 @@
 export default class OrdersViewCtrl {
 
-    constructor($state, $stateParams, $ionicLoading, $ionicPopup, orderService) {
+    constructor($state, $stateParams, $ionicLoading, $ionicPopup, sessionService, orderService) {
         this.$state = $state;
         this.$stateParams = $stateParams;
         this.$ionicLoading = $ionicLoading;
         this.$ionicPopup = $ionicPopup;
+        this.sessionService = sessionService;
         this.orderService = orderService;
 
         this.adminUser = true;
@@ -22,6 +23,14 @@ export default class OrdersViewCtrl {
             action: 'edit',
             id: this.$stateParams.id
         });
+    }
+
+    /**
+     * Checks if Order under status 2 or if User has Manager privileges
+     * @returns {boolean}
+     */
+    orderIsEditable() {
+        return this.order && this.order.isEditable() && this.sessionService.userHasRole('Manager');
     }
 
     promptDeleteOrder() {

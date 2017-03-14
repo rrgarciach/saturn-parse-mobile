@@ -22,7 +22,7 @@ export default function orderService($q, Parse, itemService) {
         query.skip(filter.offset || 0);
         query.limit(filter.limit || 10);
         query.descending('folio');
-        query.select('folio,client,totals');
+        query.select('folio,client,totals,status');
         query.include('client');
         query.include('client.profile');
         query.find({

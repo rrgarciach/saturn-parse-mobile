@@ -21,8 +21,12 @@ export default class Order extends Parse.Object {
         return this.get('folio');
     }
 
+    set status(status) {
+        this.set('status', status);
+    }
+
     get status() {
-        return this.get('status');
+        return this.get('status') || 1;
     }
 
     set items(_items) {

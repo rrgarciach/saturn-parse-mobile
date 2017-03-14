@@ -14,7 +14,8 @@ export default function sessionService(Parse, clientService, promoterService) {
         getPromoter,
         loadUserRoles,
         getUserRoles,
-        getUserRoleName
+        getUserRoleName,
+        userHasRole
     };
 
     function getUser() {
@@ -38,6 +39,19 @@ export default function sessionService(Parse, clientService, promoterService) {
     }
 
     function loadUserRoles() {
+        Parse.Session.current()
+            .then(result => {
+                // @TODO: Hydrate session
+            })
+            .catch(err => {
+                // @TODO: Handle auto re-login
+                if (err.code === 201) {
+                    Parse.User.logOut()
+                        .then(() => {
+
+                        });
+                }
+            });
 
         return new Promise((resolve, reject) => {
 
@@ -129,6 +143,10 @@ export default function sessionService(Parse, clientService, promoterService) {
 
     function getUserRoleName() {
         return session.roleName;
+    }
+
+    function userHasRole(roleName) {
+        return session.roles.indexOf(roleName) > -1;
     }
 
 }

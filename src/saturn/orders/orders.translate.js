@@ -12,6 +12,7 @@ export default function translate($translateProvider) {
         sku: 'Código',
         order_notes: 'Notas de la órden',
         no_order_notes: 'No existen notas para esta órden',
+        status: 'Estatus',
     });
 
 };

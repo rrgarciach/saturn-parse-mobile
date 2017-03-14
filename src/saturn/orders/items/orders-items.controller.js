@@ -1,6 +1,6 @@
 export default class OrdersItemsCtrl {
 
-    constructor($scope, $stateParams, $location, $ionicHistory, $ionicModal, $ionicLoading, $ionicPopup, orderService, productService, itemService) {
+    constructor($scope, $stateParams, $location, $ionicHistory, $ionicModal, $ionicLoading, $ionicPopup, sessionService, orderService, productService, itemService) {
         this.$scope = $scope;
         this.$stateParams = $stateParams;
         this.$location = $location;
@@ -8,6 +8,7 @@ export default class OrdersItemsCtrl {
         this.$ionicModal = $ionicModal;
         this.$ionicLoading = $ionicLoading;
         this.$ionicPopup = $ionicPopup;
+        this.sessionService = sessionService;
         this.orderService = orderService;
         this.productService = productService;
         this.itemService = itemService;
@@ -34,6 +35,19 @@ export default class OrdersItemsCtrl {
                 }
             });
 
+        this.status = [
+            {id: 1, name: 'CAPTURADO'},
+            {id: 2, name: 'PROCESADO'},
+            {id: 3, name: 'SURTIENDO'},
+            {id: 4, name: 'SUTRIDO'},
+            {id: 5, name: 'PENDIENTE DE ENTREGA'},
+            {id: 6, name: 'EN RUTA PARA ENTREGA'},
+            {id: 7, name: 'ENTREGADO'},
+            {id: 8, name: 'CANCELADO'},
+            {id: 9, name: 'CANCELADO POR EL CLIENTE'},
+            {id: 10, name: 'CANCELADO POR EL PROMOTOR'}
+        ];
+
     }
 
     _initNew() {
@@ -51,6 +65,10 @@ export default class OrdersItemsCtrl {
 
         this.instantiateModals(); // Instantiate required Ionic modals
 
+    }
+
+    statusIsEditable() {
+        return this.sessionService.userHasRole('Manager');
     }
 
     _initEdit() {
