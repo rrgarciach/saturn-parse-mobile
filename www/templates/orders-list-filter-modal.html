@@ -13,20 +13,19 @@
                 <div class="input-label">
                     Buscar por
                 </div>
-                <select ng-model="vm.filter.searchBy">
-                    <option selected value="promoter">No. de Promotor</option>
-                    <option value="client">No. de Cliente</option>
+                <select ng-options="searchBy.label for searchBy in vm.options.searchBy track by searchBy.value"
+                        ng-model="vm.filter.searchBy">
                 </select>
             </ion-item>
-            <ion-item class="item item-input item-select">
-                <div class="input-label">
-                    Ordenar por
-                </div>
-                <select ng-model="vm.filter.orderBy">
-                    <option selected value="Order.id">No. de Pedido</option>
-                    <option value="Order.date">Fecha</option>
-                </select>
-            </ion-item>
+            <!--<ion-item class="item item-input item-select">-->
+                <!--<div class="input-label">-->
+                    <!--Ordenar por-->
+                <!--</div>-->
+                <!--<select ng-model="vm.filter.orderBy">-->
+                    <!--<option selected value="Order.id">No. de Pedido</option>-->
+                    <!--<option value="Order.date">Fecha</option>-->
+                <!--</select>-->
+            <!--</ion-item>-->
             <ion-item class="item item-toggle">
                 Descendente
                 <label class="toggle toggle-balanced">

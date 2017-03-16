@@ -55,11 +55,13 @@ export default function orderService($q, Parse, errorService, itemService) {
                         deferred.resolve(order);
                     },
                     error: err => {
+                        errorService.catchErr(err);
                         deferred.reject(err);
                     }
                 });
             },
             error: err => {
+                errorService.catchErr(err);
                 deferred.reject(err);
             }
         });
@@ -83,6 +85,7 @@ export default function orderService($q, Parse, errorService, itemService) {
                         deferred.resolve(_order);
                     },
                     error: err => {
+                        errorService.catchErr(err);
                         deferred.reject(err);
                     }
                 });
@@ -103,6 +106,7 @@ export default function orderService($q, Parse, errorService, itemService) {
                         deferred.resolve(_order);
                     },
                     error: err => {
+                        errorService.catchErr(err);
                         deferred.reject(err);
                     }
                 });
@@ -144,11 +148,13 @@ export default function orderService($q, Parse, errorService, itemService) {
                         deferred.resolve(order);
                     },
                     error: err => {
+                        errorService.catchErr(err);
                         deferred.reject(err);
                     }
                 });
             },
             error: err => {
+                errorService.catchErr(err);
                 deferred.reject(err);
             }
         });

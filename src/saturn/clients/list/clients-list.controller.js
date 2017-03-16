@@ -63,24 +63,25 @@ export default class ClientsListCtrl {
                 this.$scope.$broadcast('scroll.infiniteScrollComplete');
                 this.$ionicLoading.hide();
                 this.moreData = clients.length > 0; // Check if there's no more data
-            })
-            .catch(() => {
-                this.$ionicPopup.alert({
-                    title: 'Error de conexión',
-                    template: 'Ha ocurrido un error. Revise su conexión a Internet.',
-                    okText: 'Volver'
-                });
             });
     }
 
     init() {
+        this.options = {
+            searchBy: [
+                {model: 'Client', value: 'folio', label: 'No. de Cliente'},
+                {model: 'Profile', value: 'firstName', label: 'Nombre'},
+                {model: 'Profile', value: 'lastName', label: 'Apellido'},
+            ]
+        };
+
         this.filter = {
             offset: 0,
             limit: 10,
-            // desc: true,
-            // orderBy: 'Order.id',
-            // searchBy: 'client',
-            // searchValue: '',
+            desc: true,
+            // orderBy: 'folio',
+            searchBy: this.options.searchBy[0],
+            searchValue: '',
         };
         this.moreData = true;
         this.clients = [];

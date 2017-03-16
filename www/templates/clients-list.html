@@ -4,23 +4,23 @@
         <a class="button button-icon icon ion-plus-circled" href="#/app/clients/new"></a>
     </ion-nav-buttons>
 
-    <!--<ion-nav-buttons side="right">-->
-        <!--<a class="button button-icon icon ion-funnel" ng-click="vm.openFiltersModal()"></a>-->
-    <!--</ion-nav-buttons>-->
+    <ion-nav-buttons side="right">
+        <a class="button button-icon icon ion-funnel" ng-click="vm.openFiltersModal()"></a>
+    </ion-nav-buttons>
 
-    <!--<div class="bar bar-subheader item-input-inset" no-tap-scroll="true">-->
-        <!--<label class="item-input-wrapper">-->
-            <!--<i class="icon ion-ios-search placeholder-icon"></i>-->
-            <!--<input type="search"-->
-                   <!--ng-model="vm.filter.searchValue"-->
-                   <!--ng-change="vm.applyFilters()"-->
-                   <!--ng-model-options="{ debounce: 1000 }"-->
-                   <!--placeholder="Buscar por {{vm.filter.searchBy | lowercase}}...">-->
-        <!--</label>-->
-    <!--</div>-->
+    <div class="bar bar-subheader item-input-inset" no-tap-scroll="true">
+        <label class="item-input-wrapper">
+            <i class="icon ion-ios-search placeholder-icon"></i>
+            <input type="search"
+                   ng-model="vm.filter.searchValue"
+                   ng-change="vm.applyFilters()"
+                   ng-model-options="{ debounce: 1000 }"
+                   placeholder="Buscar por {{vm.filter.searchBy.label | lowercase}}...">
+        </label>
+    </div>
 
-    <!--<ion-content class="has-subheader">-->
-    <ion-content>
+    <ion-content class="has-subheader">
+    <!--<ion-content>-->
 
         <ion-list>
             <ion-item ng-repeat="client in vm.clients track by $index" href="#/app/clients/view/{{client.id}}">

@@ -24,8 +24,8 @@ export default class LoginCtrl {
 
         // Form data for the login modal
         this.loginData = {
-            email: 'rrgarciach@gmail.com',
-            password: 'asdf1234'
+            email: '',
+            password: ''
         };
 
         if (this.autoLogin) {

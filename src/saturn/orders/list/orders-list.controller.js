@@ -103,9 +103,6 @@ export default class OrdersListCtrl {
                 this.$scope.$broadcast('scroll.infiniteScrollComplete');
                 this.$ionicLoading.hide();
                 this.moreData = orders.length > 0; // Check if there's no more data
-            })
-            .catch(err => {
-                this.errorService.catchErr(err);
             });
     }
 

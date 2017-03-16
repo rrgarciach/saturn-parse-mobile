@@ -1,6 +1,6 @@
 import Client from '../../models/client.model';
 
-export default function clientService($q, Parse, profileService, addressService, userService) {
+export default function clientService($q, Parse, errorService, profileService, addressService, userService) {
 
     return {
         getAll,
@@ -12,23 +12,35 @@ export default function clientService($q, Parse, profileService, addressService,
     };
 
     function getAll(filter) {
-        let deferred = $q.defer();
+        return new Promise((resolve, reject) => {
 
-        let query = new Parse.Query(Client);
-        query.skip(filter.offset || 0);
-        query.limit(filter.limit || 10);
-        query.descending('folio');
-        query.include('profile');
-        query.find({
-            success: clients => {
-                deferred.resolve(clients);
-            },
-            error: err => {
-                deferred.reject(err);
+            let query = new Parse.Query(Client);
+            query.skip(filter.offset || 0);
+            query.limit(filter.limit || 10);
+
+            // In case that model selected is not Client, we have to compose a complex query:
+            if (filter.searchBy.model !== 'Client') {
+                let innerQuery = new Parse.Query(filter.searchBy.model);
+                innerQuery = _parseQuery(innerQuery, filter);
+                query.matchesQuery('profile', innerQuery);
+
+            } else {
+                query = _parseQuery(query, filter);
             }
+
+            query.include('profile');
+            query.find({
+                success: clients => {
+                    resolve(clients);
+                },
+                error: err => {
+                    errorService.catchErr(err);
+                    reject(err);
+                }
+            });
+
         });
 
-        return deferred.promise;
     }
 
     function getOne(fieldName, value) {
@@ -44,6 +56,7 @@ export default function clientService($q, Parse, profileService, addressService,
                     resolve(new Client(client));
                 },
                 error: err => {
+                    errorService.catchErr(err);
                     reject(err);
                 }
             });
@@ -104,6 +117,7 @@ export default function clientService($q, Parse, profileService, addressService,
             })
             .catch(err => {
 
+                errorService.catchErr(err);
                 deferred.reject(err);
 
             });
@@ -139,6 +153,27 @@ export default function clientService($q, Parse, profileService, addressService,
         client.user = data ? userService.factory(data.profile) : userService.factory();
 
         return client;
+    }
+
+    function _parseQuery(query, filter) {
+
+        if (filter.searchValue) {
+            query.startsWith(filter.searchBy.value, filter.searchValue);
+        }
+
+        if (filter.searchBy.value) {
+            query.descending(filter.searchBy.value);
+        } else {
+            query.ascending('folio');
+        }
+
+        if (filter.desc) {
+            query.descending(filter.searchBy.value);
+        } else {
+            query.ascending(filter.searchBy.value);
+        }
+
+        return query;
     }
 
 }
