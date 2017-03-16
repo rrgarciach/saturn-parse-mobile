@@ -2,7 +2,7 @@
     <ion-nav-buttons side="right">
         <!--<button class="button button-clear align-left" ng-click="vm.closeOrder()">Volver</button>-->
         <button class="button button-a button-icon icon ion-compose ion-trash-b"
-                ng-disabled="vm.order.isEditable()"
+                ng-disabled="!vm.orderIsEditable()"
                 ng-click="vm.promptDeleteOrder()">
         </button>
         <button class="button button-icon icon ion-compose icon-right"

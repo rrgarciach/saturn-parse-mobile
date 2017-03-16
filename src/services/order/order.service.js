@@ -1,6 +1,6 @@
 import Order from '../../models/order.model';
 
-export default function orderService($q, Parse, itemService) {
+export default function orderService($q, Parse, errorService, itemService) {
 
     let currentOrder;
 
@@ -16,25 +16,27 @@ export default function orderService($q, Parse, itemService) {
     };
 
     function getAll(filter) {
-        let deferred = $q.defer();
+        return new Promise((resolve, reject) => {
 
-        let query = new Parse.Query(Order);
-        query.skip(filter.offset || 0);
-        query.limit(filter.limit || 10);
-        query.descending('folio');
-        query.select('folio,client,totals,status');
-        query.include('client');
-        query.include('client.profile');
-        query.find({
-            success: orders => {
-                deferred.resolve(orders);
-            },
-            error: err => {
-                deferred.reject(err);
-            }
+            let query = new Parse.Query(Order);
+            query.skip(filter.offset || 0);
+            query.limit(filter.limit || 10);
+            query.descending('folio');
+            query.select('folio,client,totals,status');
+            query.include('client');
+            query.include('client.profile');
+            query.find({
+                success: orders => {
+                    resolve(orders);
+                },
+                error: err => {
+                    errorService.catchErr(err);
+                    reject(err);
+                }
+            });
+
         });
 
-        return deferred.promise;
     }
 
     function getById(id) {

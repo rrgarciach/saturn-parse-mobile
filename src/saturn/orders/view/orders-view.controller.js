@@ -30,7 +30,7 @@ export default class OrdersViewCtrl {
      * @returns {boolean}
      */
     orderIsEditable() {
-        return this.order && this.order.isEditable() && this.sessionService.userHasRole('Manager');
+        return this.order && this.order.isEditable() || this.sessionService.userHasRole('Manager');
     }
 
     promptDeleteOrder() {

@@ -1,4 +1,4 @@
-export default function sessionService(Parse, clientService, promoterService) {
+export default function sessionService(Parse, errorService, clientService, promoterService) {
 
     let session = {
         roles: [],
@@ -39,24 +39,9 @@ export default function sessionService(Parse, clientService, promoterService) {
     }
 
     function loadUserRoles() {
-        Parse.Session.current()
-            .then(result => {
-                // @TODO: Hydrate session
-            })
-            .catch(err => {
-                // @TODO: Handle auto re-login
-                if (err.code === 201) {
-                    Parse.User.logOut()
-                        .then(() => {
-
-                        });
-                }
-            });
-
         return new Promise((resolve, reject) => {
 
             let user = Parse.User.current();
-
             if (user) {
 
                 let queries = [
@@ -78,6 +63,10 @@ export default function sessionService(Parse, clientService, promoterService) {
                     })
                     .then(() => {
                         resolve();
+                    })
+                    .catch(err => {
+                        errorService.catchErr(err);
+                        reject(err);
                     });
 
             }
@@ -85,7 +74,6 @@ export default function sessionService(Parse, clientService, promoterService) {
             resolve();
 
         });
-
     }
 
     function _resolveSessionRoles() {

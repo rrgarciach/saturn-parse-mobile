@@ -1,4 +1,4 @@
-export default function config(ENV, $urlRouterProvider, $translateProvider, ParseProvider, ionicDatePickerProvider) {
+export default function config(ENV, $urlRouterProvider, $translateProvider, ParseProvider, ionicDatePickerProvider, localStorageServiceProvider) {
 
     $translateProvider.preferredLanguage('es');
     $translateProvider.fallbackLanguage('es');
@@ -26,5 +26,8 @@ export default function config(ENV, $urlRouterProvider, $translateProvider, Pars
         disableWeekdays: []
     };
     ionicDatePickerProvider.configDatePicker(datePickerObj);
+
+    localStorageServiceProvider
+        .setPrefix('saturnApp');
 
 }

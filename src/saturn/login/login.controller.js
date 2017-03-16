@@ -1,6 +1,6 @@
 export default class LoginCtrl {
 
-    constructor($ionicSideMenuDelegate, $ionicLoading, $ionicPopup, $location, $ionicHistory, $state, $scope, authService, sessionService) {
+    constructor($ionicSideMenuDelegate, $ionicLoading, $ionicPopup, $location, $ionicHistory, $state, $scope, localStorageService, authService, sessionService) {
         this.$ionicSideMenuDelegate = $ionicSideMenuDelegate;
         this.$ionicLoading = $ionicLoading;
         this.$ionicPopup = $ionicPopup;
@@ -8,20 +8,43 @@ export default class LoginCtrl {
         this.$ionicHistory = $ionicHistory;
         this.$state = $state;
         this.$scope = $scope;
+        this.localStorageService = localStorageService;
         this.authService = authService;
         this.sessionService = sessionService;
 
-        this.showLogin = false;
         // Initialize view:
-        this.init();
+        this._init();
+    }
+
+    _init() {
+        this.showLogin = false;
+        this.autoLogin = !!this.localStorageService.get('loginData');
+
+        this.$ionicSideMenuDelegate.canDragContent(false);
+
+        // Form data for the login modal
+        this.loginData = {
+            email: 'rrgarciach@gmail.com',
+            password: 'asdf1234'
+        };
+
+        if (this.autoLogin) {
+            this.loginData = this.localStorageService.get('loginData');
+            this.doLogin();
+        }
+        this.showLogin = true;
     }
 
     doLogin() {
-        this.$ionicLoading.show({
-            template: 'Procesando...'
-        });
+        this.$ionicLoading.show({template: 'Procesando...'});
         this.authService.login(this.loginData)
             .then(user => {
+                // Save credentials if Auto Login was slected
+                if (this.autoLogin) {
+                    this.localStorageService.set('loginData', this.loginData);
+                } else {
+                    this.localStorageService.remove('loginData');
+                }
                 this._redirectToHome();
             })
             .catch(err => {
@@ -97,21 +120,6 @@ export default class LoginCtrl {
             template: message,
             okText: 'Volver'
         });
-    }
-
-    init() {
-        this.$ionicSideMenuDelegate.canDragContent(false);
-
-        // Form data for the login modal
-        this.loginData = {
-            email: 'rrgarciach@gmail.com',
-            password: 'asdf1234'
-        };
-
-        if (this.sessionService.getToken()) {
-            this._redirectToHome();
-        }
-        this.showLogin = true;
     }
 
     _redirectToHome() {

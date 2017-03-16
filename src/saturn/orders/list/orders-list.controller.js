@@ -1,12 +1,13 @@
 export default class OrdersListCtrl {
 
-    constructor($scope, $state, ENV, $ionicModal, $ionicPopup, $ionicLoading, orderService, orderDownloadService) {
+    constructor($scope, $state, ENV, $ionicModal, $ionicPopup, $ionicLoading, errorService, orderService, orderDownloadService) {
         this.$scope = $scope;
         this.$state = $state;
         this.ENV = ENV;
         this.$ionicModal = $ionicModal;
         this.$ionicPopup = $ionicPopup;
         this.$ionicLoading = $ionicLoading;
+        this.errorService = errorService;
         this.orderService = orderService;
         this.orderDownloadService = orderDownloadService;
 
@@ -94,9 +95,7 @@ export default class OrdersListCtrl {
     }
 
     getOders() {
-        this.$ionicLoading.show({
-            template: 'Procesando...'
-        });
+        this.$ionicLoading.show({template: 'Procesando...'});
         this.orderService.getAll(this.filter)
             .then(orders => {
                 this.filter.offset += 10;
@@ -105,12 +104,8 @@ export default class OrdersListCtrl {
                 this.$ionicLoading.hide();
                 this.moreData = orders.length > 0; // Check if there's no more data
             })
-            .catch(() => {
-                this.$ionicPopup.alert({
-                    title: 'Error de conexión',
-                    template: 'Ha ocurrido un error. Revise su conexión a Internet.',
-                    okText: 'Volver'
-                });
+            .catch(err => {
+                this.errorService.catchErr(err);
             });
     }
 

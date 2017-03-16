@@ -2,6 +2,7 @@
 // next lines is commented due that Ionic is already loading angular. Will fix later.
 // import angular from 'angular';
 import ngParse from 'angular-parse';
+import LocalStorageModule from 'angular-local-storage';
 
 import run from './app.run';
 import config from './app.config';
@@ -27,6 +28,7 @@ angular.module('app', [
     'ionic-datepicker',
     saturnModule,
     servicesModule,
+    LocalStorageModule,
     ngParse
 ])
     .config(config)

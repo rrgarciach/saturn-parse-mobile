@@ -85,7 +85,7 @@ export default class Order extends Parse.Object {
     }
 
     isEditable() {
-        return this.status > 1;
+        return this.status < 2;
     }
 
 }

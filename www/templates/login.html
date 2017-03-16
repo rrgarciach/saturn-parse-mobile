@@ -1,4 +1,4 @@
-<ion-view view-title="Login" hide-nav-bar="true">
+<ion-view view-title="Login" hide-nav-bar="true" cache-view="false">
     <ion-content>
         <span ng-show="vm.showLogin">
             <form name="loginForm" novalidate ng-submit="loginForm.$valid && vm.doLogin()">
@@ -29,6 +29,8 @@
                         {{'forgot_password' | translate}}
                     </button>
                 </ion-item>
+
+                <ion-toggle ng-model="vm.autoLogin">{{'auto_login' | translate}}</ion-toggle>
 
             </ion-list>
             </form>

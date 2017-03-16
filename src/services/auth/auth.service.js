@@ -1,6 +1,6 @@
 'use strict';
 
-export default function authService($q, Parse, sessionService) {
+export default function authService($q, Parse, localStorageService, sessionService) {
 
     return {
         login,
@@ -10,35 +10,39 @@ export default function authService($q, Parse, sessionService) {
     };
 
     function login(loginData) {
-        let deferred = $q.defer();
+        return new Promise((resolve, reject) => {
 
-        Parse.User.logIn(loginData.email, loginData.password, {
-            success: user => {
-                sessionService.loadUserRoles()
-                    .then(() => {
-                        deferred.resolve(user);
-                    });
-            },
-            error: (user, error) => {
-                let err = {};
-                switch (error.code) {
-                    case Parse.Error.OBJECT_NOT_FOUND:
-                        err.status = 401;
-                        break;
-                    case Parse.Error.EMAIL_NOT_FOUND:
-                        err.status = 403;
-                        break;
+            Parse.User.logIn(loginData.email, loginData.password, {
+                success: user => {
+                    sessionService.loadUserRoles()
+                        .then(() => {
+                            resolve(user);
+                        });
+                },
+                error: (user, error) => {
+                    let err = {};
+                    switch (error.code) {
+                        case Parse.Error.OBJECT_NOT_FOUND:
+                            err.status = 401;
+                            break;
+                        case Parse.Error.EMAIL_NOT_FOUND:
+                            err.status = 403;
+                            break;
+                    }
+                    reject(err);
                 }
-                deferred.reject(err);
-            }
-        });
+            });
 
-        return deferred.promise;
+        });
     }
 
     function logout() {
+        localStorageService.remove('loginData');
         return Parse.User.logOut()
             .then(() => {
+                sessionService.destroy();
+            })
+            .catch(() => {
                 sessionService.destroy();
             });
     }
