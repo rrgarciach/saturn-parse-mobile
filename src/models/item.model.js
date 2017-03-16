@@ -20,6 +20,7 @@ export default class Item extends Parse.Object {
 
     set product(product) {
         this.set('product', product);
+        this.set('sku', product.get('sku'));
         this.price = this.product.price;
     }
 
