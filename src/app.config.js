@@ -5,7 +5,7 @@ export default function config(ENV, $urlRouterProvider, $translateProvider, Pars
     $translateProvider.useSanitizeValueStrategy('escape');
 
     // Initialize Parse
-    ParseProvider.initialize('saturn-id', 'saturn-master-key');
+    ParseProvider.initialize('saturn-id');
     ParseProvider.serverURL = `${ENV.PARSE_SERVER_URL}/parse`;
 
     const datePickerObj = {
