@@ -11,3 +11,4 @@ plugins/
 
 # Babel transpiled scripts
 www/js/
+/src/app.env.js

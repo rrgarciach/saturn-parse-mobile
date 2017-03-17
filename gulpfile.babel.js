@@ -12,6 +12,9 @@ const babel = require('gulp-babel');
 const _ = require('lodash');
 const lazypipe = require('lazypipe');
 const gulpLoadPlugins = require('gulp-load-plugins');
+const replace = require('gulp-replace-task');
+const args    = require('yargs').argv;
+const fs = require('fs');
 
 const babelify = require('babelify');
 const browserify = require('browserify');
@@ -110,7 +113,7 @@ gulp.task('test:watch', () => {
   return gulp.watch([`${srcPath}/**/**.js`], ['test']);
 });
 
-gulp.task('script', ['clean:dist'], () => {
+gulp.task('script', ['replace'], () => {
   let sources = browserify({
     entries: 'src/app.module.js',
     // debug: true
@@ -123,3 +126,25 @@ gulp.task('script', ['clean:dist'], () => {
     // Do stuff to the output file
     .pipe(gulp.dest('www/js/'))
 });
+
+gulp.task('replace', ['clean:dist'], () => {
+    // Get the environment from the command line
+    const env = args.env || process.env.APP_ENV || 'development';
+
+    // Read the settings from the right file
+    const filename = env + '.json';
+    const settings = JSON.parse(fs.readFileSync('config/' + filename, 'utf8'));
+
+    // Replace each placeholder with the correct value for the variable.
+    gulp.src('config/app.env.js')
+        .pipe(replace({
+            patterns: [
+                {
+                    match: 'parseServerUrl',
+                    replacement: settings.parseServerUrl
+                }
+            ]
+        }))
+        .pipe(gulp.dest('src/'));
+});
+
