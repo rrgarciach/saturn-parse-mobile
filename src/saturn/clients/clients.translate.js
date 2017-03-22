@@ -4,6 +4,7 @@ export default function translate($translateProvider) {
         clients: 'Clientes',
         client: 'Cliente',
         profile: 'Perfil',
+        legalName: 'Razón Social',
         firstName: 'Nombre(s)',
         lastName: 'Appellidos',
         persona_moral: 'Persona Moral',
@@ -22,6 +23,7 @@ export default function translate($translateProvider) {
         phone2: 'Teléfono 2',
         new_client: 'Nuevo Cliente',
         edit_client: 'Editar Cliente',
+        save: 'Guardar',
     });
 
 };

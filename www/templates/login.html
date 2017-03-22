@@ -12,14 +12,12 @@
 
                 <!--Email input field-->
                 <ion-item class="item-input">
-                    <span class="input-label">{{'login_email' | translate}}</span>
-                    <input type="text" ng-model="vm.loginData.email">
+                    <input type="email" placeholder="{{'login_email' | translate}}" ng-model="vm.loginData.email">
                 </ion-item>
 
                 <!--Password input field-->
                 <ion-item class="item-input">
-                    <span class="input-label">{{'login_password' | translate}}</span>
-                    <input type="password" ng-model="vm.loginData.password">
+                    <input type="password" placeholder="{{'login_password' | translate}}" ng-model="vm.loginData.password">
                 </ion-item>
 
                 <ion-item class="text-center">

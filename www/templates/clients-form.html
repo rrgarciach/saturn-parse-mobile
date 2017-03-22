@@ -1,9 +1,10 @@
 <ion-view id="clients-form" view-title="{{vm.actionLabel | translate}}" cache-view="false">
     <ion-nav-buttons side="right">
         <!--<button class="button button-clear align-left" ng-click="vm.closeOrder()">Volver</button>-->
-        <button class="button button-icon icon ion-checkmark-circled icon-right"
+        <button class="button button-positive button-outline icon-left ion-checkmark-circled"
                 ng-disabled="vm.saveForm.$invalid || vm.saveForm.$pristine"
                 ng-click="vm.promptSave()">
+            {{'save' | translate}}
         </button>
     </ion-nav-buttons>
     <ion-content>
@@ -36,7 +37,8 @@
                 </ion-item>
 
                 <ion-item class="item-input">
-                    <span class="input-label">{{'firstName' | translate}}*:</span>
+                    <span class="input-label" ng-if="vm.client.profile.isPersonaMoral">{{'legalName' | translate}}*:</span>
+                    <span class="input-label" ng-if="!vm.client.profile.isPersonaMoral">{{'firstName' | translate}}*:</span>
                     <input type="text"
                            ng-required="true"
                            ng-model="vm.client.profile.firstName">

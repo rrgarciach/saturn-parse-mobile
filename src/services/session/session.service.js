@@ -126,7 +126,7 @@ export default function sessionService(Parse, errorService, clientService, promo
     }
 
     function getPromoter() {
-        return session.promoter
+        return session.promoter;
     }
 
     function getUserRoleName() {
