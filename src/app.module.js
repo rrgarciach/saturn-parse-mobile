@@ -13,6 +13,7 @@ import centsCurrency from './filters/cents-currency.filter';
 import registerModels from './app.models';
 
 import fileModel from './directives/file-model.directive';
+import inputUppercase from './directives/input-uppercase.directive';
 
 import ENV from './app.env';
 
@@ -38,5 +39,6 @@ angular.module('app', [
     .filter('centsCurrency', centsCurrency)
     .config(registerModels)
     .directive('fileModel', fileModel)
+    .directive('inputUppercase', inputUppercase)
     .constant('ENV', ENV)
     .controller('MenuCtrl', MenuCtrl);
