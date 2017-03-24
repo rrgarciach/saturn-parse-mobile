@@ -1,9 +1,11 @@
 export default class OrdersItemsCtrl {
 
-    constructor($scope, $stateParams, $location, $ionicHistory, $ionicModal, $ionicLoading, $ionicPopup, sessionService, orderService, productService, itemService) {
+    constructor($scope, $stateParams, $location, $window, $timeout, $ionicHistory, $ionicModal, $ionicLoading, $ionicPopup, sessionService, orderService, productService, itemService) {
         this.$scope = $scope;
         this.$stateParams = $stateParams;
         this.$location = $location;
+        this.$window = $window;
+        this.$timeout = $timeout;
         this.$ionicHistory = $ionicHistory;
         this.$ionicModal = $ionicModal;
         this.$ionicLoading = $ionicLoading;
@@ -102,6 +104,7 @@ export default class OrdersItemsCtrl {
                         this.item = this.defaultItem;
                     }
                     this.$ionicLoading.hide();
+                    this._focusInput('quantity');
 
                 })
                 .catch(err => {
@@ -115,6 +118,16 @@ export default class OrdersItemsCtrl {
             this.item = this.defaultItem;
         }
     };
+
+    _focusInput(id) {
+        this.$timeout(() => {
+            let element = this.$window.document.getElementById(id);
+            if (element) {
+                element.value = '';
+                element.focus();
+            }
+        });
+    }
 
     instantiateModals() {
         // Instantiate New Item modal:

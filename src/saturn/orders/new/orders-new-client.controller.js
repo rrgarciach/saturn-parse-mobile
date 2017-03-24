@@ -1,8 +1,9 @@
 export default class OrdersNewClientCtrl {
 
-    constructor($state, $ionicLoading, orderService, clientService) {
+    constructor($state, $ionicLoading,sessionService, orderService, clientService) {
         this.$state = $state;
         this.$ionicLoading = $ionicLoading;
+        this.sessionService = sessionService;
         this.orderService = orderService;
         this.clientService = clientService;
     }

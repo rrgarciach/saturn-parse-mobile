@@ -119,20 +119,37 @@ export default function sessionService(Parse, errorService, clientService, promo
         });
     }
 
-    // This method is to resolve route access
+    /**
+     * Return an array with strings of current User's roles names
+     * This method is to resolve route access
+     * @returns {Array}
+     */
     // TODO: Refactor route access in order to remove this method and use getUserRoleName() instead
     function getUserRoles() {
         return session.roles || [];
     }
 
+    /**
+     * Returns related Promoter (if current User is a Client
+     * @returns {session.promoter|{}}
+     */
     function getPromoter() {
         return session.promoter;
     }
 
+    /**
+     * Return current User role string name
+     * @returns string
+     */
     function getUserRoleName() {
         return session.roleName;
     }
 
+    /**
+     * Evaluates if current User contains the given role
+     * @param roleName
+     * @returns boolean
+     */
     function userHasRole(roleName) {
         return session.roles.indexOf(roleName) > -1;
     }

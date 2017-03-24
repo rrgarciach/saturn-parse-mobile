@@ -1,15 +1,16 @@
 export default class OrdersListCtrl {
 
-    constructor($scope, $state, ENV, $ionicModal, $ionicPopup, $ionicLoading, errorService, orderService, orderDownloadService) {
+    constructor($scope, $state, ENV, $ionicModal, $ionicPopup, $ionicLoading, sessionService, errorService, orderService, clientService) {
         this.$scope = $scope;
         this.$state = $state;
         this.ENV = ENV;
         this.$ionicModal = $ionicModal;
         this.$ionicPopup = $ionicPopup;
         this.$ionicLoading = $ionicLoading;
+        this.sessionService = sessionService;
         this.errorService = errorService;
         this.orderService = orderService;
-        this.orderDownloadService = orderDownloadService;
+        this.clientService = clientService;
 
         this._init();
     }
@@ -104,6 +105,27 @@ export default class OrdersListCtrl {
                 this.$ionicLoading.hide();
                 this.moreData = orders.length > 0; // Check if there's no more data
             });
+    }
+
+    addNewOrder() {
+        const userRole = this.sessionService.getUserRoleName();
+        if (userRole === 'Client') {
+            this.$ionicLoading.show({template: 'Procesando...'});
+            this.clientService.getByUser(this.sessionService.getUser())
+                .then(client => {
+                    this.client = client;
+                    this.$ionicLoading.hide();
+                    this.startNewOrder();
+                });
+        } else {
+            this.$state.go('app.orders:new');
+        }
+    }
+
+    startNewOrder() {
+        let order = this.orderService.factory({client: this.client});
+        this.orderService.setCurrentOrder(order);
+        this.$state.go('app.orders:new:items');
     }
 
 }

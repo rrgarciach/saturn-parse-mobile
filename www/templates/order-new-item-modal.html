@@ -29,10 +29,11 @@
                     </ion-item>
                     <ion-item class="item-input">
                         <span class="input-label">Cantidad:</span>
-                        <input type="number"
+                        <input type="tel"
+                               id="quantity"
                                min="1"
                                step="1"
-                               placeholder="Escriba cantidad..."
+                               placeholder="cantidad..."
                                ng-disabled="!vm.item.sku"
                                ng-model="vm.item.quantity">
                     </ion-item>
