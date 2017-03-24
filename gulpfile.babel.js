@@ -81,7 +81,8 @@ gulp.task('sass', done => {
 gulp.task('babel', ['clean:dist'], () => {
   return gulp.src(_.union(paths.scripts.src))
     .pipe(babel({
-      presets: ['es2015']
+      presets: ['es2015'],
+        plugins: ['es6-promise']
     }))
     .pipe(gulp.dest('./www/js'));
 });
